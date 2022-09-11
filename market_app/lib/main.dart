@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/CheckMail.dart';
+import 'package:market_app/CreateNewPass.dart';
 import 'package:market_app/LogIn.dart';
 import 'package:market_app/ResetPass.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
           '/login': (context) => const LogIn(),
           '/resetpassword': (context) => ResetPass(),
           '/checkmail': (context) => const CheckMail(),
+          '/createnewpass': (context) => const CreateNewPass(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(

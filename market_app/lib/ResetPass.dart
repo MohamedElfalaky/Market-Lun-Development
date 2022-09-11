@@ -4,7 +4,7 @@ import 'package:market_app/LogIn.dart';
 class ResetPass extends StatelessWidget {
   ResetPass();
   final _formKey = GlobalKey<FormState>();
-
+  final _mailText = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,11 +47,15 @@ class ResetPass extends StatelessWidget {
                     SizedBox(
                       width: 385,
                       child: TextFormField(
+                        controller: _mailText,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if (value!.isNotEmpty && value.length <= 9) {
-                            return "The mail must be more than 9 characters!";
-                          } else if (value.isEmpty) {
-                            return "please enter yor mail";
+                          if (value!.isEmpty) {
+                            return "please enter your mail";
+                          } else if (value.isNotEmpty &&
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(_mailText.text)) {
+                            return "please use mail formoula ***@***.***";
                           }
                           return null;
                         },

@@ -1,15 +1,13 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:market_app/CreateNewPass.dart';
 
 class CheckMail extends StatelessWidget {
   const CheckMail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var inkWell = InkWell(onTap: () {
-      Navigator.pushNamed(context, '/resetpassword');
-    });
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -49,7 +47,11 @@ class CheckMail extends StatelessWidget {
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                         Color.fromARGB(255, 199, 19, 19))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/createnewpass');
+
+                  CreateNewPass();
+                },
                 child: Text('Open mail app'),
               ),
             ),

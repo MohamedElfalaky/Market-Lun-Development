@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
+class CreateNewPass extends StatefulWidget {
+  const CreateNewPass({Key? key}) : super(key: key);
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<CreateNewPass> createState() => _CreateNewPassState();
 }
 
-class _LogInState extends State<LogIn> {
+class _CreateNewPassState extends State<CreateNewPass> {
   final _formKey = GlobalKey<FormState>();
+  final pass1 = TextEditingController();
+  final pass2 = TextEditingController();
   bool isHiddenPass = true;
+  bool isHiddenPass2 = true;
   bool _throwShotAway = false;
-  final mailText = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Reset Password",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ),
       // appBar: AppBar(title: Text("LOGIN")),
       body: Container(
         color: Color.fromARGB(255, 251, 248, 248),
@@ -22,28 +33,30 @@ class _LogInState extends State<LogIn> {
           // mainAxisSiz MainAxisSize.min,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 100, bottom: 50),
+              margin: EdgeInsets.only(top: 50, bottom: 50),
               width: double.infinity,
               // ignore: sort_child_properties_last
               child: Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    Container(
-                        height: MediaQuery.of(context).size.width * 0.5,
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Image.asset('assets/attachment_120367649.png')),
-                    Text(
-                      "Market Admin",
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 11, 11, 11),
-                          fontSize: 40,
-                          fontFamily: "-apple-system, "),
-                    ),
-                    Text("Easy control your bussiness")
-                  ],
-                ),
-              ),
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Create new password",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.width * 0.03,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        child: Text(
+                          "Your password must be different from previous used password",
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
+                  )),
               // color: Color.fromARGB(255, 18, 107, 98),
             ),
             Container(
@@ -54,72 +67,26 @@ class _LogInState extends State<LogIn> {
                   child: Form(
                     key: _formKey,
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 5.0, right: 15, left: 15),
+                              top: 5.0, right: 15, left: 15, bottom: 10),
                           child: TextFormField(
-                            controller: mailText,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value!.isNotEmpty && value.length <= 9) {
-                                return "Mail must be more than 9 characters!";
-                              } else if (value.isEmpty) {
-                                return "please enter you mail";
-                              } else if (value.isNotEmpty &&
-                                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                      .hasMatch(mailText.text)) {
-                                return "please use mail formoula ***@***.com ";
-                              }
-                              return null;
-                            },
-                            maxLength: 20,
-                            decoration: InputDecoration(
-                              fillColor: Color.fromARGB(255, 222, 221, 218),
-                              filled: true,
-                              hintText: "Email",
-                              labelStyle: TextStyle(
-                                color: Color.fromARGB(255, 245, 59, 59),
-                              ),
-                              prefixIcon: Icon(Icons.email),
-                              suffixIcon: Icon(
-                                Icons.check_circle,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 1,
-                                      color:
-                                          Color.fromARGB(255, 222, 221, 218))),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 222, 221, 218),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 5.0, right: 15, left: 15),
-                          child: TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            controller: pass1,
                             obscureText: isHiddenPass,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter password";
-                              } else if (value.length <= 6) {
-                                return "Password must be more than 6 fileds";
+                              } else if (value.length < 8) {
+                                return "Password must be at least 8 fileds";
                               }
                               return null;
                             },
                             maxLength: 20,
                             decoration: InputDecoration(
-                              fillColor: Color.fromARGB(255, 222, 221, 218),
-                              filled: true,
                               hintText: "Password",
                               labelStyle: TextStyle(
                                 color: Color.fromARGB(255, 230, 53, 53),
@@ -138,33 +105,62 @@ class _LogInState extends State<LogIn> {
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 1,
-                                      color:
-                                          Color.fromARGB(255, 222, 221, 218))),
+                                  borderSide: BorderSide(width: 1)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 222, 221, 218),
+                                  color: Colors.blue,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: 10),
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                value: _throwShotAway,
-                                onChanged: (bool? newValue) {
-                                  setState(() {
-                                    _throwShotAway = newValue!;
-                                  });
-                                },
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 5.0, right: 15, left: 15, bottom: 10),
+                          child: TextFormField(
+                            controller: pass2,
+                            obscureText: isHiddenPass2,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter password";
+                              } else if (value.length < 8) {
+                                return "Password must be at least 8 fileds";
+                              } else if (value != pass1.text) {
+                                return "Passwords are not matched";
+                              }
+                              return null;
+                            },
+                            maxLength: 20,
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 230, 53, 53),
                               ),
-                              Text("Remember me?")
-                            ],
+                              prefixIcon: Icon(Icons.security),
+                              suffixIcon: InkWell(
+                                onTap: (() {
+                                  isHiddenPass2 = !isHiddenPass2;
+                                  // isHiddenPass
+                                  //     ? isHiddenPass = false
+                                  //     : isHiddenPass = true;
+                                  setState(() {});
+                                }),
+                                child: Icon(
+                                  Icons.visibility,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(width: 1)),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                                borderSide: BorderSide(
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         Container(
@@ -186,21 +182,26 @@ class _LogInState extends State<LogIn> {
                                 // );
                               }
                             },
-                            child: Text('Log in'),
+                            child: Text('Send mail'),
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: MediaQuery.of(context).size.width * 0.6,
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.pushNamed(context, '/resetpassword');
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/login', (Route<dynamic> route) => false);
                           },
                           child: Text(
-                            "Forget password?",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            'I remember my password return to login',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
                           ),
-                        )
+                        ),
+                        Container(
+                            margin: EdgeInsets.only(top: 5),
+                            child: Text("I dont have an account"))
                       ],
                     ),
                   )),
