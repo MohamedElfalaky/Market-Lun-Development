@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_app/LogIn.dart';
 
 class ResetPass extends StatelessWidget {
   ResetPass();

@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:market_app/CreateNewPass.dart';
+import 'package:market_app/Screens/CreateNewPass.dart';
 
 class CheckMail extends StatelessWidget {
   const CheckMail({super.key});

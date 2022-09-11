@@ -179,11 +179,10 @@ class _LogInState extends State<LogIn> {
                               if (!_formKey.currentState!.validate()) {
                                 return;
                               } else {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) =>  ),
-                                // );
+                                // Navigator.pushNamed(context, '/orderspage');
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/orderspage',
+                                    (Route<dynamic> route) => false);
                               }
                             },
                             child: Text('Log in'),
