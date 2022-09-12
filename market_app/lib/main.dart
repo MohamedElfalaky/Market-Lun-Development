@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_app/Screens/CheckMail.dart';
 import 'package:market_app/Screens/CreateNewPass.dart';
 import 'package:market_app/Screens/LogIn.dart';
+import 'package:market_app/Screens/OrderDetails.dart';
 import 'package:market_app/Screens/Orders.dart';
 import 'package:market_app/Screens/ResetPass.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
           '/checkmail': (context) => const CheckMail(),
           '/createnewpass': (context) => const CreateNewPass(),
           '/orderspage': (context) => const OrdersPage(),
+          '/ordersdetails': (context) => const OrderDetails(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -41,6 +43,6 @@ class MyApp extends StatelessWidget {
 
           // iconTheme: IconThemeData(color: Colors.red)
         ),
-        home: LogIn());
+        home: OrdersPage());
   }
 }
