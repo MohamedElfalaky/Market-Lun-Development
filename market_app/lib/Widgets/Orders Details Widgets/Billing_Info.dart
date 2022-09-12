@@ -32,11 +32,11 @@ class BillingInfo extends StatelessWidget {
           title: Row(
             children: [
               Icon(
-                Icons.person,
+                Icons.attach_money_rounded,
                 size: 40,
               ),
               Text(
-                " Client Info.",
+                " Billing Info.",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )
             ],

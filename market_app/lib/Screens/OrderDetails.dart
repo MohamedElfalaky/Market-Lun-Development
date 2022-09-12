@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
 import 'package:market_app/Widgets/Orders%20Details%20Widgets/Billing_Info.dart';
 import 'package:market_app/Widgets/Orders%20Details%20Widgets/Client_info.dart';
 import 'package:market_app/Widgets/Orders%20Details%20Widgets/Order_Info.dart';
@@ -31,6 +32,23 @@ class _OrderDetailsState extends State<OrderDetails> {
                 icon: Icon(Icons.search))
           ],
         ),
-        body: ListView(children: [ClientInfo(), OrderInfo(), BillingInfo()]));
+        body: ListView(children: [
+          ClientInfo(),
+          OrderInfo(),
+          BillingInfo(),
+        ]),
+        bottomNavigationBar: Container(
+          child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+              child: BottomAppBar(child: AcceptDecline())),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+            boxShadow: [
+              BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 20),
+            ],
+          ),
+        ));
   }
 }

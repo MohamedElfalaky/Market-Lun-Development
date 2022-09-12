@@ -32,11 +32,11 @@ class OrderInfo extends StatelessWidget {
           title: Row(
             children: [
               Icon(
-                Icons.person,
+                Icons.shopping_bag,
                 size: 40,
               ),
               Text(
-                " Client Info.",
+                " Order Info.",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )
             ],
