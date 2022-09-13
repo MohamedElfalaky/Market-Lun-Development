@@ -17,36 +17,44 @@ class _LogInState extends State<LogIn> {
     return Scaffold(
       // appBar: AppBar(title: Text("LOGIN")),
       body: Container(
-        color: Color.fromARGB(255, 251, 248, 248),
+        color: Color.fromARGB(255, 255, 255, 255),
         child: Column(
           // mainAxisSiz MainAxisSize.min,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 100, bottom: 50),
+              margin: EdgeInsets.only(top: 50, bottom: 50),
               width: double.infinity,
               // ignore: sort_child_properties_last
-              child: Align(
-                alignment: Alignment.center,
+              child: Center(
                 child: Column(
                   children: [
-                    Container(
-                        height: MediaQuery.of(context).size.width * 0.5,
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Image.asset('assets/attachment_120367649.png')),
+                    Center(
+                      child: Container(
+                          margin: EdgeInsets.only(top: 15),
+                          padding: EdgeInsets.all(25),
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          // width: MediaQuery.of(context).size.height * 0.4,
+                          child: Image.asset('assets/Logo.png')),
+                    ),
                     Text(
                       "Market Admin",
                       style: TextStyle(
-                          color: Color.fromARGB(255, 11, 11, 11),
-                          fontSize: 40,
-                          fontFamily: "-apple-system, "),
+                        color: Color.fromARGB(255, 11, 11, 11),
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    Text("Easy control your bussiness")
+                    Text(
+                      "Easy control your bussiness",
+                      style: TextStyle(fontSize: 17),
+                    )
                   ],
                 ),
               ),
               // color: Color.fromARGB(255, 18, 107, 98),
             ),
             Container(
+              margin: EdgeInsets.only(top: 25),
               width: double.infinity,
               // ignore: sort_child_properties_last
               child: Align(
@@ -77,7 +85,7 @@ class _LogInState extends State<LogIn> {
                             },
                             maxLength: 20,
                             decoration: InputDecoration(
-                              fillColor: Color.fromARGB(255, 222, 221, 218),
+                              fillColor: Color.fromARGB(255, 239, 246, 249),
                               filled: true,
                               hintText: "Email",
                               labelStyle: TextStyle(
@@ -91,11 +99,11 @@ class _LogInState extends State<LogIn> {
                                   borderSide: BorderSide(
                                       width: 1,
                                       color:
-                                          Color.fromARGB(255, 222, 221, 218))),
+                                          Color.fromARGB(255, 239, 246, 249))),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 222, 221, 218),
+                                  color: Color.fromARGB(255, 239, 246, 249),
                                 ),
                               ),
                             ),
@@ -118,7 +126,7 @@ class _LogInState extends State<LogIn> {
                             },
                             maxLength: 20,
                             decoration: InputDecoration(
-                              fillColor: Color.fromARGB(255, 222, 221, 218),
+                              fillColor: Color.fromARGB(255, 239, 246, 249),
                               filled: true,
                               hintText: "Password",
                               labelStyle: TextStyle(
@@ -141,11 +149,11 @@ class _LogInState extends State<LogIn> {
                                   borderSide: BorderSide(
                                       width: 1,
                                       color:
-                                          Color.fromARGB(255, 222, 221, 218))),
+                                          Color.fromARGB(255, 239, 246, 249))),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(25.0),
                                 borderSide: BorderSide(
-                                  color: Color.fromARGB(255, 222, 221, 218),
+                                  color: Color.fromARGB(255, 239, 246, 249),
                                 ),
                               ),
                             ),
@@ -170,26 +178,33 @@ class _LogInState extends State<LogIn> {
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 20),
                           width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Color.fromARGB(255, 199, 19, 19))),
-                            onPressed: () {
-                              if (!_formKey.currentState!.validate()) {
-                                return;
-                              } else {
-                                // Navigator.pushNamed(context, '/orderspage');
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/orderspage',
-                                    (Route<dynamic> route) => false);
-                              }
-                            },
-                            child: Text('Log in'),
+                          height: 55,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Color.fromARGB(255, 248, 85, 85))),
+                              onPressed: () {
+                                if (!_formKey.currentState!.validate()) {
+                                  return;
+                                } else {
+                                  // Navigator.pushNamed(context, '/orderspage');
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/orderspage',
+                                      (Route<dynamic> route) => false);
+                                }
+                              },
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 30,
                         ),
                         InkWell(
                           onTap: () {
@@ -197,7 +212,8 @@ class _LogInState extends State<LogIn> {
                           },
                           child: Text(
                             "Forget password?",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17),
                           ),
                         )
                       ],
