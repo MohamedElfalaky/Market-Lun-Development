@@ -1,43 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
 import 'package:market_app/Widgets/Orders%20Details%20Widgets/Billing_Info.dart';
-import 'package:market_app/Widgets/Orders%20Details%20Widgets/Bottom_Navigation_Bar.dart';
 import 'package:market_app/Widgets/Orders%20Details%20Widgets/Client_info.dart';
 import 'package:market_app/Widgets/Orders%20Details%20Widgets/Order_Info.dart';
 import 'package:market_app/Widgets/Search%20widget/Search.dart';
+import 'package:market_app/Widgets/Settings%20Widgets/Inside_Settings.dart';
+import 'package:market_app/Widgets/Settings%20Widgets/Save_Btn.dart';
 
-class OrderDetails extends StatefulWidget {
-  const OrderDetails({super.key});
+class Settings extends StatefulWidget {
+  const Settings({super.key});
 
   @override
-  State<OrderDetails> createState() => _OrderDetailsState();
+  State<Settings> createState() => _OrderDetailsState();
 }
 
-class _OrderDetailsState extends State<OrderDetails> {
+class _OrderDetailsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Order Details"),
+          title: Text("Settings"),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: (() {
               Navigator.pop(context);
             }),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  showSearch(context: context, delegate: mySearchDelegate());
-                },
-                icon: Icon(Icons.search))
-          ],
         ),
         body: ListView(children: [
-          ClientInfo(),
-          OrderInfo(),
-          BillingInfo(),
+          insideSettings(),
         ]),
-        bottomNavigationBar: MyBottomNavigationBar());
+        bottomNavigationBar: SaveBtn());
   }
 }

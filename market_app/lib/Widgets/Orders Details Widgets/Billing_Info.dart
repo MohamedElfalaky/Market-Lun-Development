@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BillingInfo extends StatelessWidget {
   BillingInfo({super.key});
 
-  Container myClientInfo(String metaa, String dataa, context) {
+  Container myBillInfo(String metaa, String dataa, context) {
     return Container(
       padding: EdgeInsets.only(left: 20),
       margin: EdgeInsets.only(bottom: 10, top: 5),
@@ -46,9 +46,9 @@ class BillingInfo extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    myClientInfo("Client Name", "Mohamed", context),
-                    myClientInfo("Phone", "01111238198", context),
-                    myClientInfo("Address", "New Maadi", context),
+                    myBillInfo("Payment Method", "Visa", context),
+                    myBillInfo("Subtotal", "155.00 \$", context),
+                    myBillInfo("Delivery fees", "5.00 \$", context),
                   ],
                 )
               ],

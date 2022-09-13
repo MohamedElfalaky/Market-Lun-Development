@@ -16,7 +16,15 @@ class NavigationDrawerWidget extends StatelessWidget {
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
       onTap: () {
-        Navigator.pushNamed(context, routeNAme);
+        if (routeNAme == '/login') {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              '/login', (Route<dynamic> route) => false);
+        } else if (routeNAme == '/orderspage') {
+          Navigator.pushReplacementNamed(context, '/orderspage');
+        } else {
+          Navigator.pushNamed(context, routeNAme);
+        }
+        ;
       },
     );
   }
@@ -26,7 +34,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     return Drawer(
       // backgroundColor: Colors.white,
       child: Container(
-          child: ListView(padding: EdgeInsets.zero, children: [
+          child: Column(children: [
         DrawerHeader(
           decoration: BoxDecoration(
               // color: Color.fromARGB(255, 234, 179, 179),
@@ -47,8 +55,16 @@ class NavigationDrawerWidget extends StatelessWidget {
           )),
         ),
         myListTile(Icons.shopping_bag, "Orders", '/orderspage', context),
-        myListTile(Icons.notifications, "Notifications", '/login', context),
-        myListTile(Icons.settings, "Settings", '/login', context),
+        myListTile(
+            Icons.notifications, "Notifications", '/notifications', context),
+        myListTile(Icons.settings, "Settings", '/settings', context),
+        Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(
+            bottom: 25,
+          ),
+          child: myListTile(Icons.logout, "Logout", '/login', context),
+        ),
       ])),
     );
   }

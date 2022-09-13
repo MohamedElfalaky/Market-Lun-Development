@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:market_app/Screens/CheckMail.dart';
 import 'package:market_app/Screens/CreateNewPass.dart';
 import 'package:market_app/Screens/LogIn.dart';
+import 'package:market_app/Screens/Notifications.dart';
 import 'package:market_app/Screens/OrderDetails.dart';
 import 'package:market_app/Screens/Orders.dart';
 import 'package:market_app/Screens/ResetPass.dart';
+import 'package:market_app/Screens/Settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
           // '/': (context) => const LogIn(),
@@ -25,6 +28,8 @@ class MyApp extends StatelessWidget {
           '/createnewpass': (context) => const CreateNewPass(),
           '/orderspage': (context) => const OrdersPage(),
           '/ordersdetails': (context) => const OrderDetails(),
+          '/notifications': (context) => const Notifications(),
+          '/settings': (context) => const Settings(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
