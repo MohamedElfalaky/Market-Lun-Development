@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
 
 class DeliveryOrder extends StatelessWidget {
   DeliveryOrder({super.key});
@@ -18,6 +19,16 @@ class DeliveryOrder extends StatelessWidget {
     "dymmy driver",
     "dymmy cost",
   ];
+
+  void _showAlertDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ChoosTimePopUp();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -115,7 +126,9 @@ class DeliveryOrder extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      _showAlertDialog(context);
+                                    },
                                     child: Text("Accept"),
                                     style: ElevatedButton.styleFrom(
                                         primary:

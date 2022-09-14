@@ -26,13 +26,32 @@ class _OrdersPageState extends State<OrdersPage> {
               },
               icon: Icon(Icons.search))
         ],
+        // bottom: HorizontalFilterBar(),
       ),
       body: ListView(
         children: [
-          HorizontalFilterBar(),
-          DeliveryOrder(),
-          DeliveryOrder(),
-          DeliveryOrder()
+          Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.88,
+                child: Column(
+                  children: [
+                    HorizontalFilterBar(),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      child: ListView(
+                        children: [
+                          DeliveryOrder(),
+                          DeliveryOrder(),
+                          DeliveryOrder()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

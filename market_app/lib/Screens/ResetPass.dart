@@ -15,124 +15,128 @@ class ResetPass extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: Container(
-            margin: EdgeInsets.only(top: 30),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'Reset Password',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 40),
-                  child: Text(
-                    'Enter the Email associated with your account and we will send you an email with instructions to reset your password',
-                    textAlign: TextAlign.center,
+      body: ListView(children: [
+        Center(
+          child: Container(
+              height: MediaQuery.of(context).size.height * 0.83,
+              margin: EdgeInsets.only(top: 30),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Form(
-                  key: _formKey,
-                  child: Column(children: [
-                    SizedBox(
-                      width: 385,
-                      child: TextFormField(
-                        controller: _mailText,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "please enter your mail";
-                          } else if (value.isNotEmpty &&
-                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(_mailText.text)) {
-                            return "please use mail formoula ***@***.***";
-                          }
-                          return null;
-                        },
-                        maxLength: 20,
-                        decoration: InputDecoration(
-                          fillColor: Color.fromARGB(255, 245, 242, 237),
-                          filled: true,
-                          hintText: "Email",
-                          labelStyle: TextStyle(
-                            color: Color.fromARGB(255, 245, 59, 59),
-                          ),
-                          prefixIcon: Icon(Icons.email),
-                          suffixIcon: Icon(
-                            Icons.check_circle,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(width: 1)),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                            borderSide: BorderSide(
-                              color: Colors.blue,
+                  Text(
+                    'Reset Password',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 40),
+                    child: Text(
+                      'Enter the Email associated with your account and we will send you an email with instructions to reset your password',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Column(children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: TextFormField(
+                          controller: _mailText,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter your mail";
+                            } else if (value.isNotEmpty &&
+                                !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(_mailText.text)) {
+                              return "please use mail formoula ***@***.***";
+                            }
+                            return null;
+                          },
+                          maxLength: 20,
+                          decoration: InputDecoration(
+                            fillColor: Color.fromARGB(255, 245, 242, 237),
+                            filled: true,
+                            hintText: "Email",
+                            labelStyle: TextStyle(
+                              color: Color.fromARGB(255, 245, 59, 59),
+                            ),
+                            prefixIcon: Icon(Icons.email),
+                            suffixIcon: Icon(
+                              Icons.check_circle,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(width: 1)),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide: BorderSide(
+                                color: Colors.blue,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      width: 380,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(255, 199, 19, 19))),
-                        onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          } else {
-                            Navigator.pushNamed(context, '/checkmail');
-                          }
-                        },
-                        child: Text(
-                          'Send mail',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  Color.fromARGB(255, 199, 19, 19))),
+                          onPressed: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            } else {
+                              Navigator.pushNamed(context, '/checkmail');
+                            }
+                          },
+                          child: Text(
+                            'Send mail',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
-                    ),
-                  ]),
-                ),
-                Spacer(),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/login', (Route<dynamic> route) => false);
-                  },
-                  child: Text(
-                    'I remember my password return to login',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ]),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    ;
-                  },
-                  child: Text("I dont have an account!"),
-                ),
-                SizedBox(
-                  height: 50,
-                )
-              ],
-            )),
-      ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/login', (Route<dynamic> route) => false);
+                    },
+                    child: Text(
+                      'I remember my password return to login',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      ;
+                    },
+                    child: Text("I dont have an account!"),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  )
+                ],
+              )),
+        ),
+      ]),
     );
   }
 }
