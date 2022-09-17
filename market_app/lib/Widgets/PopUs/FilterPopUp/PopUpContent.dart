@@ -21,7 +21,7 @@ class _FilterPopUpContentState extends State<FilterPopUpContent> {
   Widget myFilterPopUp(List myList, int index, context) {
     return Container(
       // padding: EdgeInsets.only(left: 10),
-      // margin: EdgeInsets.only(bottom: 10, top: 5),
+      margin: EdgeInsets.all(5),
       width: MediaQuery.of(context).size.width * 1,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +63,7 @@ class _FilterPopUpContentState extends State<FilterPopUpContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: EdgeInsets.all(10),
       child: Column(
         children: [
           Column(children: [

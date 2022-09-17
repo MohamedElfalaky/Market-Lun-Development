@@ -44,16 +44,20 @@ class CheckMail extends StatelessWidget {
                   margin: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width * 0.1),
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 199, 19, 19))),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/createnewpass');
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromARGB(255, 248, 85, 85))),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/createnewpass');
 
-                      CreateNewPass();
-                    },
-                    child: Text('Open mail app'),
+                        CreateNewPass();
+                      },
+                      child: Text('Open mail app'),
+                    ),
                   ),
                 ),
                 SizedBox(

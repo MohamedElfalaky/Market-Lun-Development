@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/Widgets/PopUs/ChooseTimePopUp/ChooseTimeContentPopUp.dart';
+import 'package:market_app/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
+import 'package:market_app/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
 
 class AcceptDecline extends StatelessWidget {
   AcceptDecline({super.key});
+  void _showAlertDialog(context, Widget myWidget) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return myWidget;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         // crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +49,9 @@ class AcceptDecline extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _showAlertDialog(context, ChoosTimePopUp());
+                              },
                               child: Text("Accept"),
                               style: ElevatedButton.styleFrom(
                                   primary: Color.fromARGB(255, 60, 238, 60)),
@@ -52,7 +65,9 @@ class AcceptDecline extends StatelessWidget {
                       child: SizedBox(
                         height: double.infinity,
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _showAlertDialog(context, DeclinePopUp());
+                          },
                           child: Text("Decline"),
                           style: OutlinedButton.styleFrom(
                               backgroundColor:

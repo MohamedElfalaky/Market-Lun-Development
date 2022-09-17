@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:duration_picker/duration_picker.dart';
 
-class ChooseTimePopUpContent extends StatefulWidget {
+class ChooseTimePopUpContent extends StatelessWidget {
   ChooseTimePopUpContent({super.key});
 
-  @override
-  State<ChooseTimePopUpContent> createState() => _ChooseTimePopUpContentState();
-}
-
-class _ChooseTimePopUpContentState extends State<ChooseTimePopUpContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +24,7 @@ class _ChooseTimePopUpContentState extends State<ChooseTimePopUpContent> {
               height: 10,
             ),
             Text(
-              " Select which driver you want toassign to \this order",
+              " Select which driver you want to assign to \this order",
               textAlign: TextAlign.center,
             ),
             SizedBox(

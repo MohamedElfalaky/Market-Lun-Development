@@ -89,21 +89,24 @@ class ResetPass extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.9,
                         height: 50,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                  Color.fromARGB(255, 199, 19, 19))),
-                          onPressed: () {
-                            if (!_formKey.currentState!.validate()) {
-                              return;
-                            } else {
-                              Navigator.pushNamed(context, '/checkmail');
-                            }
-                          },
-                          child: Text(
-                            'Send mail',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color.fromARGB(255, 248, 85, 85))),
+                            onPressed: () {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              } else {
+                                Navigator.pushNamed(context, '/checkmail');
+                              }
+                            },
+                            child: Text(
+                              'Send mail',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),

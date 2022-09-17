@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Widgets/PopUs/FilterPopUp/Filter_PopUp.dart';
+import 'package:market_app/Widgets/PopUs/FilterPopUp/PopUpContent.dart';
 
 class HorizontalFilterBar extends StatelessWidget {
   const HorizontalFilterBar({super.key});
@@ -11,13 +12,13 @@ class HorizontalFilterBar extends StatelessWidget {
     "All"
   ];
 
-  void _showAlertDialog(context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return FilterPopUp();
-      },
-    );
+  void _showModalSheet(context) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+        context: context,
+        builder: ((context) => FilterPopUp()));
   }
 
   @override
@@ -57,7 +58,7 @@ class HorizontalFilterBar extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              _showAlertDialog(context);
+              _showModalSheet(context);
             },
             child: Container(
               // height: MediaQuery.of(context).size.height * 0.05,
