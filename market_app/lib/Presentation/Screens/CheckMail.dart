@@ -52,29 +52,20 @@ class CheckMail extends StatelessWidget {
                           backgroundColor: MaterialStateProperty.all(
                               Color.fromARGB(255, 248, 85, 85))),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/createnewpass');
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/login', (Route<dynamic> route) => false);
 
                         CreateNewPass();
                       },
-                      child: Text('Open mail app'),
+                      child: Text('Return to login'),
                     ),
                   ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.25,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/login', (Route<dynamic> route) => false);
-                  },
-                  child: Text(
-                    'return to login',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.03,
+                  height: MediaQuery.of(context).size.width * 0.075,
                 ),
                 InkWell(
                   onTap: () {

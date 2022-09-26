@@ -12,8 +12,10 @@ import 'package:market_app/Presentation/Screens/Settings.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
-import 'package:market_app/data/Local/CacheHelper.dart';
+import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
+import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
+import 'package:market_app/data/Shared/UniLinks.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +27,8 @@ void main() async {
   await CacheHelper.init();
   //initiating prefs (the instance of Shared Prefrences)
 
+  UniLinks.initUniLink();
+  UniLinks.initUniLinks();
   Widget widget;
   String? token = CacheHelper.getFromShared('token');
   if (token != null) {
@@ -52,7 +56,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
-        BlocProvider(create: (context) => LogoutCubit())
+        BlocProvider(create: (context) => LogoutCubit()),
+        BlocProvider(create: (context) => MailSentCubit())
       ],
       child: MaterialApp(
           useInheritedMediaQuery: true,

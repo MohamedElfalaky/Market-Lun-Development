@@ -16,9 +16,3 @@ class LogoutError extends LogoutState {
   final String error;
   LogoutError(this.error);
 }
-
-// class LoginSuccess extends LoginState {
-//   final LogInModel myLoginModel;
-//   LoginSuccess(this.myLoginModel);
-// }
-

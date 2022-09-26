@@ -1,4 +1,8 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
 
 class ResetPass extends StatelessWidget {
   ResetPass();
@@ -85,27 +89,60 @@ class ResetPass extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        height: 50,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Color.fromARGB(255, 248, 85, 85))),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.pushNamed(context, '/checkmail');
-                              }
-                            },
-                            child: Text(
-                              'Send mail',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
+                      BlocConsumer<MailSentCubit, MailSentState>(
+                        listener: (context, state) {
+                          if (state is MailSentSuccess) {
+                            if (state.mailSentModel.success) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  '/checkmail',
+                                  (Route<dynamic> route) => false);
+                              // print(CacheHelper.getToken("token"));
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "No account attached to this mail",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 223, 47, 34),
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+                            }
+                          }
+                        },
+                        builder: (context, state) {
+                          return ConditionalBuilder(
+                            condition: state is! MailSentLoading,
+                            builder: ((context) => Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  height: 50,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Color.fromARGB(
+                                                      255, 248, 85, 85))),
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          MailSentCubit.get(context)
+                                              .sendMail(email: _mailText.text);
+                                        }
+                                      },
+                                      child: Text(
+                                        'Send mail',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                            fallback: (context) => CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ]),
                   ),
