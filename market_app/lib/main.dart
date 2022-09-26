@@ -10,8 +10,8 @@ import 'package:market_app/Presentation/Screens/ResetPass.dart';
 import 'package:market_app/Presentation/Screens/ReturnToLogin.dart';
 import 'package:market_app/Presentation/Screens/Settings.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:market_app/business_logic/cubits/Logout%20Cubit/cubit/logout_cubit.dart';
-import 'package:market_app/business_logic/cubits/cubit/login_cubit.dart';
+import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
+import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:market_app/data/Local/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
 

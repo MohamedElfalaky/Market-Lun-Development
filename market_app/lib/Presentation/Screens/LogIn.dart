@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/LogIn%20Widgets/LogoAndSlogan.dart';
 import 'package:market_app/Presentation/Widgets/LogIn%20Widgets/MailTextField.dart';
 import 'package:market_app/Presentation/Widgets/LogIn%20Widgets/PassWordTextField.dart';
-import 'package:market_app/business_logic/cubits/cubit/login_cubit.dart';
+import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/data/Local/CacheHelper.dart';
 
