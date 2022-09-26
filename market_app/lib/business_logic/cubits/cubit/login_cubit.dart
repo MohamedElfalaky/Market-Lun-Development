@@ -1,10 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/data/Models/LogInModel.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
-import 'package:market_app/data/end_points.dart';
-import 'package:meta/meta.dart';
+import 'package:market_app/data/Shared/end_points.dart';
 
 part 'login_state.dart';
 

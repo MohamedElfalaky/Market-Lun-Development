@@ -60,7 +60,6 @@ class ResetPass extends StatelessWidget {
                             }
                             return null;
                           },
-                          maxLength: 20,
                           decoration: InputDecoration(
                             fillColor: Color.fromARGB(255, 245, 242, 237),
                             filled: true,
@@ -69,9 +68,9 @@ class ResetPass extends StatelessWidget {
                               color: Color.fromARGB(255, 245, 59, 59),
                             ),
                             prefixIcon: Icon(Icons.email),
-                            suffixIcon: Icon(
-                              Icons.check_circle,
-                            ),
+                            // suffixIcon: Icon(
+                            //   Icons.check_circle,
+                            // ),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(width: 1)),
                             focusedBorder: OutlineInputBorder(
@@ -96,9 +95,7 @@ class ResetPass extends StatelessWidget {
                                 backgroundColor: MaterialStateProperty.all(
                                     Color.fromARGB(255, 248, 85, 85))),
                             onPressed: () {
-                              if (!_formKey.currentState!.validate()) {
-                                return;
-                              } else {
+                              if (_formKey.currentState!.validate()) {
                                 Navigator.pushNamed(context, '/checkmail');
                               }
                             },
@@ -125,16 +122,7 @@ class ResetPass extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      ;
-                    },
-                    child: Text("I dont have an account!"),
-                  ),
-                  SizedBox(
-                    height: 50,
+                    height: 40,
                   )
                 ],
               )),

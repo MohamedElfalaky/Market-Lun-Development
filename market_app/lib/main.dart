@@ -10,43 +10,55 @@ import 'package:market_app/Presentation/Screens/ResetPass.dart';
 import 'package:market_app/Presentation/Screens/ReturnToLogin.dart';
 import 'package:market_app/Presentation/Screens/Settings.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:market_app/business_logic/cubits/Logout%20Cubit/cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/cubit/login_cubit.dart';
 import 'package:market_app/data/Local/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //WidgetsFlutterBinding.ensureInitialized used to ensure that every functions main will run completely then run app
+
   DioHelper.init();
+  // initiating dio (base Url) in DioHelper class
+
   await CacheHelper.init();
+  //initiating prefs (the instance of Shared Prefrences)
+
   Widget widget;
-  String? token = CacheHelper.getToken('token');
+  String? token = CacheHelper.getFromShared('token');
   if (token != null) {
     widget = OrdersPage();
   } else {
     widget = LogIn();
   }
+//checking if theres token or not to decide which page will be the main(if there is token Login will be the main)
+
   runApp(
     // DevicePreview(
     //   enabled: true,
-    //   builder: (context) => const
+    //   builder: (context) => const   (to preview the app in varity of deviced in the emulator)
 
-    MyApp(widget), // Wrap your app
+    MyApp(widget),
   );
 }
 
 class MyApp extends StatelessWidget {
   final Widget startWidget;
-  MyApp(this.startWidget);
+  const MyApp(this.startWidget, {super.key});
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => LogoutCubit())
+      ],
       child: MaterialApp(
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
           debugShowCheckedModeBanner: false,
-          initialRoute: '/',
           routes: {
             // '/': (context) => const LogIn(),
             '/login': (context) => LogIn(),

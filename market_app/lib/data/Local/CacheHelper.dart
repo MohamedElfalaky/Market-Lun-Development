@@ -7,12 +7,12 @@ class CacheHelper {
     prefs = await SharedPreferences.getInstance();
   }
 
-  static Future saveToken(String token) async {
-    await prefs!.setString('token', token);
+  static Future saveToShared(String key, String value) async {
+    await prefs!.setString(key, value);
   }
 
-  static getToken(String key) {
-    return prefs?.get(key);
+  static getFromShared(String key) {
+    return prefs!.get(key);
   }
 
   static Future<bool?> removeToken(String key) async {

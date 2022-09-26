@@ -63,9 +63,15 @@ class CheckMail extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.25,
                 ),
-                Text(
-                  "Did not recive email address?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/login', (Route<dynamic> route) => false);
+                  },
+                  child: Text(
+                    'return to login',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.03,

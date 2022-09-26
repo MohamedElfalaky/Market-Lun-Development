@@ -28,8 +28,10 @@ class LogIn extends StatelessWidget {
                 backgroundColor: Color.fromARGB(255, 18, 228, 43),
                 textColor: Colors.white,
                 fontSize: 16.0);
-            CacheHelper.saveToken(state.myLoginModel.data!.token).then(
-                (value) => Navigator.of(context).pushNamedAndRemoveUntil(
+            CacheHelper.saveToShared('name', state.myLoginModel.data!.name);
+            CacheHelper.saveToShared('image', state.myLoginModel.data!.media);
+            CacheHelper.saveToShared('token', state.myLoginModel.data!.token)
+                .then((value) => Navigator.of(context).pushNamedAndRemoveUntil(
                     '/orderspage', (Route<dynamic> route) => false));
             // print(CacheHelper.getToken("token"));
           } else {

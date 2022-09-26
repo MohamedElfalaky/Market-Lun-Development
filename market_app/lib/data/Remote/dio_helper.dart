@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 class DioHelper {
   static Dio? dio;
+  static Dio? dioLogOut;
 
   static init() {
     dio = Dio(BaseOptions(
