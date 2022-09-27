@@ -13,7 +13,7 @@ class UniLinks {
       initialLink = await getInitialLink();
     } on PlatformException {}
     try {
-       initialLinkUri = await getInitialUri();
+      initialLinkUri = await getInitialUri();
     } on FormatException {}
   }
 
