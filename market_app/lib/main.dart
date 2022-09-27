@@ -29,6 +29,8 @@ void main() async {
 
   UniLinks.initUniLink();
   UniLinks.initUniLinks();
+  UniLinks.initUniLinkUri();
+
   Widget widget;
   String? token = CacheHelper.getFromShared('token');
   if (token != null) {
