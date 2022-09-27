@@ -25,6 +25,6 @@ class UniLinks {
   }
 
   Future<void> initUniLinkUri() async {
-    _sub = uriLinkStream.listen((Uri? uri) {}, onError: (err) {});
+    _subUri = uriLinkStream.listen((Uri? uri) {}, onError: (err) {});
   }
 }
