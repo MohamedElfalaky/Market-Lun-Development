@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
 
 class DeliveryOrder extends StatelessWidget {
-  DeliveryOrder({super.key});
+  int? id;
+  String? name;
+  String? paymentMethod;
+  String? driverName;
+  int? total;
+  DeliveryOrder(
+      {this.id, this.name, this.paymentMethod, this.driverName, this.total});
 
   List<String> metaDeta = [
     "Order ID",
@@ -12,16 +18,15 @@ class DeliveryOrder extends StatelessWidget {
     "Total"
   ];
 
-  List<String> dummyData = [
-    "dummy id",
-    "dummy name",
-    "dummy payment",
-    "dymmy driver",
-    "dymmy cost",
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<String> dummyData = [
+      id.toString(),
+      name.toString(),
+      paymentMethod.toString(),
+      driverName.toString(),
+      total.toString(),
+    ];
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, "/ordersdetails");

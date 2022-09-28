@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/FilterPopUp/Filter_PopUp.dart';
+import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/data/Shared/CacheHelper.dart';
 
 class HorizontalFilterBar extends StatelessWidget {
   const HorizontalFilterBar({super.key});
   static const List<String> _barMetaData = [
+    "All",
     "New",
     "Preparing",
-    "Recived",
-    "Completed",
-    "All"
+    "Delivered", //5
+    "Canceled", //6
+    "Refunded", //7
   ];
 
   void _showModalSheet(context) {
@@ -37,7 +40,32 @@ class HorizontalFilterBar extends StatelessWidget {
                 children: [
                   for (var i = 0; i < _barMetaData.length; i++)
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        if (i == 0) {
+                          OrdersCubit.get(context).getAllOrders(
+                              delivery: 1,
+                              pickup: 1,
+                              apiToken: CacheHelper.getFromShared("token"));
+                        } else if (i == 3) {
+                          OrdersCubit.get(context).getOrders(
+                              delivery: 1,
+                              pickup: 1,
+                              apiToken: CacheHelper.getFromShared("token"),
+                              status: 5);
+                        } else if (i == 4) {
+                          OrdersCubit.get(context).getOrders(
+                              delivery: 1,
+                              pickup: 1,
+                              apiToken: CacheHelper.getFromShared("token"),
+                              status: 6);
+                        } else if (i == 5) {
+                          OrdersCubit.get(context).getOrders(
+                              delivery: 1,
+                              pickup: 1,
+                              apiToken: CacheHelper.getFromShared("token"),
+                              status: 7);
+                        }
+                      },
                       child: Container(
                         child: Center(
                             child: Text(

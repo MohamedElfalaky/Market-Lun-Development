@@ -13,9 +13,12 @@ import 'package:device_preview/device_preview.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
+import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
 import 'package:market_app/data/Shared/UniLinks.dart';
+import './data/Shared/UniLinks.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,11 +30,10 @@ void main() async {
   await CacheHelper.init();
   //initiating prefs (the instance of Shared Prefrences)
 
-  UniLinks.initUniLink();
-  UniLinks.initUniLinks();
-  UniLinks.initUniLinkUri();
+  // UniLinks.init();
 
   Widget widget;
+
   String? token = CacheHelper.getFromShared('token');
   if (token != null) {
     widget = OrdersPage();
@@ -59,7 +61,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => LogoutCubit()),
-        BlocProvider(create: (context) => MailSentCubit())
+        BlocProvider(create: (context) => MailSentCubit()),
+        BlocProvider(create: (context) => UpdatePasswordCubit()),
+        BlocProvider(create: (context) => OrdersCubit()),
       ],
       child: MaterialApp(
           useInheritedMediaQuery: true,
@@ -71,7 +75,7 @@ class MyApp extends StatelessWidget {
             '/login': (context) => LogIn(),
             '/resetpassword': (context) => ResetPass(),
             '/checkmail': (context) => const CheckMail(),
-            '/createnewpass': (context) => const CreateNewPass(),
+            '/createnewpass': (context) => CreateNewPass(),
             '/returntologin': (context) => const ReturnToLogin(),
             '/orderspage': (context) => const OrdersPage(),
             '/ordersdetails': (context) => const OrderDetails(),

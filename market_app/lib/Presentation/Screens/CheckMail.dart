@@ -53,11 +53,11 @@ class CheckMail extends StatelessWidget {
                               Color.fromARGB(255, 248, 85, 85))),
                       onPressed: () {
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/login', (Route<dynamic> route) => false);
+                            '/createnewpass', (Route<dynamic> route) => false);
 
                         CreateNewPass();
                       },
-                      child: Text('Return to login'),
+                      child: Text('Reset'),
                     ),
                   ),
                 ),
