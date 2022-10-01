@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 
-class FilterPopUpContent extends StatefulWidget {
+class FilterPopUpContent extends StatelessWidget {
   FilterPopUpContent({super.key});
-
-  @override
-  State<FilterPopUpContent> createState() => _FilterPopUpContentState();
-}
-
-class _FilterPopUpContentState extends State<FilterPopUpContent> {
-  static const List<String> values1 = ["All", "Pick up", "Delivery"];
-  static const List<String> values2 = [
-    "Today",
-    "Yesterday",
-    "Lastweek",
-    "Lastmonth"
-  ];
-  String selectedValue1 = values1.first;
-  String selectedValue2 = values2.first;
 
   Widget myFilterPopUp(List myList, int index, context) {
     return Container(
-      // padding: EdgeInsets.only(left: 10),
       margin: EdgeInsets.all(5),
       width: MediaQuery.of(context).size.width * 1,
       child: Column(
@@ -28,74 +14,72 @@ class _FilterPopUpContentState extends State<FilterPopUpContent> {
         children: myList.map((listItem) {
           return RadioListTile<String>(
             value: listItem,
-            groupValue: index == 0 ? selectedValue1 : selectedValue2,
+            groupValue: index == 0
+                ? OrdersCubit.selectedValue1
+                : OrdersCubit.selectedValue2,
             title: Text(listItem,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             onChanged: ((value) {
-              setState(() {
-                listItem = value!;
-                if (index == 0) {
-                  selectedValue1 = value;
-                } else {
-                  selectedValue2 = value;
-                }
-                print(listItem);
-                //  print(myselected);
-                print(value);
-              });
+              listItem = value!;
+              if (index == 0) {
+                OrdersCubit.selectedValue1 = value;
+                OrdersCubit.get(context).changeRadioButton();
+              } else {
+                OrdersCubit.selectedValue2 = value;
+                OrdersCubit.get(context).changeRadioButton();
+              }
             }),
           );
-        }).toList()
-
-        // Text(
-        //   metaa,
-        //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-        // ),
-        // Text(
-        //   dataa,
-        //   style: TextStyle(fontSize: 15),
-        // )
-        ,
+        }).toList(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Column(children: [
-            Row(
-              children: [
-                SizedBox(height: 30, child: Icon(Icons.shopping_bag)),
-                Text(
-                  "  Order status",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
+    return BlocConsumer<OrdersCubit, OrdersState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Container(
+          margin: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Column(children: [
+                Row(
+                  children: [
+                    SizedBox(height: 30, child: Icon(Icons.shopping_bag)),
+                    Text(
+                      "  Order status",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
 
-            myFilterPopUp(values1, 0, context),
-            // myFilterPopUp(values2, selectedValue2, context)
-          ]),
-          Column(children: [
-            Row(
-              children: [
-                SizedBox(height: 30, child: Icon(Icons.date_range)),
-                Text(
-                  "  Date",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
+                myFilterPopUp(OrdersCubit.values1, 0, context),
+                // myFilterPopUp(values2, selectedValue2, context)
+              ]),
+              Column(children: [
+                Row(
+                  children: [
+                    SizedBox(height: 30, child: Icon(Icons.date_range)),
+                    Text(
+                      "  Date",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
 
-            myFilterPopUp(values2, 1, context),
-            // myFilterPopUp(values2, selectedValue2, context)
-          ])
-        ],
-      ),
+                myFilterPopUp(OrdersCubit.values2, 1, context),
+                // myFilterPopUp(values2, selectedValue2, context)
+              ])
+            ],
+          ),
+        );
+      },
     );
     ;
   }

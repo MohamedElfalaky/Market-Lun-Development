@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 
 class BillingInfo extends StatelessWidget {
   BillingInfo({super.key});
@@ -44,12 +46,36 @@ class BillingInfo extends StatelessWidget {
           children: [
             Row(
               children: [
-                Column(
-                  children: [
-                    myBillInfo("Payment Method", "Visa", context),
-                    myBillInfo("Subtotal", "155.00 \$", context),
-                    myBillInfo("Delivery fees", "5.00 \$", context),
-                  ],
+                BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
+                  listener: (context, state) {
+                    // TODO: implement listener
+                  },
+                  builder: (context, state) {
+                    return state is OrderDetailsSuccess
+                        ? Column(
+                            children: [
+                              myBillInfo(
+                                  "Payment Method",
+                                  state.myOrderDetailsModel.data.payment.method,
+                                  context),
+                              myBillInfo(
+                                  "Subtotal",
+                                  "${state.myOrderDetailsModel.data.payment.subtotal} \$",
+                                  context),
+                              myBillInfo(
+                                  "Delivery fees",
+                                  "${state.myOrderDetailsModel.data.payment.deliveryFee} \$",
+                                  context),
+                              myBillInfo(
+                                  "Total",
+                                  "${state.myOrderDetailsModel.data.payment.deliveryFee + state.myOrderDetailsModel.data.payment.subtotal} \$",
+                                  context),
+                            ],
+                          )
+                        : Center(
+                            child: CircularProgressIndicator(),
+                          );
+                  },
                 )
               ],
             )

@@ -13,6 +13,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
+import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
@@ -25,6 +26,7 @@ void main() async {
   //WidgetsFlutterBinding.ensureInitialized used to ensure that every functions main will run completely then run app
 
   DioHelper.init();
+
   // initiating dio (base Url) in DioHelper class
 
   await CacheHelper.init();
@@ -64,6 +66,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => MailSentCubit()),
         BlocProvider(create: (context) => UpdatePasswordCubit()),
         BlocProvider(create: (context) => OrdersCubit()),
+        BlocProvider(create: (context) => OrderDetailsCubit()),
       ],
       child: MaterialApp(
           useInheritedMediaQuery: true,
@@ -78,7 +81,7 @@ class MyApp extends StatelessWidget {
             '/createnewpass': (context) => CreateNewPass(),
             '/returntologin': (context) => const ReturnToLogin(),
             '/orderspage': (context) => const OrdersPage(),
-            '/ordersdetails': (context) => const OrderDetails(),
+            '/ordersdetails': (context) => OrderDetails(),
             '/notifications': (context) => const Notifications(),
             '/settings': (context) => const Settings(),
           },

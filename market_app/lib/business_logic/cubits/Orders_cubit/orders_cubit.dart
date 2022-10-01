@@ -10,6 +10,16 @@ part 'orders_state.dart';
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit() : super(OrdersInitial());
   static OrdersCubit get(context) => BlocProvider.of(context);
+  static const List<String> values1 = ["All", "Pick up", "Delivery"];
+  static const List<String> values2 = [
+    "Today",
+    "Yesterday",
+    "Lastweek",
+    "Lastmonth"
+  ];
+  static String selectedValue1 = values1.first;
+  static String selectedValue2 = values2.first;
+  int? selectedIndex;
 
   void getAllOrders({
     required int delivery,
@@ -48,5 +58,9 @@ class OrdersCubit extends Cubit<OrdersState> {
     }).catchError((error) {
       emit(OrdersError(error.toString()));
     });
+  }
+
+  void changeRadioButton() {
+    emit(OnChangeRadioButton());
   }
 }

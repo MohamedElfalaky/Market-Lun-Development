@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 
 class ClientInfo extends StatelessWidget {
   ClientInfo({super.key});
@@ -11,13 +13,19 @@ class ClientInfo extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            metaa,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          Expanded(
+            flex: 4,
+            child: Text(
+              metaa,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
           ),
-          Text(
-            dataa,
-            style: TextStyle(fontSize: 15),
+          Expanded(
+            flex: 3,
+            child: Text(
+              dataa,
+              style: TextStyle(fontSize: 15),
+            ),
           )
         ],
       ),
@@ -44,12 +52,27 @@ class ClientInfo extends StatelessWidget {
           children: [
             Row(
               children: [
-                Column(
-                  children: [
-                    myClientInfo("Client Name", "Mohamed", context),
-                    myClientInfo("Phone", "01111238198", context),
-                    myClientInfo("Address", "New Maadi", context),
-                  ],
+                BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+                  builder: (context, state) {
+                    return state is OrderDetailsSuccess
+                        ? Column(
+                            children: [
+                              myClientInfo(
+                                  "Client Name",
+                                  state.myOrderDetailsModel.data.clientName,
+                                  context),
+                              myClientInfo(
+                                  "Phone",
+                                  state.myOrderDetailsModel.data.clientPhone,
+                                  context),
+                              myClientInfo(
+                                  "Address",
+                                  state.myOrderDetailsModel.data.address,
+                                  context),
+                            ],
+                          )
+                        : Center(child: CircularProgressIndicator());
+                  },
                 )
               ],
             )

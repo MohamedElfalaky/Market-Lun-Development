@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/Presentation/Screens/OrderDetails.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20widgets/Delivery_Order.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20widgets/Horizontal_filter_bar.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20widgets/Navigation_Drawer%20_Widget.dart';
 import 'package:market_app/Presentation/Widgets/Search%20widget/Search.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/data/Shared/CacheHelper.dart';
 
-class OrdersPage extends StatelessWidget {
+class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
+
+  @override
+  State<OrdersPage> createState() => _OrdersPageState();
+}
+
+class _OrdersPageState extends State<OrdersPage> {
+  @override
+  void initState() {
+    OrdersCubit.get(context).getAllOrders(
+        delivery: 1, pickup: 1, apiToken: CacheHelper.getFromShared("token"));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +47,7 @@ class OrdersPage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.88,
                 child: Column(
                   children: [
-                    HorizontalFilterBar(),
+                    SizedBox(child: HorizontalFilterBar()),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.8,
                       child: BlocConsumer<OrdersCubit, OrdersState>(
@@ -50,19 +64,39 @@ class OrdersPage extends StatelessWidget {
                                             margin: EdgeInsets.only(top: 300),
                                             child: CircularProgressIndicator()),
                                       )
-                                    : DeliveryOrder(
-                                        id: state
-                                            .myOrdermodel.data[index].orderId,
-                                        name: state.myOrdermodel.data[index]
-                                            .clientName,
-                                        paymentMethod: state.myOrdermodel
-                                            .data[index].paymentMethod,
-                                        driverName: state.myOrdermodel
-                                            .data[index].driverName,
-                                        total: state
-                                            .myOrdermodel.data[index].total,
-                                        status: state.myOrdermodel.data[index]
-                                            .orderStatus,
+                                    : InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      OrderDetails(
+                                                        id: state
+                                                            .myOrdermodel
+                                                            .data[index]
+                                                            .orderId,
+                                                        status: state
+                                                            .myOrdermodel
+                                                            .data[index]
+                                                            .orderStatus,
+                                                      )));
+                                        },
+                                        child: DeliveryOrder(
+                                          id: state
+                                              .myOrdermodel.data[index].orderId,
+                                          name: state.myOrdermodel.data[index]
+                                              .clientName,
+                                          paymentMethod: state.myOrdermodel
+                                              .data[index].paymentMethod,
+                                          driverName: state.myOrdermodel
+                                              .data[index].driverName,
+                                          total: state
+                                              .myOrdermodel.data[index].total,
+                                          status: state.myOrdermodel.data[index]
+                                              .orderStatus,
+                                          receiveMethod: state.myOrdermodel
+                                              .data[index].receiveMethod,
+                                        ),
                                       );
                               });
                         },

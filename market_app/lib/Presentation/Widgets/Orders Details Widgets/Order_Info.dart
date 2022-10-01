@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 
 class OrderInfo extends StatelessWidget {
-  OrderInfo({super.key});
+  String? status;
+  OrderInfo(this.status);
 
-  Container myOrdertInfo(String metaa, String dataa, context) {
+  Color? statusColor;
+  Color? txtStatusColor;
+
+  Container myOrdertInfo(
+      String metaa, String dataa, Color? stsClr, Color? txtClr, context) {
     return Container(
       padding: EdgeInsets.only(left: 20),
       margin: EdgeInsets.only(bottom: 10, top: 10),
@@ -20,12 +27,11 @@ class OrderInfo extends StatelessWidget {
                   height: 30,
                   width: 100,
                   decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 222, 255, 220),
-                      borderRadius: BorderRadius.circular(15)),
+                      color: stsClr, borderRadius: BorderRadius.circular(15)),
                   child: Center(
                     child: Text(
                       dataa,
-                      style: TextStyle(color: Color.fromARGB(255, 66, 255, 94)),
+                      style: TextStyle(color: txtClr),
                     ),
                   ),
                 )
@@ -40,6 +46,17 @@ class OrderInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (status == "Cancelled") {
+      statusColor = Color.fromRGBO(255, 1, 1, 0.2);
+      txtStatusColor = Color.fromRGBO(255, 1, 1, 1);
+    } else if (status == "Delivered") {
+      statusColor = Color.fromRGBO(10, 255, 10, 0.2);
+      txtStatusColor = Color.fromRGBO(10, 255, 10, 1);
+    } else {
+      statusColor = Color.fromARGB(69, 30, 62, 243);
+      ;
+      txtStatusColor = Color.fromARGB(255, 30, 62, 243);
+    }
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
       child: ExpansionTile(
@@ -58,13 +75,60 @@ class OrderInfo extends StatelessWidget {
           children: [
             Row(
               children: [
-                Column(
-                  children: [
-                    myOrdertInfo("Order Status", "In Progress", context),
-                    myOrdertInfo("Order ID", "#7363", context),
-                    myOrdertInfo("Driver Name", " Khaled Mohamed", context),
-                    myOrdertInfo("Order Type", " Delivery", context),
-                  ],
+                BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return state is OrderDetailsSuccess
+                        ? Column(
+                            children: [
+                              myOrdertInfo(
+                                  "Order Status",
+                                  state.myOrderDetailsModel.data.status,
+                                  statusColor,
+                                  txtStatusColor,
+                                  context),
+                              myOrdertInfo(
+                                  "Order ID",
+                                  state.myOrderDetailsModel.data.orderId
+                                      .toString(),
+                                  statusColor,
+                                  txtStatusColor,
+                                  context),
+                              myOrdertInfo(
+                                  "Driver Name",
+                                  state.myOrderDetailsModel.data.driverName,
+                                  statusColor,
+                                  txtStatusColor,
+                                  context),
+                              myOrdertInfo(
+                                  "Order Type",
+                                  state.myOrderDetailsModel.data.orderType,
+                                  statusColor,
+                                  txtStatusColor,
+                                  context),
+                              myOrdertInfo(
+                                  "Time",
+                                  state.myOrderDetailsModel.data.time
+                                      .toString(),
+                                  statusColor,
+                                  txtStatusColor,
+                                  context),
+                              myOrdertInfo(
+                                  "Updated at",
+                                  state.myOrderDetailsModel.data.updatedAt,
+                                  statusColor,
+                                  txtStatusColor,
+                                  context),
+                              myOrdertInfo(
+                                  "Notes",
+                                  state.myOrderDetailsModel.data.hint,
+                                  statusColor,
+                                  txtStatusColor,
+                                  context),
+                            ],
+                          )
+                        : Center(child: CircularProgressIndicator());
+                  },
                 )
               ],
             )

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/FilterPopUp/PopUpContent.dart';
+import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/data/Shared/CacheHelper.dart';
 
 class FilterPopUp extends StatelessWidget {
   const FilterPopUp({super.key});
@@ -31,6 +33,25 @@ class FilterPopUp extends StatelessWidget {
             child: ElevatedButton(
               child: Text('Save'),
               onPressed: () {
+                // if()
+
+                if (OrdersCubit.selectedValue1 == "All") {
+                  OrdersCubit.get(context).getAllOrders(
+                      delivery: 1,
+                      pickup: 1,
+                      apiToken: CacheHelper.getFromShared("token"));
+                } else if (OrdersCubit.selectedValue1 == "Pick up") {
+                  OrdersCubit.get(context).getAllOrders(
+                      delivery: 0,
+                      pickup: 1,
+                      apiToken: CacheHelper.getFromShared("token"));
+                } else {
+                  OrdersCubit.get(context).getAllOrders(
+                      delivery: 1,
+                      pickup: 0,
+                      apiToken: CacheHelper.getFromShared("token"));
+                }
+
                 Navigator.of(context).pop();
               },
             ),

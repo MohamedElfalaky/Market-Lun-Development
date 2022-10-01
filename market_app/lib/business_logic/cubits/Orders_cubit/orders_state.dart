@@ -12,6 +12,8 @@ class OrdersSuccess extends OrdersState {
   OrdersSuccess(this.myOrdermodel);
 }
 
+class OnChangeRadioButton extends OrdersState {}
+
 class OrdersError extends OrdersState {
   final String error;
   OrdersError(this.error);
