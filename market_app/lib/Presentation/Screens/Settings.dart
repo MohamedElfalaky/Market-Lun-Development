@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/Settings%20Widgets/Inside_Settings.dart';
 import 'package:market_app/Presentation/Widgets/Settings%20Widgets/Save_Btn.dart';
 
-class Settings extends StatefulWidget {
+class Settings extends StatelessWidget {
   const Settings({super.key});
 
-  @override
-  State<Settings> createState() => _OrderDetailsState();
-}
-
-class _OrderDetailsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

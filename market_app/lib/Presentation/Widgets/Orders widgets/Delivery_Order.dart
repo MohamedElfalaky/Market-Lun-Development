@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
+import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
 
 class DeliveryOrder extends StatelessWidget {
   int? id;
@@ -7,8 +8,17 @@ class DeliveryOrder extends StatelessWidget {
   String? paymentMethod;
   String? driverName;
   int? total;
+  String? status;
+  Color? statusColor;
+  Color? txtStatusColor;
+  Widget? statusButton;
   DeliveryOrder(
-      {this.id, this.name, this.paymentMethod, this.driverName, this.total});
+      {this.id,
+      this.name,
+      this.paymentMethod,
+      this.driverName,
+      this.total,
+      this.status});
 
   List<String> metaDeta = [
     "Order ID",
@@ -17,6 +27,10 @@ class DeliveryOrder extends StatelessWidget {
     "Driver Name",
     "Total"
   ];
+
+  // if(status== "s"){
+  //   statusColor= Color.fromARGB(253, 239, 38, 0);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +41,27 @@ class DeliveryOrder extends StatelessWidget {
       driverName.toString(),
       total.toString(),
     ];
+    if (status == "Cancelled") {
+      statusColor = Color.fromRGBO(255, 1, 1, 0.2);
+      txtStatusColor = Color.fromRGBO(255, 1, 1, 1);
+    } else if (status == "Delivered") {
+      statusColor = Color.fromRGBO(10, 255, 10, 0.2);
+      txtStatusColor = Color.fromRGBO(10, 255, 10, 1);
+    } else {
+      statusColor = Color.fromARGB(69, 30, 62, 243);
+      ;
+      txtStatusColor = Color.fromARGB(255, 30, 62, 243);
+    }
+    ;
+
+    if (status == "Cancelled" ||
+        status == "Delivered" ||
+        status == "Refunded") {
+      statusButton = ViewButton();
+    } else {
+      statusButton = AcceptDecline();
+    }
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, "/ordersdetails");
@@ -77,11 +112,12 @@ class DeliveryOrder extends StatelessWidget {
                           height: 30,
                           width: 100,
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 192, 215, 255),
+                              color: statusColor,
                               borderRadius: BorderRadius.circular(15)),
                           child: Center(
                             child: Text(
-                              "New",
+                              status!,
+                              style: TextStyle(color: txtStatusColor),
                             ),
                           ),
                         ),
@@ -95,7 +131,7 @@ class DeliveryOrder extends StatelessWidget {
                     )
                   ],
                 ),
-                AcceptDecline()
+                statusButton!
               ],
             ),
           ),

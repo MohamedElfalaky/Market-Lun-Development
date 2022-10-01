@@ -41,11 +41,15 @@ class OrdersPage extends StatelessWidget {
                         builder: (context, state) {
                           return ListView.builder(
                               itemCount: state is! OrdersSuccess
-                                  ? 20
+                                  ? 1
                                   : state.myOrdermodel.data.length,
                               itemBuilder: (context, index) {
                                 return state is! OrdersSuccess
-                                    ? CircularProgressIndicator()
+                                    ? Center(
+                                        child: Container(
+                                            margin: EdgeInsets.only(top: 300),
+                                            child: CircularProgressIndicator()),
+                                      )
                                     : DeliveryOrder(
                                         id: state
                                             .myOrdermodel.data[index].orderId,
@@ -57,6 +61,8 @@ class OrdersPage extends StatelessWidget {
                                             .data[index].driverName,
                                         total: state
                                             .myOrdermodel.data[index].total,
+                                        status: state.myOrdermodel.data[index]
+                                            .orderStatus,
                                       );
                               });
                         },
