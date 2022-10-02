@@ -40,7 +40,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           actions: [
             IconButton(
                 onPressed: () {
-                  showSearch(context: context, delegate: mySearchDelegate());
+                  Navigator.pushNamed(context, '/search');
                 },
                 icon: Icon(Icons.search))
           ],
