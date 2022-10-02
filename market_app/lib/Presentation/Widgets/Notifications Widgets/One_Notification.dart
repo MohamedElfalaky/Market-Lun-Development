@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class OneNotification extends StatelessWidget {
-  const OneNotification({super.key});
+  String? body;
+  String? date;
+  OneNotification({this.body, this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class OneNotification extends StatelessWidget {
       ),
       padding: EdgeInsets.only(top: 35),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             padding: EdgeInsets.all(10),
@@ -27,12 +29,25 @@ class OneNotification extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width * .05,
           ),
-          Flexible(
-            child: Text(
-              "You have got new order, wanna check it now?",
-              softWrap: true,
-              style: TextStyle(fontSize: 16),
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: Text(
+                  body!,
+                  // softWrap: true,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              Container(
+                child: Text(
+                  "${date!}s ago",
+                  // softWrap: true,
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ),
+            ],
           )
         ],
       ),
