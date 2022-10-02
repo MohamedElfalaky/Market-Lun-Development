@@ -53,7 +53,7 @@ class OrdersCubit extends Cubit<OrdersState> {
       "statuses[0]": status,
     }).then((value) {
       var myOdrersModel = OrdersModel.fromJson(value.data);
-
+      // myCounter = myOdrersModel.data.length;
       emit(OrdersSuccess(myOdrersModel));
     }).catchError((error) {
       emit(OrdersError(error.toString()));

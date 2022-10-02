@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/FilterPopUp/Filter_PopUp.dart';
+import 'package:market_app/business_logic/cubits/New_order_counter/new_order_counter_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 
-class HorizontalFilterBar extends StatelessWidget {
+class HorizontalFilterBar extends StatefulWidget {
   HorizontalFilterBar({super.key});
-  static const List<String> _barMetaData = [
+  static final List<String> _barMetaData = [
     "All",
     "New",
-    "Preparing",
+    "Preparing ",
     "Delivered", //5
     "Canceled", //6
     "Refunded", //7
   ];
+
+  @override
+  State<HorizontalFilterBar> createState() => _HorizontalFilterBarState();
+}
+
+class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
+  int _counter = 0;
 
   void _showModalSheet(context) {
     showModalBottomSheet(
@@ -27,16 +35,15 @@ class HorizontalFilterBar extends StatelessWidget {
   int? selectedIndex;
 
   @override
+  void initState() {
+    NewOrderCounterCubit.get(context)
+        .getOrders(apiToken: CacheHelper.getFromShared("token"));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // if (flag == true) {
-    //   txtColor = Colors.amber;
-    // } else {
-    //   txtColor = Colors.red;
-    // }
-    return BlocConsumer<OrdersCubit, OrdersState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocBuilder<NewOrderCounterCubit, NewOrderCounterState>(
       builder: (context, state) {
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.08,
@@ -52,7 +59,9 @@ class HorizontalFilterBar extends StatelessWidget {
                     // This next line does the trick.
                     scrollDirection: Axis.horizontal,
                     children: [
-                      for (var i = 0; i < _barMetaData.length; i++)
+                      for (var i = 0;
+                          i < HorizontalFilterBar._barMetaData.length;
+                          i++)
                         InkWell(
                           onTap: () {
                             if (OrdersCubit.selectedValue1 == "All") {
@@ -62,6 +71,29 @@ class HorizontalFilterBar extends StatelessWidget {
                                     pickup: 1,
                                     apiToken:
                                         CacheHelper.getFromShared("token"));
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
+                              } else if (i == 1) {
+                                OrdersCubit.get(context).getOrders(
+                                    delivery: 1,
+                                    pickup: 1,
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"),
+                                    status: 1);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
+                              } else if (i == 2) {
+                                OrdersCubit.get(context).getOrders(
+                                    delivery: 1,
+                                    pickup: 1,
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"),
+                                    status: 2);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 3) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 1,
@@ -69,6 +101,9 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 5);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 4) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 1,
@@ -76,6 +111,9 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 6);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 5) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 1,
@@ -83,6 +121,9 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 7);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               }
                             } else if (OrdersCubit.selectedValue1 ==
                                 "Delivery") {
@@ -92,6 +133,29 @@ class HorizontalFilterBar extends StatelessWidget {
                                     pickup: 0,
                                     apiToken:
                                         CacheHelper.getFromShared("token"));
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
+                              } else if (i == 1) {
+                                OrdersCubit.get(context).getOrders(
+                                    delivery: 1,
+                                    pickup: 0,
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"),
+                                    status: 1);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
+                              } else if (i == 2) {
+                                OrdersCubit.get(context).getOrders(
+                                    delivery: 1,
+                                    pickup: 0,
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"),
+                                    status: 2);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 3) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 1,
@@ -99,6 +163,9 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 5);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 4) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 1,
@@ -106,6 +173,9 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 6);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 5) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 1,
@@ -113,12 +183,38 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 7);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               }
                             } else {
                               if (i == 0) {
                                 OrdersCubit.get(context).getAllOrders(
                                     delivery: 0,
                                     pickup: 1,
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
+                              } else if (i == 1) {
+                                OrdersCubit.get(context).getOrders(
+                                    delivery: 0,
+                                    pickup: 1,
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"),
+                                    status: 1);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
+                              } else if (i == 2) {
+                                OrdersCubit.get(context).getOrders(
+                                    delivery: 0,
+                                    pickup: 1,
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"),
+                                    status: 2);
+                                NewOrderCounterCubit.get(context).getOrders(
                                     apiToken:
                                         CacheHelper.getFromShared("token"));
                               } else if (i == 3) {
@@ -128,6 +224,9 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 5);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 4) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 0,
@@ -135,6 +234,9 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 6);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               } else if (i == 5) {
                                 OrdersCubit.get(context).getOrders(
                                     delivery: 0,
@@ -142,23 +244,54 @@ class HorizontalFilterBar extends StatelessWidget {
                                     apiToken:
                                         CacheHelper.getFromShared("token"),
                                     status: 7);
+                                NewOrderCounterCubit.get(context).getOrders(
+                                    apiToken:
+                                        CacheHelper.getFromShared("token"));
                               }
                             }
                             OrdersCubit.get(context).selectedIndex = i;
                             OrdersCubit.get(context).changeRadioButton();
                           },
                           child: Container(
-                            child: Center(
-                                child: Text(
-                              _barMetaData[i],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            )),
+                            child: i == 1
+                                ? Stack(children: [
+                                    Center(
+                                        child: Text(
+                                      HorizontalFilterBar._barMetaData[i],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    )),
+                                    Align(
+                                      alignment: Alignment(0.79, 0),
+                                      child: Container(
+                                        height: 20,
+                                        width: 20,
+                                        decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 195, 185, 184),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Center(
+                                            child: Text(NewOrderCounterCubit
+                                                .myCounter
+                                                .toString())),
+                                      ),
+                                    )
+                                  ])
+                                : Center(
+                                    child: Text(
+                                    HorizontalFilterBar._barMetaData[i],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  )),
                             // height: 50,
                             width: 110.0,
                             decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 227, 223, 223),
+                                color: i == 1
+                                    ? Color.fromARGB(255, 250, 107, 97)
+                                    : Color.fromARGB(255, 242, 238, 238),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
                                 boxShadow: [

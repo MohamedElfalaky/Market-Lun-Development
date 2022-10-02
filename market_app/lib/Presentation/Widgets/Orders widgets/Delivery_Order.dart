@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
+import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/CancelButton.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
@@ -54,10 +55,18 @@ class DeliveryOrder extends StatelessWidget {
     } else if (status == "Delivered") {
       statusColor = Color.fromRGBO(10, 255, 10, 0.2);
       txtStatusColor = Color.fromRGBO(10, 255, 10, 1);
-    } else {
+    } else if (status == "Refunded") {
       statusColor = Color.fromARGB(69, 30, 62, 243);
       ;
       txtStatusColor = Color.fromARGB(255, 30, 62, 243);
+    } else if (status == "New") {
+      statusColor = Color.fromARGB(69, 29, 187, 205);
+      ;
+      txtStatusColor = Color.fromARGB(255, 13, 170, 179);
+    } else {
+      statusColor = Color.fromARGB(69, 230, 7, 159);
+      ;
+      txtStatusColor = Color.fromARGB(255, 235, 19, 152);
     }
     ;
 
@@ -65,8 +74,10 @@ class DeliveryOrder extends StatelessWidget {
         status == "Delivered" ||
         status == "Refunded") {
       statusButton = ViewButton();
-    } else {
+    } else if (status == "New") {
       statusButton = AcceptDecline();
+    } else {
+      statusButton = CancelButton();
     }
 
     if (receiveMethod == "Delivery") {

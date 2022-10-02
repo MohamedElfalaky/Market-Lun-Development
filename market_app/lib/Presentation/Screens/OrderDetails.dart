@@ -50,6 +50,6 @@ class _OrderDetailsState extends State<OrderDetails> {
           OrderInfo(widget.status),
           BillingInfo(),
         ]),
-        bottomNavigationBar: MyBottomNavigationBar());
+        bottomNavigationBar: MyBottomNavigationBar(widget.status));
   }
 }

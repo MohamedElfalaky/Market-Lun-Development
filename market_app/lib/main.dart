@@ -14,6 +14,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
+import 'package:market_app/business_logic/cubits/New_order_counter/new_order_counter_cubit.dart';
 import 'package:market_app/business_logic/cubits/Notification_cubit/notifications_cubit.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OrderDetailsCubit()),
         BlocProvider(create: (context) => NotificationsCubit()),
         BlocProvider(create: (context) => SearchCubit()),
+        BlocProvider(create: (context) => NewOrderCounterCubit()),
       ],
       child: MaterialApp(
           useInheritedMediaQuery: true,

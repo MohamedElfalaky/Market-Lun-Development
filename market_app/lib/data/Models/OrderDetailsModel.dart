@@ -82,7 +82,7 @@ class Payment {
   late final int price;
   late final String method;
   late final int deliveryFee;
-  late final int subtotal;
+  late final num subtotal;
 
   Payment.fromJson(Map<String, dynamic> json) {
     price = json['price'];
@@ -103,7 +103,7 @@ class Products {
   late final int id;
   late final String name;
   late final int quantity;
-  late final int total;
+  late final num total;
   late final List<String> options;
 
   Products.fromJson(Map<String, dynamic> json) {

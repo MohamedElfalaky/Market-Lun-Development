@@ -52,10 +52,18 @@ class OrderInfo extends StatelessWidget {
     } else if (status == "Delivered") {
       statusColor = Color.fromRGBO(10, 255, 10, 0.2);
       txtStatusColor = Color.fromRGBO(10, 255, 10, 1);
-    } else {
+    } else if (status == "Refunded") {
       statusColor = Color.fromARGB(69, 30, 62, 243);
       ;
       txtStatusColor = Color.fromARGB(255, 30, 62, 243);
+    } else if (status == "New") {
+      statusColor = Color.fromARGB(69, 29, 187, 205);
+      ;
+      txtStatusColor = Color.fromARGB(255, 13, 170, 179);
+    } else {
+      statusColor = Color.fromARGB(69, 230, 7, 159);
+      ;
+      txtStatusColor = Color.fromARGB(255, 235, 19, 152);
     }
     return Container(
       margin: EdgeInsets.symmetric(vertical: 15),
@@ -74,6 +82,7 @@ class OrderInfo extends StatelessWidget {
           ),
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
                   listener: (context, state) {},

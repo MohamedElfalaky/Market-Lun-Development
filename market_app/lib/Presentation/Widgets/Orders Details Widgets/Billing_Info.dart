@@ -45,6 +45,7 @@ class BillingInfo extends StatelessWidget {
           ),
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
                   listener: (context, state) {

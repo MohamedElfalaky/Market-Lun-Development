@@ -21,57 +21,46 @@ class ViewButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                      height: 30,
-                      width: 30,
-                      child: Image.asset("assets/200w.gif")),
-                  Container(
-                      margin: EdgeInsets.symmetric(vertical: 15),
-                      child: Text("Order will canceled in x mins")),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: SizedBox(
-                          height: double.infinity,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                _showAlertDialog(context, ChoosTimePopUp());
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.visibility),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text("View"),
-                                ],
+          SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            height: 50,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: SizedBox(
+                      height: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.visibility,
+                                color: Colors.white,
                               ),
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color.fromARGB(255, 246, 19, 19)),
-                            ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "View",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
                           ),
+                          decoration: BoxDecoration(color: Colors.red),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )
         ],
       ),

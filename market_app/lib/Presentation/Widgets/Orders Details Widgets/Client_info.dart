@@ -51,8 +51,15 @@ class ClientInfo extends StatelessWidget {
           ),
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+                BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
+                  listener: (context, state) {
+                    if (state is OrderDetailsSuccess) {
+                      print(
+                          "slkmlkdnjknlwjndwlsnwljnsjlwnsljwnjlwnkljswnljsnkjbehkbflqndewn");
+                    }
+                  },
                   builder: (context, state) {
                     return state is OrderDetailsSuccess
                         ? Column(
