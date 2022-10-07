@@ -41,8 +41,6 @@ class _OrdersPageState extends State<OrdersPage> {
       OrdersCubit.get(context).getAllOrders(
           delivery: 1, pickup: 1, apiToken: CacheHelper.getFromShared("token"));
     }
-
-    super.initState();
   }
 
   @override

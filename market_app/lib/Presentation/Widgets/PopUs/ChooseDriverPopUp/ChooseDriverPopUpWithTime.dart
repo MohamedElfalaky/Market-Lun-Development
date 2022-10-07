@@ -9,16 +9,16 @@ import 'package:market_app/data/Models/DriversModel.dart';
 import 'package:market_app/data/Models/NotificationsModel.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 
-class ChooseDriverPopUp extends StatefulWidget {
+class ChooseDriverPopUpWithTime extends StatefulWidget {
   final id;
-  final int myTime;
-  ChooseDriverPopUp(this.myTime, this.id);
+  ChooseDriverPopUpWithTime(this.id);
 
   @override
-  State<ChooseDriverPopUp> createState() => _ChooseDriverPopUpState();
+  State<ChooseDriverPopUpWithTime> createState() =>
+      _ChooseDriverPopUpWithTimeState();
 }
 
-class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
+class _ChooseDriverPopUpWithTimeState extends State<ChooseDriverPopUpWithTime> {
   int _navigateTothisIndex = 2;
   int _currentState = 2;
   @override
@@ -69,7 +69,6 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                     dropdownValue =
                         value!; // قيمه الاختيار تتغير عند اختيار قيمه جديدة
                     print(dropdownValue);
-                    print(widget.myTime);
                   },
                   items: state.myDriversModel.data
                       .map<DropdownMenuItem<String>>((Dataa value) {
@@ -89,18 +88,7 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                     child: OutlinedButton(
                       child: Text('Later'),
                       onPressed: () {
-                        UpdateOrderCubit.get(context).updateNewToPreparing(
-                            time: widget.myTime, orderId: widget.id);
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrdersPage(
-                                      statusToinitiate: _currentState,
-                                    )),
-                            ModalRoute.withName(""));
-
-                        OrdersCubit.get(context).selectedIndex =
-                            _navigateTothisIndex;
+                        Navigator.pop(context);
                       },
                     ),
                   ),
@@ -113,15 +101,26 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
-                        listener: (context, state) {},
+                        listener: (context, state) {
+                          state is UpdateOrderSuccess
+                              ? Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OrdersPage(
+                                            statusToinitiate: _currentState,
+                                          )),
+                                  ModalRoute.withName(""))
+                              //  Navigator.pushNamedAndRemoveUntil(
+                              //     context, "/orderspage", (route) => false)
+                              : null;
+                        },
                         builder: (context, state) {
                           return state is! UpdateOrderLoading
                               ? ElevatedButton(
                                   child: Text('Save'),
                                   onPressed: () {
                                     UpdateOrderCubit.get(context)
-                                        .updateNewToPreparingWithDriver(
-                                            time: widget.myTime,
+                                        .updateNotAssignedDriver(
                                             orderId: widget.id,
                                             driverId: dropdownValue);
 

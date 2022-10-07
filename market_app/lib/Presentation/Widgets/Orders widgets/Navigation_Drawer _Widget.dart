@@ -51,7 +51,9 @@ class NavigationDrawerWidget extends StatelessWidget {
             children: [
               SizedBox(
                   height: 90,
-                  child: Image.network(CacheHelper.getFromShared(('image')))),
+                  child: FadeInImage.assetNetwork(
+                      placeholder: "assets/attachment_120367649.png",
+                      image: CacheHelper.getFromShared("image"))),
               SizedBox(
                 height: 7,
               ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Screens/Orders.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUp.dart';
+import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUpWithTime.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
@@ -60,16 +61,16 @@ class CancelButton extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
                           listener: (context, state) {
-                            state is UpdateOrderSuccess
-                                ? Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => OrdersPage(
-                                              statusToinitiate:
-                                                  _navigateTothisIndex,
-                                            )),
-                                    ModalRoute.withName(""))
-                                : null;
+                            // state is UpdateOrderSuccess
+                            //     ? Navigator.pushAndRemoveUntil(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => OrdersPage(
+                            //                   statusToinitiate:
+                            //                       _navigateTothisIndex,
+                            //                 )),
+                            //         ModalRoute.withName(""))
+                            //     : null;
                           },
                           builder: (context, state) {
                             return state is! UpdateOrderLoading
@@ -83,6 +84,16 @@ class CancelButton extends StatelessWidget {
                                               .updatePreparingToDelivered(
                                             orderId: id,
                                           );
+
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      OrdersPage(
+                                                        statusToinitiate:
+                                                            _navigateTothisIndex,
+                                                      )),
+                                              ModalRoute.withName(""));
                                           OrdersCubit.get(context)
                                                   .selectedIndex =
                                               _navigateTothisIndex;
@@ -94,9 +105,23 @@ class CancelButton extends StatelessWidget {
                                       ),
                                     ),
                                   )
-                                : Center(
-                                    child: CircularProgressIndicator(),
-                                  );
+                                : id == UpdateOrderCubit.get(context).currentId
+                                    // من الكيوبت عشان اعرف امسكها بعد ما تاخد قيمتها
+                                    ? Center(child: CircularProgressIndicator())
+                                    : SizedBox(
+                                        height: double.infinity,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          child: ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text("Delivered"),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Color.fromARGB(
+                                                    255, 60, 238, 60)),
+                                          ),
+                                        ),
+                                      );
                           },
                         ),
                       ),
@@ -137,7 +162,9 @@ class CancelButton extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               _showAlertDialog(
-                                  context, ChooseDriverPopUp(0, id));
+                                  context,
+                                  ChooseDriverPopUpWithTime(
+                                      id)); // حاطط التايم بصفر
                             },
                             child: Text(
                               "Assign now",

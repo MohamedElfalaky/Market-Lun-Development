@@ -15,6 +15,8 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
 
   static UpdateOrderCubit get(context) => BlocProvider.of(context);
 
+  int currentId = 0;
+
   void updateNewToPreparing({required time, required orderId}) {
     emit(UpdateOrderLoading());
     DioHelper.postData(url: "$GETORDERS/$orderId", data: {
@@ -39,6 +41,23 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
 
       emit(UpdateOrderSuccess(myUpdateOrderModel));
+    }).catchError((error) {
+      emit(UpdateOrderError(error.toString()));
+    });
+  }
+
+  void updateNotAssignedDriver({required orderId, required driverId}) {
+    emit(UpdateOrderLoading());
+    DioHelper.postData(url: "$GETORDERS/$orderId", data: {
+      "api_token": CacheHelper.getFromShared("token"),
+      "order_status_id": 2,
+      "driver_id": driverId,
+    }).then((value) {
+      var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
+
+      emit(UpdateOrderSuccess(myUpdateOrderModel));
+    }).catchError((error) {
+      emit(UpdateOrderError(error.toString()));
     });
   }
 
@@ -51,10 +70,13 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
     }).then((value) {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
       emit(UpdateOrderSuccess(myUpdateOrderModel));
+    }).catchError((error) {
+      emit(UpdateOrderError(error.toString()));
     });
   }
 
   void updatePreparingToDelivered({required orderId}) {
+    currentId = orderId;
     emit(UpdateOrderLoading());
     DioHelper.postData(url: "$GETORDERS/$orderId", data: {
       "api_token": CacheHelper.getFromShared("token"),
@@ -62,6 +84,8 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
     }).then((value) {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
       emit(UpdateOrderSuccess(myUpdateOrderModel));
+    }).catchError((error) {
+      emit(UpdateOrderError(error.toString()));
     });
   }
 }

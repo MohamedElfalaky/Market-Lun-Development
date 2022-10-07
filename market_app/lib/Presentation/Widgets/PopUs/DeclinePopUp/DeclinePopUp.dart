@@ -19,7 +19,6 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
   final _formKey = GlobalKey<FormState>();
 
   int navigateTothisIndex = 4;
-  int currentState = 6;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -81,27 +80,12 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
               ),
               Center(
                 child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
-                  listener: (context, state) {
-                    state is UpdateOrderSuccess
-                        ? Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrdersPage(
-                                      statusToinitiate: navigateTothisIndex,
-                                    )),
-                            ModalRoute.withName(""))
-                        : null;
-
-                    // Navigator.pushNamedAndRemoveUntil(
-                    //     context, "orderspage", (route) => false,
-                    //     arguments: currentState)
-                    // : null;
-                  },
+                  listener: (context, state) {},
                   builder: (context, state) {
                     return state is! UpdateOrderLoading
                         ? Container(
                             margin: EdgeInsets.only(bottom: 15),
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: MediaQuery.of(context).size.width * 0.55,
                             height: MediaQuery.of(context).size.height * 0.055,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
@@ -115,6 +99,16 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                                     UpdateOrderCubit.get(context).declineOrder(
                                         orderId: widget.id,
                                         cancelReason: myControlled.text);
+
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => OrdersPage(
+                                                  statusToinitiate:
+                                                      navigateTothisIndex,
+                                                )),
+                                        ModalRoute.withName(""));
+
                                     OrdersCubit.get(context).selectedIndex =
                                         navigateTothisIndex;
                                   }
