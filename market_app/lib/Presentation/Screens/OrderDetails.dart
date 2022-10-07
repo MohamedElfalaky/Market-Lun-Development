@@ -10,9 +10,14 @@ import 'package:market_app/data/Shared/CacheHelper.dart';
 class OrderDetails extends StatefulWidget {
   final int? id;
   final String? status;
+  final driverName;
   // Color? statusColor;
   // Color? txtStatusColor;
-  OrderDetails({this.id, this.status});
+  OrderDetails({
+    this.id,
+    this.status,
+    this.driverName,
+  });
 
   @override
   State<OrderDetails> createState() => _OrderDetailsState();
@@ -50,6 +55,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           OrderInfo(widget.status),
           BillingInfo(),
         ]),
-        bottomNavigationBar: MyBottomNavigationBar(widget.status));
+        bottomNavigationBar:
+            MyBottomNavigationBar(widget.status, widget.id, widget.driverName));
   }
 }

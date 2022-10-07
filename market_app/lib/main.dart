@@ -11,6 +11,7 @@ import 'package:market_app/Presentation/Screens/ReturnToLogin.dart';
 import 'package:market_app/Presentation/Screens/Search.dart';
 import 'package:market_app/Presentation/Screens/Settings.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:market_app/business_logic/cubits/Drivers_cubits/drivers_cubit.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
@@ -20,6 +21,7 @@ import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_detai
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/business_logic/cubits/Search_cubit/search_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
+import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
 import 'package:market_app/data/Shared/UniLinks.dart';
@@ -42,7 +44,9 @@ void main() async {
 
   String? token = CacheHelper.getFromShared('token');
   if (token != null) {
-    widget = OrdersPage();
+    widget = OrdersPage(
+      statusToinitiate: 0,
+    );
   } else {
     widget = LogIn();
   }
@@ -74,6 +78,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => NotificationsCubit()),
         BlocProvider(create: (context) => SearchCubit()),
         BlocProvider(create: (context) => NewOrderCounterCubit()),
+        BlocProvider(create: (context) => DriversCubit()),
+        BlocProvider(create: (context) => UpdateOrderCubit()),
       ],
       child: MaterialApp(
           useInheritedMediaQuery: true,
@@ -87,7 +93,9 @@ class MyApp extends StatelessWidget {
             '/checkmail': (context) => const CheckMail(),
             '/createnewpass': (context) => CreateNewPass(),
             '/returntologin': (context) => const ReturnToLogin(),
-            '/orderspage': (context) => const OrdersPage(),
+            '/orderspage': (context) => OrdersPage(
+                  statusToinitiate: 0,
+                ),
             '/ordersdetails': (context) => OrderDetails(),
             '/notifications': (context) => const Notifications(),
             '/settings': (context) => const Settings(),

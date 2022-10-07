@@ -24,7 +24,7 @@ class ChooseTimePopUpContent extends StatelessWidget {
               height: 10,
             ),
             Text(
-              " Select which driver you want to assign to \this order",
+              " Type time in minutes",
               textAlign: TextAlign.center,
             ),
             SizedBox(

@@ -8,3 +8,4 @@ const SENDMAIL = "/api/market/forget_password";
 const UPDATEPASS = "/api/market/changePassword";
 const GETORDERS = "/api/market/orders";
 const NOTIFICATIONS = "/api/market/notifications";
+const DRIVERS = "/api/market/drivers";

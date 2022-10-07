@@ -3,7 +3,9 @@ import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTime
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
 
 class AcceptDecline extends StatelessWidget {
-  AcceptDecline({super.key});
+  final id;
+  AcceptDecline(this.id);
+
   void _showAlertDialog(context, Widget myWidget) {
     showDialog(
       context: context,
@@ -49,7 +51,7 @@ class AcceptDecline extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             child: ElevatedButton(
                               onPressed: () {
-                                _showAlertDialog(context, ChoosTimePopUp());
+                                _showAlertDialog(context, ChoosTimePopUp(id));
                               },
                               child: Text("Accept"),
                               style: ElevatedButton.styleFrom(
@@ -65,7 +67,7 @@ class AcceptDecline extends StatelessWidget {
                         height: double.infinity,
                         child: OutlinedButton(
                           onPressed: () {
-                            _showAlertDialog(context, DeclinePopUp());
+                            _showAlertDialog(context, DeclinePopUp(id));
                           },
                           child: Text("Decline"),
                           style: OutlinedButton.styleFrom(

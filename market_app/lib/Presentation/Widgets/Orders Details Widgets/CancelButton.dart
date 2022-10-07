@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:market_app/Presentation/Screens/Orders.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
+import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 
 class CancelButton extends StatelessWidget {
-  CancelButton({super.key});
+  final id;
+  final driverName;
+  final int _navigateTothisIndex = 3;
+  CancelButton(
+    this.id,
+    this.driverName,
+  );
   void _showAlertDialog(context, Widget myWidget) {
     showDialog(
       context: context,
@@ -45,14 +55,61 @@ class CancelButton extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
+                          listener: (context, state) {
+                            state is UpdateOrderSuccess
+                                ? Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OrdersPage(
+                                              statusToinitiate:
+                                                  _navigateTothisIndex,
+                                            )),
+                                    ModalRoute.withName(""))
+                                : null;
+                          },
+                          builder: (context, state) {
+                            return state is! UpdateOrderLoading
+                                ? SizedBox(
+                                    height: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          UpdateOrderCubit.get(context)
+                                              .updatePreparingToDelivered(
+                                            orderId: id,
+                                          );
+                                          OrdersCubit.get(context)
+                                                  .selectedIndex =
+                                              _navigateTothisIndex;
+                                        },
+                                        child: Text("Delivered"),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Color.fromARGB(
+                                                255, 60, 238, 60)),
+                                      ),
+                                    ),
+                                  )
+                                : Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: SizedBox(
                           height: double.infinity,
                           child: OutlinedButton(
                             onPressed: () {
-                              _showAlertDialog(context, DeclinePopUp());
+                              _showAlertDialog(context, DeclinePopUp(id));
                             },
                             child: Text("Cancel"),
                             style: OutlinedButton.styleFrom(
@@ -70,26 +127,29 @@ class CancelButton extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                  margin: EdgeInsets.only(top: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Driver not assigned yet? "),
-                      InkWell(
-                        onTap: () {
-                          _showAlertDialog(context, ChooseDriverPopUp());
-                        },
-                        child: Text(
-                          "Assign now",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 247, 6, 6)),
-                        ),
-                      ),
-                    ],
-                  )),
+              driverName == "Not Assigned"
+                  ? Container(
+                      margin: EdgeInsets.only(top: 10, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Driver not assigned yet? "),
+                          InkWell(
+                            onTap: () {
+                              _showAlertDialog(
+                                  context, ChooseDriverPopUp(0, id));
+                            },
+                            child: Text(
+                              "Assign now",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 247, 6, 6)),
+                            ),
+                          ),
+                        ],
+                      ))
+                  : Container(),
             ],
           )
         ],

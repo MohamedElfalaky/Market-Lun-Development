@@ -4,9 +4,15 @@ import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Cance
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
+  final id;
+  final driverName;
   String? status;
   Widget? statusButton;
-  MyBottomNavigationBar(this.status);
+  MyBottomNavigationBar(
+    this.status,
+    this.id,
+    this.driverName,
+  );
   @override
   Widget build(BuildContext context) {
     if (status == "Cancelled" ||
@@ -14,9 +20,9 @@ class MyBottomNavigationBar extends StatelessWidget {
         status == "Refunded") {
       statusButton = null;
     } else if (status == "New") {
-      statusButton = AcceptDecline();
+      statusButton = AcceptDecline(id);
     } else {
-      statusButton = CancelButton();
+      statusButton = CancelButton(id, driverName);
     }
     return Container(
       child: ClipRRect(

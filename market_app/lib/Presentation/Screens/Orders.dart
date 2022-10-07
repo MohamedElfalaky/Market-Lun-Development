@@ -9,7 +9,8 @@ import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart'
 import 'package:market_app/data/Shared/CacheHelper.dart';
 
 class OrdersPage extends StatefulWidget {
-  const OrdersPage({super.key});
+  final int statusToinitiate;
+  const OrdersPage({required this.statusToinitiate});
 
   @override
   State<OrdersPage> createState() => _OrdersPageState();
@@ -18,8 +19,29 @@ class OrdersPage extends StatefulWidget {
 class _OrdersPageState extends State<OrdersPage> {
   @override
   void initState() {
-    OrdersCubit.get(context).getAllOrders(
-        delivery: 1, pickup: 1, apiToken: CacheHelper.getFromShared("token"));
+    if (widget.statusToinitiate == 2) {
+      OrdersCubit.get(context).getOrders(
+          delivery: 1,
+          pickup: 1,
+          apiToken: CacheHelper.getFromShared("token"),
+          status: 2);
+    } else if (widget.statusToinitiate == 4) {
+      OrdersCubit.get(context).getOrders(
+          delivery: 1,
+          pickup: 1,
+          apiToken: CacheHelper.getFromShared("token"),
+          status: 6);
+    } else if (widget.statusToinitiate == 3) {
+      OrdersCubit.get(context).getOrders(
+          delivery: 1,
+          pickup: 1,
+          apiToken: CacheHelper.getFromShared("token"),
+          status: 5);
+    } else {
+      OrdersCubit.get(context).getAllOrders(
+          delivery: 1, pickup: 1, apiToken: CacheHelper.getFromShared("token"));
+    }
+
     super.initState();
   }
 
@@ -79,6 +101,10 @@ class _OrdersPageState extends State<OrdersPage> {
                                                             .myOrdermodel
                                                             .data[index]
                                                             .orderStatus,
+                                                        driverName: state
+                                                            .myOrdermodel
+                                                            .data[index]
+                                                            .driverName,
                                                       )));
                                         },
                                         child: DeliveryOrder(
