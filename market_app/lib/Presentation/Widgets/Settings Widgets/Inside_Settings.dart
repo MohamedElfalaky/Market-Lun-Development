@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/data/Shared/AppLocalizations.dart';
 
 class insideSettings extends StatefulWidget {
   insideSettings({super.key});
@@ -8,10 +9,12 @@ class insideSettings extends StatefulWidget {
 }
 
 class _insideSettingsState extends State<insideSettings> {
-  static const List<String> values1 = ["Available", "Busy", "Closed"];
-  static const List<String> values2 = ["Delivery", "Pickup"];
-  String selectedValue1 = values1.first;
-  String selectedValue2 = values2.first;
+  // static const List<String> values1 = ["Available", "Busy", "Closed"];
+  // static const List<String> values2 = ["Delivery", "Pickup"];
+  // static const List<String> values3 = ["English", "العربية"];
+  String selectedValue1 = 'non';
+  String selectedValue2 = 'non';
+  String selectedValue3 = 'non';
 
   Widget myinsideSettings(List myList, int index, context) {
     return Container(
@@ -22,19 +25,25 @@ class _insideSettingsState extends State<insideSettings> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: myList.map((listItem) {
           return RadioListTile<String>(
-            value: listItem,
-            groupValue: index == 0 ? selectedValue1 : selectedValue2,
+            value: listItem, //
+            groupValue: index == 0
+                ? selectedValue1
+                : index == 1
+                    ? selectedValue2
+                    : selectedValue3,
             title: Text(listItem,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             onChanged: ((value) {
               setState(() {
-                listItem = value!;
+                // listItem = value!;
                 if (index == 0) {
-                  selectedValue1 = value;
-                } else {
-                  selectedValue2 = value;
+                  selectedValue1 = value!;
+                } else if (index == 1) {
+                  selectedValue2 = value!;
+                } else if (index == 2) {
+                  selectedValue3 = value!;
                 }
-                print(listItem);
+                // print(listItem);
                 //  print(myselected);
                 print(value);
               });
@@ -72,7 +81,13 @@ class _insideSettingsState extends State<insideSettings> {
                 ],
               ),
               children: [
-                myinsideSettings(values1, 0, context),
+                myinsideSettings([
+                  AppLocalizations.of(context)!.translate("All"),
+
+                  ///
+                  "Busy",
+                  "Closed"
+                ], 0, context),
                 // myinsideSettings(values2, selectedValue2, context)
               ]),
           ExpansionTile(
@@ -86,9 +101,23 @@ class _insideSettingsState extends State<insideSettings> {
                 ],
               ),
               children: [
-                myinsideSettings(values2, 1, context),
+                myinsideSettings(["Delivery", "Pickup"], 1, context),
                 // myinsideSettings(values2, selectedValue2, context)
-              ])
+              ]),
+          ExpansionTile(
+              title: Row(
+                children: [
+                  SizedBox(height: 30, child: Icon(Icons.language)),
+                  Text(
+                    "  Language",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+              children: [
+                myinsideSettings(["English", "العربية"], 2, context),
+                // myinsideSettings(values2, selectedValue2, context)
+              ]),
         ],
       ),
     );

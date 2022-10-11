@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/Presentation/Screens/Orders.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverContentPopUp.dart';
+import 'package:market_app/business_logic/cubits/AssignCubit/Assign_cubit.dart';
 import 'package:market_app/business_logic/cubits/Drivers_cubits/drivers_cubit.dart';
+import 'package:market_app/business_logic/cubits/New_order_counter/new_order_counter_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Models/DriversModel.dart';
 import 'package:market_app/data/Models/NotificationsModel.dart';
@@ -102,16 +106,49 @@ class _ChooseDriverPopUpWithTimeState extends State<ChooseDriverPopUpWithTime> {
                       borderRadius: BorderRadius.circular(10),
                       child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
                         listener: (context, state) {
-                          state is UpdateOrderSuccess
-                              ? Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OrdersPage(
-                                            statusToinitiate: _currentState,
-                                          )),
-                                  ModalRoute.withName(""))
-                              //  Navigator.pushNamedAndRemoveUntil(
-                              //     context, "/orderspage", (route) => false)
+                          state is NotAssignedDriverSuccess
+                              ? () async {
+                                  // Fluttertoast.showToast(
+                                  //     msg: state.myUpdateOrderModel.message,
+                                  //     toastLength: Toast.LENGTH_SHORT,
+                                  //     gravity: ToastGravity.BOTTOM,
+                                  //     timeInSecForIosWeb: 2,
+                                  //     backgroundColor:
+                                  //         Color.fromARGB(255, 223, 47, 34),
+                                  //     textColor: Colors.white,
+                                  //     fontSize: 16.0); // اظهر توست
+                                  Navigator.pop(context); //شيل البوب آب
+                                  OrdersCubit.get(context)
+                                          .selectedIndex = //حط شادو علي التاب اللي اتعدل لها الستيت
+                                      _navigateTothisIndex;
+
+                                  await OrdersCubit.get(context).getOrders(
+                                      // رندر الاوردر ليست
+                                      delivery: 1,
+                                      pickup: 1,
+                                      status: 2,
+                                      apiToken:
+                                          CacheHelper.getFromShared("token"));
+                                  // NewOrderCounterCubit.get(context)
+                                  //     .test(); // رندر التاب
+
+                                  NewOrderCounterCubit.get(context).getOrders(
+                                      apiToken: CacheHelper.getFromShared(
+                                          "token")); // to update "New" Counter and tab bar (change the selected index)
+
+                                  //عشان الديتيلز
+                                  await TestCubit.get(context).getOrdersDetails(
+                                      apiToken:
+                                          CacheHelper.getFromShared("token"),
+                                      orderId: widget.id.toString());
+
+                                  // عشان الاسسين بوتون
+
+                                  AssignCubit.get(context).getOrdersDetails(
+                                      apiToken:
+                                          CacheHelper.getFromShared("token"),
+                                      orderId: widget.id.toString());
+                                }()
                               : null;
                         },
                         builder: (context, state) {
@@ -123,17 +160,6 @@ class _ChooseDriverPopUpWithTimeState extends State<ChooseDriverPopUpWithTime> {
                                         .updateNotAssignedDriver(
                                             orderId: widget.id,
                                             driverId: dropdownValue);
-
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => OrdersPage(
-                                                  statusToinitiate:
-                                                      _currentState,
-                                                )),
-                                        ModalRoute.withName(""));
-                                    OrdersCubit.get(context).selectedIndex =
-                                        _navigateTothisIndex;
                                   },
                                 )
                               : Center(child: CircularProgressIndicator());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:market_app/Presentation/Screens/CheckMail.dart';
 import 'package:market_app/Presentation/Screens/CreateNewPass.dart';
 import 'package:market_app/Presentation/Screens/LogIn.dart';
@@ -11,6 +12,7 @@ import 'package:market_app/Presentation/Screens/ReturnToLogin.dart';
 import 'package:market_app/Presentation/Screens/Search.dart';
 import 'package:market_app/Presentation/Screens/Settings.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:market_app/business_logic/cubits/AssignCubit/Assign_cubit.dart';
 import 'package:market_app/business_logic/cubits/Drivers_cubits/drivers_cubit.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
@@ -20,8 +22,10 @@ import 'package:market_app/business_logic/cubits/Notification_cubit/notification
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/business_logic/cubits/Search_cubit/search_cubit.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
+import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
 import 'package:market_app/data/Shared/UniLinks.dart';
@@ -80,8 +84,29 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => NewOrderCounterCubit()),
         BlocProvider(create: (context) => DriversCubit()),
         BlocProvider(create: (context) => UpdateOrderCubit()),
+        BlocProvider(create: (context) => TestCubit()),
+        BlocProvider(create: (context) => AssignCubit()),
       ],
       child: MaterialApp(
+          supportedLocales: const [Locale('en'), Locale('ar')], //Localization
+          localizationsDelegates: const [
+            AppLocalizations
+                .delegate, // Localization basedon mobile defaulte language
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate
+          ],
+
+          // لو لغة الهاتف مدعومه ف الاب بتاعي حطها لو لا حط اول لغه
+          localeResolutionCallback: ((deviceLocale, supportedLocales) {
+            for (var local in supportedLocales) {
+              if (deviceLocale != null &&
+                  deviceLocale.languageCode == local.languageCode) {
+                return deviceLocale;
+              }
+              return supportedLocales.first;
+            }
+          }),
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,

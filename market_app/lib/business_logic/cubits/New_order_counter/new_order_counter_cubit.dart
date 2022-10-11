@@ -14,7 +14,11 @@ class NewOrderCounterCubit extends Cubit<NewOrderCounterState> {
   static NewOrderCounterCubit get(context) => BlocProvider.of(context);
   static var myCounter = 0;
 
-  void getOrders(
+  void test() {
+    emit(NewOrderCounterTest());
+  }
+
+  getOrders(
       {int delivery = 1,
       int pickup = 1,
       required String apiToken,
@@ -28,7 +32,7 @@ class NewOrderCounterCubit extends Cubit<NewOrderCounterState> {
     }).then((value) {
       var myOdrersModel = OrdersModel.fromJson(value.data);
       myCounter = myOdrersModel.data.length;
-      emit(NewOrderCounterLoading());
+      emit(NewOrderCounterSucces());
     }).catchError((error) {
       emit(NewOrderCounterError(error.toString()));
     });

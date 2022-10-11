@@ -9,6 +9,8 @@ class NewOrderCounterLoading extends NewOrderCounterState {}
 
 class NewOrderCounterSucces extends NewOrderCounterState {}
 
+class NewOrderCounterTest extends NewOrderCounterState {}
+
 class NewOrderCounterError extends NewOrderCounterState {
   final String error;
   NewOrderCounterError(this.error);

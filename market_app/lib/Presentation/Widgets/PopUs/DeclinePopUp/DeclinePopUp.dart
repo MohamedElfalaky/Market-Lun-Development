@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/Presentation/Screens/Orders.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclineContentPopUp.dart';
+import 'package:market_app/business_logic/cubits/New_order_counter/new_order_counter_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
+import 'package:market_app/data/Shared/CacheHelper.dart';
 
 class DeclinePopUp extends StatefulWidget {
   final id;
@@ -80,7 +84,42 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
               ),
               Center(
                 child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
-                  listener: (context, state) {},
+                  listener: (context, state) {
+                    state is declineOrderSuccess
+                        ? () {
+                            // Fluttertoast.showToast(
+                            //     msg: state.myUpdateOrderModel.message,
+                            //     toastLength: Toast.LENGTH_SHORT,
+                            //     gravity: ToastGravity.BOTTOM,
+                            //     timeInSecForIosWeb: 2,
+                            //     backgroundColor:
+                            //         Color.fromARGB(255, 223, 47, 34),
+                            //     textColor: Colors.white,
+                            //     fontSize: 16.0); // اظهر توست
+                            Navigator.pop(context); //شيل البوب آب
+                            OrdersCubit.get(context)
+                                    .selectedIndex = //حط شادو علي التاب اللي اتعدل لها الستيت
+                                navigateTothisIndex;
+
+                            OrdersCubit.get(context).getOrders(
+                                // رندر الاوردر ليست
+                                delivery: 1,
+                                pickup: 1,
+                                status: 6,
+                                apiToken: CacheHelper.getFromShared("token"));
+                            // NewOrderCounterCubit.get(context)
+                            //     .test(); // رندر التاب بار
+
+                            TestCubit.get(context).getOrdersDetails(
+                                apiToken: CacheHelper.getFromShared("token"),
+                                orderId: widget.id.toString());
+
+                            NewOrderCounterCubit.get(context).getOrders(
+                                apiToken: CacheHelper.getFromShared(
+                                    "token")); // to update "New" Counter and tab bar (change the selected index)
+                          }()
+                        : null;
+                  },
                   builder: (context, state) {
                     return state is! UpdateOrderLoading
                         ? Container(
@@ -99,18 +138,6 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                                     UpdateOrderCubit.get(context).declineOrder(
                                         orderId: widget.id,
                                         cancelReason: myControlled.text);
-
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => OrdersPage(
-                                                  statusToinitiate:
-                                                      navigateTothisIndex,
-                                                )),
-                                        ModalRoute.withName(""));
-
-                                    OrdersCubit.get(context).selectedIndex =
-                                        navigateTothisIndex;
                                   }
                                 },
                               ),

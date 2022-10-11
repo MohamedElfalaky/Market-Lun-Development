@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
+import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -53,7 +54,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   height: 90,
                   child: FadeInImage.assetNetwork(
                       placeholder: "assets/attachment_120367649.png",
-                      image: CacheHelper.getFromShared("image"))),
+                      image: CacheHelper.getFromShared('image'))),
               SizedBox(
                 height: 7,
               ),
@@ -64,7 +65,11 @@ class NavigationDrawerWidget extends StatelessWidget {
             ],
           )),
         ),
-        myListTile(Icons.shopping_bag, "Orders", '/orderspage', context),
+        myListTile(
+            Icons.shopping_bag,
+            AppLocalizations.of(context)!.translate("All"),
+            '/orderspage',
+            context),
         myListTile(
             Icons.notifications, "Notifications", '/notifications', context),
         myListTile(Icons.settings, "Settings", '/settings', context),

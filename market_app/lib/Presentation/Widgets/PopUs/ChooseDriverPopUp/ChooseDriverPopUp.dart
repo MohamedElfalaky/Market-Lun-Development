@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/Presentation/Screens/Orders.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverContentPopUp.dart';
+import 'package:market_app/business_logic/cubits/AssignCubit/Assign_cubit.dart';
 import 'package:market_app/business_logic/cubits/Drivers_cubits/drivers_cubit.dart';
+import 'package:market_app/business_logic/cubits/New_order_counter/new_order_counter_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Models/DriversModel.dart';
 import 'package:market_app/data/Models/NotificationsModel.dart';
@@ -83,26 +87,24 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.23,
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    child: OutlinedButton(
-                      child: Text('Later'),
-                      onPressed: () {
-                        UpdateOrderCubit.get(context).updateNewToPreparing(
-                            time: widget.myTime, orderId: widget.id);
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => OrdersPage(
-                                      statusToinitiate: _currentState,
-                                    )),
-                            ModalRoute.withName(""));
-
-                        OrdersCubit.get(context).selectedIndex =
-                            _navigateTothisIndex;
-                      },
-                    ),
+                  BlocBuilder<UpdateOrderCubit, UpdateOrderState>(
+                    builder: (context, state) {
+                      return state is! NewToPreparinLoading
+                          ? Container(
+                              width: MediaQuery.of(context).size.width * 0.23,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              child: OutlinedButton(
+                                child: Text('Later'),
+                                onPressed: () {
+                                  UpdateOrderCubit.get(context)
+                                      .updateNewToPreparing(
+                                          time: widget.myTime,
+                                          orderId: widget.id);
+                                },
+                              ),
+                            )
+                          : Center(child: CircularProgressIndicator());
+                    },
                   ),
                   SizedBox(
                     width: 15,
@@ -113,7 +115,71 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
-                        listener: (context, state) {},
+                        listener: (context, state) {
+                          if (state is NewToPreparingWithDriverSuccess) {
+                            () async {
+                              // Fluttertoast.showToast(
+                              //     msg: state.myUpdateOrderModel.message,
+                              //     toastLength: Toast.LENGTH_SHORT,
+                              //     gravity: ToastGravity.BOTTOM,
+                              //     timeInSecForIosWeb: 2,
+                              //     backgroundColor:
+                              //         Color.fromARGB(255, 223, 47, 34),
+                              //     textColor: Colors.white,
+                              //     fontSize: 16.0); // اظهر توست
+                              Navigator.pop(context); //شيل البوب آب
+                              Navigator.pop(context); //  التانيه شيل البوب آب
+                              OrdersCubit.get(context)
+                                      .selectedIndex = //حط شادو علي التاب اللي اتعدل لها الستيت
+                                  _navigateTothisIndex;
+
+                              await OrdersCubit.get(context).getOrders(
+                                  // رندر الاوردر ليست
+                                  delivery: 1,
+                                  pickup: 1,
+                                  status: 2,
+                                  apiToken: CacheHelper.getFromShared("token"));
+
+                              await NewOrderCounterCubit.get(context).getOrders(
+                                  apiToken: CacheHelper.getFromShared(
+                                      "token")); // to update "New" Counter and tab bar (change the selected index)
+
+                              await TestCubit.get(context).getOrdersDetails(
+                                  apiToken: CacheHelper.getFromShared("token"),
+                                  orderId: widget.id.toString());
+
+                              await TestCubit.get(context).pleaseRender();
+
+                              AssignCubit.get(context).getOrdersDetails(
+                                  apiToken: CacheHelper.getFromShared("token"),
+                                  orderId: widget.id.toString());
+                            }();
+                          } else if (state is NewToPreparingSuccess) {
+                            () async {
+                              Navigator.pop(context); //شيل البوب آب
+                              Navigator.pop(context); //شيل البوب آب التانيه
+                              OrdersCubit.get(context)
+                                      .selectedIndex = //حط شادو علي التاب اللي اتعدل لها الستيت
+                                  _navigateTothisIndex;
+
+                              await OrdersCubit.get(context).getOrders(
+                                  // رندر الاوردر ليست
+                                  delivery: 1,
+                                  pickup: 1,
+                                  status: 2,
+                                  apiToken: CacheHelper.getFromShared("token"));
+
+                              await NewOrderCounterCubit.get(context).getOrders(
+                                  apiToken: CacheHelper.getFromShared(
+                                      "token")); // to update "New" Counter and tab bar (change the selected index)
+
+                              TestCubit.get(context).getOrdersDetails(
+                                  apiToken: CacheHelper.getFromShared("token"),
+                                  orderId: widget.id.toString());
+                              //     .test(); // رندر التاب بار
+                            }();
+                          }
+                        },
                         builder: (context, state) {
                           return state is! UpdateOrderLoading
                               ? ElevatedButton(
@@ -124,17 +190,6 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                                             time: widget.myTime,
                                             orderId: widget.id,
                                             driverId: dropdownValue);
-
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => OrdersPage(
-                                                  statusToinitiate:
-                                                      _currentState,
-                                                )),
-                                        ModalRoute.withName(""));
-                                    OrdersCubit.get(context).selectedIndex =
-                                        _navigateTothisIndex;
                                   },
                                 )
                               : Center(child: CircularProgressIndicator());

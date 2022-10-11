@@ -40,7 +40,7 @@ class OrdersCubit extends Cubit<OrdersState> {
     });
   }
 
-  void getOrders(
+  getOrders(
       {required int delivery,
       required int pickup,
       required String apiToken,

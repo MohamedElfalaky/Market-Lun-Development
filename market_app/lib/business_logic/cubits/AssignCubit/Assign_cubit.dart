@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/data/Models/OrderDetailsModel.dart';
@@ -6,25 +5,25 @@ import 'package:market_app/data/Remote/dio_helper.dart';
 import 'package:market_app/data/Shared/end_points.dart';
 import 'package:meta/meta.dart';
 
-part 'order_details_state.dart';
+part '../AssignCubit/Assign_state.dart';
 
-class OrderDetailsCubit extends Cubit<OrderDetailsState> {
-  OrderDetailsCubit() : super(OrderDetailsInitial());
-  static OrderDetailsCubit get(context) => BlocProvider.of(context);
+class AssignCubit extends Cubit<AssignState> {
+  AssignCubit() : super(AssignInitial());
+  static AssignCubit get(context) => BlocProvider.of(context);
 
-  void getDetails({
+  getOrdersDetails({
     required String apiToken,
     required String orderId,
   }) {
-    emit(OrderDetailsLoading());
+    emit(AssignLoading());
     DioHelper.getData(url: '$GETORDERS/$orderId', query: {
       "api_token": apiToken,
     }).then((value) {
       var myOdrerDetailModel = OrderDetailsModel.fromJson(value.data);
 
-      emit(OrderDetailsSuccess(myOdrerDetailModel));
+      emit(AssignSuccess(myOdrerDetailModel));
     }).catchError((error) {
-      emit(OrderDetailsError(error.toString()));
+      emit(AssignError(error.toString()));
     });
   }
 }

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/Presentation/Screens/Orders.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUpWithTime.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
+import 'package:market_app/business_logic/cubits/AssignCubit/Assign_cubit.dart';
+import 'package:market_app/business_logic/cubits/New_order_counter/new_order_counter_cubit.dart';
+import 'package:market_app/business_logic/cubits/Order_details_cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
+import 'package:market_app/data/Shared/CacheHelper.dart';
 
 class CancelButton extends StatelessWidget {
+  final myCtx;
   final id;
   final driverName;
   final int _navigateTothisIndex = 3;
-  CancelButton(
-    this.id,
-    this.driverName,
-  );
+  CancelButton(this.id, this.driverName, this.myCtx);
   void _showAlertDialog(context, Widget myWidget) {
     showDialog(
       context: context,
@@ -25,8 +29,34 @@ class CancelButton extends StatelessWidget {
     );
   }
 
+  Widget? assignButton = Container();
   @override
   Widget build(BuildContext context) {
+    if (driverName == "Not Assigned") {
+      assignButton = Container(
+          margin: EdgeInsets.only(top: 10, bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Driver not assigned yet? "),
+              InkWell(
+                onTap: () {
+                  _showAlertDialog(context,
+                      ChooseDriverPopUpWithTime(id)); // حاطط التايم بصفر
+                },
+                child: Text(
+                  "Assign now",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 247, 6, 6)),
+                ),
+              ),
+            ],
+          ));
+    } else {
+      assignButton = Container();
+    }
     return Container(
       padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: Column(
@@ -61,16 +91,39 @@ class CancelButton extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 8.0),
                         child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
                           listener: (context, state) {
-                            // state is UpdateOrderSuccess
-                            //     ? Navigator.pushAndRemoveUntil(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //             builder: (context) => OrdersPage(
-                            //                   statusToinitiate:
-                            //                       _navigateTothisIndex,
-                            //                 )),
-                            //         ModalRoute.withName(""))
-                            //     : null;
+                            state is PreparingToDeliveredSuccess
+                                ? () {
+                                    OrdersCubit.get(context)
+                                            .selectedIndex = //حط شادو علي التاب اللي اتعدل لها الستيت
+                                        _navigateTothisIndex;
+
+                                    OrdersCubit.get(context).getOrders(
+                                        //
+                                        // رندر الاوردر ليست
+                                        delivery: 1,
+                                        pickup: 1,
+                                        status: 5,
+                                        apiToken:
+                                            CacheHelper.getFromShared("token"));
+
+                                    // to update "New" Counter and tab bar (change the selected index)
+                                    NewOrderCounterCubit.get(context).getOrders(
+                                        apiToken:
+                                            CacheHelper.getFromShared("token"));
+
+                                    //render order details..
+                                    TestCubit.get(context).getOrdersDetails(
+                                        apiToken:
+                                            CacheHelper.getFromShared("token"),
+                                        orderId: id.toString());
+
+                                    // BlocProvider.of<TestCubit>(context)
+                                    //     .getOrdersDetails(
+                                    //         apiToken: CacheHelper.getFromShared(
+                                    //             "token"),
+                                    //         orderId: id.toString());
+                                  }()
+                                : null;
                           },
                           builder: (context, state) {
                             return state is! UpdateOrderLoading
@@ -82,21 +135,7 @@ class CancelButton extends StatelessWidget {
                                         onPressed: () {
                                           UpdateOrderCubit.get(context)
                                               .updatePreparingToDelivered(
-                                            orderId: id,
-                                          );
-
-                                          Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      OrdersPage(
-                                                        statusToinitiate:
-                                                            _navigateTothisIndex,
-                                                      )),
-                                              ModalRoute.withName(""));
-                                          OrdersCubit.get(context)
-                                                  .selectedIndex =
-                                              _navigateTothisIndex;
+                                                  orderId: id);
                                         },
                                         child: Text("Delivered"),
                                         style: ElevatedButton.styleFrom(
@@ -152,31 +191,47 @@ class CancelButton extends StatelessWidget {
                   ],
                 ),
               ),
-              driverName == "Not Assigned"
-                  ? Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Driver not assigned yet? "),
-                          InkWell(
-                            onTap: () {
-                              _showAlertDialog(
-                                  context,
-                                  ChooseDriverPopUpWithTime(
-                                      id)); // حاطط التايم بصفر
-                            },
-                            child: Text(
-                              "Assign now",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 247, 6, 6)),
-                            ),
-                          ),
-                        ],
-                      ))
-                  : Container(),
+              BlocConsumer<AssignCubit, AssignState>(
+                listener: (context, state) {
+                  if (state is AssignSuccess) {
+                    if (state.myOrderDetailsModel.data.driverName ==
+                        "Not Assigned") {
+                      assignButton = Container(
+                          margin: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Driver not assigned yet? "),
+                              InkWell(
+                                onTap: () {
+                                  _showAlertDialog(
+                                      context,
+                                      ChooseDriverPopUpWithTime(
+                                          id)); // حاطط التايم بصفر
+                                },
+                                child: Text(
+                                  "Assign now",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 247, 6, 6)),
+                                ),
+                              ),
+                            ],
+                          ));
+                    } else {
+                      assignButton = Container();
+                    }
+                  }
+                },
+                builder: (context, state) {
+                  return state is! AssignLoading
+                      ? assignButton!
+                      : Center(
+                          child: CircularProgressIndicator(),
+                        );
+                },
+              )
             ],
           )
         ],

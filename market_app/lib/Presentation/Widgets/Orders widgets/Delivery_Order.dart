@@ -20,15 +20,16 @@ class DeliveryOrder extends StatelessWidget {
   Icon? methodIcon;
   final time;
 
-  DeliveryOrder(
-      {this.id,
-      this.name,
-      this.paymentMethod,
-      this.driverName,
-      this.total,
-      this.status,
-      this.receiveMethod,
-      this.time});
+  DeliveryOrder({
+    this.id,
+    this.name,
+    this.paymentMethod,
+    this.driverName,
+    this.total,
+    this.status,
+    this.receiveMethod,
+    this.time,
+  });
 
   List<String> metaDeta = [
     "Order ID",
@@ -79,10 +80,7 @@ class DeliveryOrder extends StatelessWidget {
     } else if (status == "New") {
       statusButton = AcceptDecline(id);
     } else {
-      statusButton = CancelButton(
-        id,
-        driverName,
-      );
+      statusButton = CancelButton(id, driverName, context);
     }
 
     if (receiveMethod == "Delivery") {

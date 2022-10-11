@@ -89,7 +89,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) =>
+                                                  builder: (contexttt) =>
                                                       OrderDetails(
                                                         id: state
                                                             .myOrdermodel
@@ -103,6 +103,7 @@ class _OrdersPageState extends State<OrdersPage> {
                                                             .myOrdermodel
                                                             .data[index]
                                                             .driverName,
+                                                        contextt: contexttt,
                                                       )));
                                         },
                                         child: DeliveryOrder(

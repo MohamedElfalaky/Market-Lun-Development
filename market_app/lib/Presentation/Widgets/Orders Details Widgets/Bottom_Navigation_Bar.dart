@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/CancelButton.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
+import 'package:market_app/data/Shared/CacheHelper.dart';
 
-class MyBottomNavigationBar extends StatelessWidget {
+class MyBottomNavigationBar extends StatefulWidget {
+  final cxt;
   final id;
   final driverName;
   String? status;
+
+  MyBottomNavigationBar(this.status, this.id, this.driverName, this.cxt);
+
+  @override
+  State<MyBottomNavigationBar> createState() => _MyBottomNavigationBarState();
+}
+
+class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   Widget? statusButton;
-  MyBottomNavigationBar(
-    this.status,
-    this.id,
-    this.driverName,
-  );
+
   @override
   Widget build(BuildContext context) {
-    if (status == "Cancelled" ||
-        status == "Delivered" ||
-        status == "Refunded") {
+    if (widget.status == "Cancelled" ||
+        widget.status == "Delivered" ||
+        widget.status == "Refunded") {
       statusButton = null;
-    } else if (status == "New") {
-      statusButton = AcceptDecline(id);
+    } else if (widget.status == "New") {
+      statusButton = AcceptDecline(widget.id);
     } else {
-      statusButton = CancelButton(id, driverName);
+      statusButton = CancelButton(widget.id, widget.driverName, widget.cxt);
     }
     return Container(
       child: ClipRRect(

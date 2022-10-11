@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 
 class BillingInfo extends StatelessWidget {
   BillingInfo({super.key});
@@ -47,12 +48,12 @@ class BillingInfo extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
+                BlocConsumer<TestCubit, TestState>(
                   listener: (context, state) {
                     // TODO: implement listener
                   },
                   builder: (context, state) {
-                    return state is OrderDetailsSuccess
+                    return state is TestSuccess
                         ? Column(
                             children: [
                               myBillInfo(

@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
+import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 
 class OrderInfo extends StatelessWidget {
   String? status;
-  OrderInfo(this.status);
+  String? id;
+  String? driverName;
+  String? orderType;
+  String? time;
+  String? updateAt;
+  String? hint;
+
+  OrderInfo(
+      {this.status,
+      this.id,
+      this.driverName,
+      this.orderType,
+      this.time,
+      this.updateAt,
+      this.hint});
 
   Color? statusColor;
   Color? txtStatusColor;
@@ -84,60 +99,23 @@ class OrderInfo extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
-                  listener: (context, state) {},
-                  builder: (context, state) {
-                    return state is OrderDetailsSuccess
-                        ? Column(
-                            children: [
-                              myOrdertInfo(
-                                  "Order Status",
-                                  state.myOrderDetailsModel.data.status,
-                                  statusColor,
-                                  txtStatusColor,
-                                  context),
-                              myOrdertInfo(
-                                  "Order ID",
-                                  state.myOrderDetailsModel.data.orderId
-                                      .toString(),
-                                  statusColor,
-                                  txtStatusColor,
-                                  context),
-                              myOrdertInfo(
-                                  "Driver Name",
-                                  state.myOrderDetailsModel.data.driverName,
-                                  statusColor,
-                                  txtStatusColor,
-                                  context),
-                              myOrdertInfo(
-                                  "Order Type",
-                                  state.myOrderDetailsModel.data.orderType,
-                                  statusColor,
-                                  txtStatusColor,
-                                  context),
-                              myOrdertInfo(
-                                  "Time",
-                                  state.myOrderDetailsModel.data.time
-                                      .toString(),
-                                  statusColor,
-                                  txtStatusColor,
-                                  context),
-                              myOrdertInfo(
-                                  "Updated at",
-                                  state.myOrderDetailsModel.data.updatedAt,
-                                  statusColor,
-                                  txtStatusColor,
-                                  context),
-                              myOrdertInfo(
-                                  "Notes",
-                                  state.myOrderDetailsModel.data.hint,
-                                  statusColor,
-                                  txtStatusColor,
-                                  context),
-                            ],
-                          )
-                        : Center(child: CircularProgressIndicator());
-                  },
+                Column(
+                  children: [
+                    myOrdertInfo("Order Status", status!, statusColor,
+                        txtStatusColor, context),
+                    myOrdertInfo(
+                        "Order ID", id!, statusColor, txtStatusColor, context),
+                    myOrdertInfo("Driver Name", driverName!, statusColor,
+                        txtStatusColor, context),
+                    myOrdertInfo("Order Type", orderType!, statusColor,
+                        txtStatusColor, context),
+                    myOrdertInfo(
+                        "Time", time!, statusColor, txtStatusColor, context),
+                    myOrdertInfo("Updated at", updateAt!, statusColor,
+                        txtStatusColor, context),
+                    myOrdertInfo(
+                        "Notes", hint!, statusColor, txtStatusColor, context),
+                  ],
                 )
               ],
             )

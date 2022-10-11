@@ -4,6 +4,7 @@ import 'package:market_app/Presentation/Widgets/PopUs/FilterPopUp/Filter_PopUp.d
 import 'package:market_app/business_logic/cubits/New_order_counter/new_order_counter_cubit.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
+import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 
 class HorizontalFilterBar extends StatefulWidget {
@@ -30,8 +31,6 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
         context: context,
         builder: ((context) => const FilterPopUp()));
   }
-
-  int? selectedIndex;
 
   @override
   void initState() {
@@ -201,7 +200,6 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                                   apiToken: CacheHelper.getFromShared("token"));
                             }
                             OrdersCubit.get(context).selectedIndex = i;
-                            OrdersCubit.get(context).changeRadioButton();
                           },
                           child: Container(
                             width: 110.0,

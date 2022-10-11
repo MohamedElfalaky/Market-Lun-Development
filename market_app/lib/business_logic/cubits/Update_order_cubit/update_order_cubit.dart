@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/data/Models/OrdersModel.dart';
 import 'package:market_app/data/Models/UpdateOrderModel.dart';
@@ -18,14 +20,22 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
   int currentId = 0;
 
   void updateNewToPreparing({required time, required orderId}) {
-    emit(UpdateOrderLoading());
+    emit(NewToPreparinLoading());
     DioHelper.postData(url: "$GETORDERS/$orderId", data: {
       "api_token": CacheHelper.getFromShared("token"),
       "timing": time,
       "order_status_id": 2,
     }).then((value) {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
-      emit(UpdateOrderSuccess(myUpdateOrderModel));
+      Fluttertoast.showToast(
+          msg: myUpdateOrderModel.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromARGB(255, 223, 47, 34),
+          textColor: Colors.white,
+          fontSize: 16.0);
+      emit(NewToPreparingSuccess(myUpdateOrderModel));
     });
   }
 
@@ -39,8 +49,15 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
       "driver_id": driverId,
     }).then((value) {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
-
-      emit(UpdateOrderSuccess(myUpdateOrderModel));
+      Fluttertoast.showToast(
+          msg: myUpdateOrderModel.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromARGB(255, 223, 47, 34),
+          textColor: Colors.white,
+          fontSize: 16.0);
+      emit(NewToPreparingWithDriverSuccess(myUpdateOrderModel));
     }).catchError((error) {
       emit(UpdateOrderError(error.toString()));
     });
@@ -54,8 +71,15 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
       "driver_id": driverId,
     }).then((value) {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
-
-      emit(UpdateOrderSuccess(myUpdateOrderModel));
+      Fluttertoast.showToast(
+          msg: myUpdateOrderModel.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromARGB(255, 223, 47, 34),
+          textColor: Colors.white,
+          fontSize: 16.0);
+      emit(NotAssignedDriverSuccess(myUpdateOrderModel));
     }).catchError((error) {
       emit(UpdateOrderError(error.toString()));
     });
@@ -69,7 +93,15 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
       "order_status_id": 6,
     }).then((value) {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
-      emit(UpdateOrderSuccess(myUpdateOrderModel));
+      Fluttertoast.showToast(
+          msg: myUpdateOrderModel.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromARGB(255, 223, 47, 34),
+          textColor: Colors.white,
+          fontSize: 16.0);
+      emit(declineOrderSuccess(myUpdateOrderModel));
     }).catchError((error) {
       emit(UpdateOrderError(error.toString()));
     });
@@ -81,11 +113,24 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
     DioHelper.postData(url: "$GETORDERS/$orderId", data: {
       "api_token": CacheHelper.getFromShared("token"),
       "order_status_id": 5,
-    }).then((value) {
+    }).then((value) async {
       var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
-      emit(UpdateOrderSuccess(myUpdateOrderModel));
+      Fluttertoast.showToast(
+          msg: myUpdateOrderModel.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromARGB(255, 223, 47, 34),
+          textColor: Colors.white,
+          fontSize: 16.0);
+      emit(PreparingToDeliveredSuccess(myUpdateOrderModel));
+      // emit(PleaseRender());
     }).catchError((error) {
       emit(UpdateOrderError(error.toString()));
     });
+  }
+
+  pleaseRender() {
+    emit(PleaseRender());
   }
 }
