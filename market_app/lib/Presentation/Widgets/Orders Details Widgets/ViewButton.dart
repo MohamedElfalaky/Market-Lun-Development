@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class ViewButton extends StatelessWidget {
   ViewButton({super.key});
@@ -48,7 +49,7 @@ class ViewButton extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "View",
+                                "View".tr(context),
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],

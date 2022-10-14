@@ -66,13 +66,11 @@ class NavigationDrawerWidget extends StatelessWidget {
           )),
         ),
         myListTile(
-            Icons.shopping_bag,
-            AppLocalizations.of(context)!.translate("All"),
-            '/orderspage',
-            context),
+            Icons.shopping_bag, 'All'.tr(context), '/orderspage', context),
+        myListTile(Icons.notifications, "Notifications".tr(context),
+            '/notifications', context),
         myListTile(
-            Icons.notifications, "Notifications", '/notifications', context),
-        myListTile(Icons.settings, "Settings", '/settings', context),
+            Icons.settings, "Settings".tr(context), '/settings', context),
         Spacer(),
         BlocConsumer<LogoutCubit, LogoutState>(
           listener: (context, state) {
@@ -110,7 +108,8 @@ class NavigationDrawerWidget extends StatelessWidget {
               child: ConditionalBuilder(
                 condition: state is! LogoutLoading,
                 builder: (BuildContext context) {
-                  return myListTile(Icons.logout, "Logout", '/login', context);
+                  return myListTile(
+                      Icons.logout, "Logout".tr(context), '/login', context);
                 },
                 fallback: (context) => CircularProgressIndicator(),
               ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/FilterPopUp/PopUpContent.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/AppLocalizations.dart';
 
 class FilterPopUp extends StatelessWidget {
   const FilterPopUp({super.key});
@@ -20,7 +21,7 @@ class FilterPopUp extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.06,
             child: Center(
                 child: Text(
-              'Filter',
+              'Filter'.tr(context),
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ))),
         Padding(
@@ -31,21 +32,24 @@ class FilterPopUp extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: ElevatedButton(
-              child: Text('Save'),
+              child: Text('Save'.tr(context)),
               onPressed: () {
                 // if()
 
-                if (OrdersCubit.selectedValue1 == "All") {
+                if (OrdersCubit.selectedValue1.tr(context) ==
+                    "All".tr(context)) {
                   OrdersCubit.get(context).getAllOrders(
                       delivery: 1,
                       pickup: 1,
                       apiToken: CacheHelper.getFromShared("token"));
-                } else if (OrdersCubit.selectedValue1 == "Pick up") {
+                } else if (OrdersCubit.selectedValue1.tr(context) ==
+                    "Pick up".tr(context)) {
                   OrdersCubit.get(context).getAllOrders(
                       delivery: 0,
                       pickup: 1,
                       apiToken: CacheHelper.getFromShared("token"));
-                } else {
+                } else if (OrdersCubit.selectedValue1.tr(context) ==
+                    "Delivery".tr(context)) {
                   OrdersCubit.get(context).getAllOrders(
                       delivery: 1,
                       pickup: 0,
@@ -58,7 +62,7 @@ class FilterPopUp extends StatelessWidget {
           ),
         ),
         TextButton(
-          child: Text('Reset all filters'),
+          child: Text('Reset all filters'.tr(context)),
           onPressed: () {
             Navigator.of(context).pop();
           },

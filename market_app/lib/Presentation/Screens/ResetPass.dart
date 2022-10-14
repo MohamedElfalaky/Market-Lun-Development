@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class ResetPass extends StatelessWidget {
   ResetPass();
@@ -13,7 +14,7 @@ class ResetPass extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Reset Password",
+          "Reset Password".tr(context),
           style: TextStyle(
             color: Colors.black,
           ),
@@ -30,7 +31,7 @@ class ResetPass extends StatelessWidget {
                     height: 15,
                   ),
                   Text(
-                    'Reset Password',
+                    'Reset Password'.tr(context),
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -39,7 +40,7 @@ class ResetPass extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: Text(
-                      'Enter the Email associated with your account and we will send you an email with instructions to reset your password',
+                      'Enter the Email associated'.tr(context),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -67,7 +68,7 @@ class ResetPass extends StatelessWidget {
                           decoration: InputDecoration(
                             fillColor: Color.fromARGB(255, 245, 242, 237),
                             filled: true,
-                            hintText: "Email",
+                            hintText: "Email".tr(context),
                             labelStyle: TextStyle(
                               color: Color.fromARGB(255, 245, 59, 59),
                             ),
@@ -132,7 +133,7 @@ class ResetPass extends StatelessWidget {
                                         }
                                       },
                                       child: Text(
-                                        'Send mail',
+                                        'Send mail'.tr(context),
                                         style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold),
@@ -153,7 +154,7 @@ class ResetPass extends StatelessWidget {
                           '/login', (Route<dynamic> route) => false);
                     },
                     child: Text(
-                      'I remember my password return to login',
+                      'I remember my password return to login'.tr(context),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),

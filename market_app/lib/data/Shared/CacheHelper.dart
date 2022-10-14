@@ -15,6 +15,15 @@ class CacheHelper {
     return prefs!.get(key);
   }
 
+  static getLangCode() {
+    final cachedLangCode = prefs!.get("LOCALE");
+    if (cachedLangCode != null) {
+      return cachedLangCode;
+    } else {
+      return "en";
+    }
+  }
+
   static Future<bool?> removeToken(String key) async {
     return await prefs?.remove(key);
   }

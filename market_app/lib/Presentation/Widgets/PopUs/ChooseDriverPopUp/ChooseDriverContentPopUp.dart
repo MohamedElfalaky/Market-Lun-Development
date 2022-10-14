@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:duration_picker/duration_picker.dart';
+import '../../../../data/Shared/AppLocalizations.dart';
 
 class ChooseDriverPopUpContent extends StatelessWidget {
   ChooseDriverPopUpContent({super.key});
@@ -16,14 +17,14 @@ class ChooseDriverPopUpContent extends StatelessWidget {
               size: 70,
             ),
             Text(
-              "Choose Driver",
+              "Choose Driver".tr(context),
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              " Select which driver you want to assign to \this order",
+              "Select which driver".tr(context),
               textAlign: TextAlign.center,
             ),
             SizedBox(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimeContentPopUp.dart';
 import 'package:duration_picker/duration_picker.dart';
+import '../../../../data/Shared/AppLocalizations.dart';
 
 class ChoosTimePopUp extends StatefulWidget {
   final id;
@@ -24,31 +25,33 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
   int? _selectedDuration = 0;
   final _myController = TextEditingController();
 
-  int _printDuration(Duration duration) {
-    // String twoDigits(int n) => n.toString().padLeft(2, "0");
-    // String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    // String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    // return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
-    int editedMinuts = duration.inMinutes;
-    for (var i = 0; i < duration.inHours; i++) {
-      editedMinuts--;
-    }
-    return duration.inHours + editedMinuts;
-  }
+// تايم بيكر شيك بالتعديلات بتاعتها ابقى اقرأها
 
-  _presentDurationPicker() async {
-    var resultingDuration = await showDurationPicker(
-      context: context,
-      initialTime: Duration(minutes: 30),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-            'Chose duration: ${_printDuration(resultingDuration!)} mins')));
+  // int _printDuration(Duration duration) {
+  //   // String twoDigits(int n) => n.toString().padLeft(2, "0");
+  //   // String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  //   // String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+  //   // return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  //   int editedMinuts = duration.inMinutes;
+  //   for (var i = 0; i < duration.inHours; i++) {
+  //     editedMinuts--;
+  //   }
+  //   return duration.inHours + editedMinuts;
+  // }
 
-    setState(() {
-      _selectedDuration = _printDuration(resultingDuration);
-    });
-  }
+  // _presentDurationPicker() async {
+  //   var resultingDuration = await showDurationPicker(
+  //     context: context,
+  //     initialTime: Duration(minutes: 30),
+  //   );
+  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //       content: Text(
+  //           'Chose duration: ${_printDuration(resultingDuration!)} mins')));
+
+  //   setState(() {
+  //     _selectedDuration = _printDuration(resultingDuration);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,7 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
                   // showCursor: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration.collapsed(
-                      hintText: "50:00 Mins",
+                      hintText: "50:00 Mins".tr(context),
                       hintStyle:
                           TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
                 ))
@@ -101,7 +104,7 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: ElevatedButton(
-                child: Text('Save'),
+                child: Text('Save'.tr(context)),
                 onPressed: () {
                   _showAlertDialog(context, int.parse(_myController.text));
                 },

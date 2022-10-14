@@ -14,6 +14,7 @@ import 'package:market_app/Presentation/Screens/Settings.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:market_app/business_logic/cubits/AssignCubit/Assign_cubit.dart';
 import 'package:market_app/business_logic/cubits/Drivers_cubits/drivers_cubit.dart';
+import 'package:market_app/business_logic/cubits/Local/local_cubit.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
@@ -86,64 +87,77 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UpdateOrderCubit()),
         BlocProvider(create: (context) => TestCubit()),
         BlocProvider(create: (context) => AssignCubit()),
+        BlocProvider(
+            create: (context) => LocalCubit()
+              ..getSavedLanguage()), //بدون نقاط: برجع انستانس من الكيوبت، بنقطه واحده: برجه انستانس من الفانكشن، نقطتين: برجع انستانت من الكيوبت وبرن الفنكشن
       ],
-      child: MaterialApp(
-          supportedLocales: const [Locale('en'), Locale('ar')], //Localization
-          localizationsDelegates: const [
-            AppLocalizations
-                .delegate, // Localization basedon mobile defaulte language
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate
-          ],
+      child: BlocBuilder<LocalCubit, LocalState>(
+        builder: (context, state) {
+          return MaterialApp(
+              locale:
+                  state is ChangeLocaleState ? state.local : const Locale('en'),
+              //  const Locale('ar'),
+              supportedLocales: const [
+                Locale('en'),
+                Locale('ar')
+              ], //Localization
+              localizationsDelegates: const [
+                AppLocalizations
+                    .delegate, // Localization basedon mobile defaulte language
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate
+              ],
 
-          // لو لغة الهاتف مدعومه ف الاب بتاعي حطها لو لا حط اول لغه
-          localeResolutionCallback: ((deviceLocale, supportedLocales) {
-            for (var local in supportedLocales) {
-              if (deviceLocale != null &&
-                  deviceLocale.languageCode == local.languageCode) {
-                return deviceLocale;
-              }
-              return supportedLocales.first;
-            }
-          }),
-          useInheritedMediaQuery: true,
-          locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
-          debugShowCheckedModeBanner: false,
-          routes: {
-            // '/': (context) => const LogIn(),
-            '/login': (context) => LogIn(),
-            '/resetpassword': (context) => ResetPass(),
-            '/checkmail': (context) => const CheckMail(),
-            '/createnewpass': (context) => CreateNewPass(),
-            '/returntologin': (context) => const ReturnToLogin(),
-            '/orderspage': (context) => OrdersPage(
-                  statusToinitiate: 0,
-                ),
-            '/ordersdetails': (context) => OrderDetails(),
-            '/notifications': (context) => const Notifications(),
-            '/settings': (context) => const Settings(),
-            '/search': (context) => Search(),
-          },
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-                color: Colors.white,
-                actionsIconTheme: IconThemeData(color: Colors.black, size: 37),
-                iconTheme: IconThemeData(
-                  color: Colors.black,
-                  size: 37,
-                ),
-                titleTextStyle: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 23,
-                    fontWeight: FontWeight.bold)),
-            primarySwatch: Colors.red,
+              // لو لغة الهاتف مدعومه ف الاب بتاعي حطها لو لا حط اول لغه
+              // localeResolutionCallback: ((deviceLocale, supportedLocales) {
+              //   for (var local in supportedLocales) {
+              //     if (deviceLocale != null &&
+              //         deviceLocale.languageCode == local.languageCode) {
+              //       return deviceLocale;
+              //     }
+              //     return supportedLocales.first;
+              //   }
+              // }),
+              useInheritedMediaQuery: true,
+              builder: DevicePreview.appBuilder,
+              debugShowCheckedModeBanner: false,
+              routes: {
+                // '/': (context) => const LogIn(),
+                '/login': (context) => LogIn(),
+                '/resetpassword': (context) => ResetPass(),
+                '/checkmail': (context) => const CheckMail(),
+                '/createnewpass': (context) => CreateNewPass(),
+                '/returntologin': (context) => const ReturnToLogin(),
+                '/orderspage': (context) => OrdersPage(
+                      statusToinitiate: 0,
+                    ),
+                '/ordersdetails': (context) => OrderDetails(),
+                '/notifications': (context) => const Notifications(),
+                '/settings': (context) => const Settings(),
+                '/search': (context) => Search(),
+              },
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                appBarTheme: const AppBarTheme(
+                    color: Colors.white,
+                    actionsIconTheme:
+                        IconThemeData(color: Colors.black, size: 37),
+                    iconTheme: IconThemeData(
+                      color: Colors.black,
+                      size: 37,
+                    ),
+                    titleTextStyle: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold)),
+                primarySwatch: Colors.red,
 
-            // iconTheme: IconThemeData(color: Colors.red)
-          ),
-          home: startWidget),
+                // iconTheme: IconThemeData(color: Colors.red)
+              ),
+              home: startWidget);
+        },
+      ),
     );
   }
 }

@@ -13,6 +13,7 @@ import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart'
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class CancelButton extends StatelessWidget {
   final myCtx;
@@ -38,14 +39,14 @@ class CancelButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Driver not assigned yet? "),
+              Text("Driver not assigned yet? ".tr(context)),
               InkWell(
                 onTap: () {
                   _showAlertDialog(context,
                       ChooseDriverPopUpWithTime(id)); // حاطط التايم بصفر
                 },
                 child: Text(
-                  "Assign now",
+                  "Assign now".tr(context),
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class CancelButton extends StatelessWidget {
                   ),
                   Container(
                       margin: EdgeInsets.only(top: 20, bottom: 10),
-                      child: Text("Order will be ready in x mins")),
+                      child: Text("Time counter".tr(context))),
                 ],
               ),
               SizedBox(
@@ -137,7 +138,7 @@ class CancelButton extends StatelessWidget {
                                               .updatePreparingToDelivered(
                                                   orderId: id);
                                         },
-                                        child: Text("Delivered"),
+                                        child: Text("Delivered".tr(context)),
                                         style: ElevatedButton.styleFrom(
                                             primary: Color.fromARGB(
                                                 255, 60, 238, 60)),
@@ -154,7 +155,8 @@ class CancelButton extends StatelessWidget {
                                               BorderRadius.circular(15),
                                           child: ElevatedButton(
                                             onPressed: () {},
-                                            child: Text("Delivered"),
+                                            child:
+                                                Text("Delivered".tr(context)),
                                             style: ElevatedButton.styleFrom(
                                                 primary: Color.fromARGB(
                                                     255, 60, 238, 60)),
@@ -175,7 +177,7 @@ class CancelButton extends StatelessWidget {
                             onPressed: () {
                               _showAlertDialog(context, DeclinePopUp(id));
                             },
-                            child: Text("Cancel"),
+                            child: Text("Cancel".tr(context)),
                             style: OutlinedButton.styleFrom(
                                 backgroundColor:
                                     Color.fromARGB(255, 245, 243, 243),
@@ -201,7 +203,7 @@ class CancelButton extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Driver not assigned yet? "),
+                              Text("Driver not assigned yet? ".tr(context)),
                               InkWell(
                                 onTap: () {
                                   _showAlertDialog(
@@ -210,7 +212,7 @@ class CancelButton extends StatelessWidget {
                                           id)); // حاطط التايم بصفر
                                 },
                                 child: Text(
-                                  "Assign now",
+                                  "Assign now".tr(context),
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,

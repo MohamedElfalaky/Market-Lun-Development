@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class CreateNewPass extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -16,7 +17,7 @@ class CreateNewPass extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Reset Password",
+          "Reset Password".tr(context),
           style: TextStyle(
             color: Colors.black,
           ),
@@ -41,7 +42,7 @@ class CreateNewPass extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              "Create new password",
+                              "Create new password".tr(context),
                               style: TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold),
                             ),
@@ -51,7 +52,8 @@ class CreateNewPass extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.6,
                               child: Text(
-                                "Your password must be different from previous used password",
+                                "Your password must be different from previous used password"
+                                    .tr(context),
                                 textAlign: TextAlign.center,
                               ),
                             )
@@ -110,7 +112,7 @@ class CreateNewPass extends StatelessWidget {
                                       },
                                       maxLength: 20,
                                       decoration: InputDecoration(
-                                        hintText: "Password",
+                                        hintText: "Password".tr(context),
                                         labelStyle: TextStyle(
                                           color:
                                               Color.fromARGB(255, 230, 53, 53),
@@ -163,7 +165,7 @@ class CreateNewPass extends StatelessWidget {
                                       },
                                       maxLength: 20,
                                       decoration: InputDecoration(
-                                        hintText: "Password",
+                                        hintText: "Password".tr(context),
                                         labelStyle: TextStyle(
                                           color:
                                               Color.fromARGB(255, 230, 53, 53),
@@ -220,7 +222,8 @@ class CreateNewPass extends StatelessWidget {
                                                               pass2.text);
                                                 }
                                               },
-                                              child: Text('Reset Password'),
+                                              child: Text(
+                                                  'Reset Password'.tr(context)),
                                             ),
                                           ),
                                         )),
@@ -229,7 +232,7 @@ class CreateNewPass extends StatelessWidget {
                                   ),
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height *
-                                        0.3,
+                                        0.22,
                                   ),
                                   InkWell(
                                     onTap: () {
@@ -238,7 +241,8 @@ class CreateNewPass extends StatelessWidget {
                                               (Route<dynamic> route) => false);
                                     },
                                     child: Text(
-                                      'I remember my password return to login',
+                                      'I remember my password return to login'
+                                          .tr(context),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16),
@@ -246,7 +250,8 @@ class CreateNewPass extends StatelessWidget {
                                   ),
                                   Container(
                                       margin: EdgeInsets.only(top: 5),
-                                      child: Text("I dont have an account"))
+                                      child: Text(
+                                          "I dont have an account".tr(context)))
                                 ],
                               ),
                             )),

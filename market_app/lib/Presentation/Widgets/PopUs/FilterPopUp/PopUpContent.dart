@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import '../../../../data/Shared/AppLocalizations.dart';
 
 class FilterPopUpContent extends StatelessWidget {
   FilterPopUpContent({super.key});
@@ -17,15 +18,17 @@ class FilterPopUpContent extends StatelessWidget {
             groupValue: index == 0
                 ? OrdersCubit.selectedValue1
                 : OrdersCubit.selectedValue2,
-            title: Text(listItem,
+            title: Text(listItem.toString().tr(context),
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             onChanged: ((value) {
-              listItem = value!;
+              // listItem = value!;
               if (index == 0) {
-                OrdersCubit.selectedValue1 = value;
+                OrdersCubit.selectedValue1 = value!;
                 OrdersCubit.get(context).changeRadioButton();
+                print(OrdersCubit.selectedValue1);
+                print(value);
               } else {
-                OrdersCubit.selectedValue2 = value;
+                OrdersCubit.selectedValue2 = value!;
                 OrdersCubit.get(context).changeRadioButton();
               }
             }),
@@ -51,7 +54,7 @@ class FilterPopUpContent extends StatelessWidget {
                   children: [
                     SizedBox(height: 30, child: Icon(Icons.shopping_bag)),
                     Text(
-                      "  Order status",
+                      "Order status".tr(context),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     )
@@ -66,7 +69,7 @@ class FilterPopUpContent extends StatelessWidget {
                   children: [
                     SizedBox(height: 30, child: Icon(Icons.date_range)),
                     Text(
-                      "  Date",
+                      "Date".tr(context),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     )

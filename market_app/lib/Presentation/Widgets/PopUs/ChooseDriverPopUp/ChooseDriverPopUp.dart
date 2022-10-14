@@ -12,6 +12,7 @@ import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order
 import 'package:market_app/data/Models/DriversModel.dart';
 import 'package:market_app/data/Models/NotificationsModel.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../../../data/Shared/AppLocalizations.dart';
 
 class ChooseDriverPopUp extends StatefulWidget {
   final id;
@@ -94,7 +95,7 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                               width: MediaQuery.of(context).size.width * 0.23,
                               height: MediaQuery.of(context).size.height * 0.05,
                               child: OutlinedButton(
-                                child: Text('Later'),
+                                child: Text('Later'.tr(context)),
                                 onPressed: () {
                                   UpdateOrderCubit.get(context)
                                       .updateNewToPreparing(
@@ -183,7 +184,7 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                         builder: (context, state) {
                           return state is! UpdateOrderLoading
                               ? ElevatedButton(
-                                  child: Text('Save'),
+                                  child: Text('Save'.tr(context)),
                                   onPressed: () {
                                     UpdateOrderCubit.get(context)
                                         .updateNewToPreparingWithDriver(

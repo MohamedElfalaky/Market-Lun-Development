@@ -1,4 +1,101 @@
 {
 
-    "All" :"الكل"
+    "Orders" :"الطلبات",
+    "All" :"الكل",
+    "New" :"الجديدة",
+    "Preparing" :"جارية",
+    "Delivered" :"وصلت",
+    "Canceled" :"الملغية",
+    "Refunded" :"المستردة",
+    "Delivery":"توصيل",
+    "Pick up":"استلام",
+    "Today":"اليوم",
+    "Yesterday":"البارحة",
+    "Lastweek":"الأسبوع الماضي",
+    "Lastmonth":"الشهر الماضي",
+    "Order status":"  حالة الطلبات",
+    "Date":"  التاريخ",
+    "Filter":"تصفية",
+    "Save":"حفظ",
+    "Reset all filters":"إعادة تعيين",
+    "Notifications":"الإشعارات",
+    "Settings":"الاعدادات",
+    "Logout":"تسجيل الخروج",
+    "Market status":"  حالة السوق",
+    "Recive method":"  طريقة الاستلام",
+    "Language":"  اللغة",
+    "Busy":"مشغول",
+    "Closed":"مغلق",
+    "Search..":"بحث..",
+    "Search":"بحث",
+    "Order ID" :"رقم الطلب",
+    "Client Name":"اسم العميل",
+    "Payment Method": "طريقة الدفع",
+    "Driver Name":"اسم السائق",
+    "Total":"المجموع",
+    "Client Info":" معلومات العميل",
+    "Phone":" المحمول",
+    "Address":" العنوان",
+    
+    "Order Info":" معلومات الطلب",
+    "Order Status":"حالة الطلب",
+    "Order Type":"نوع الطلب",
+    "Time":"الوقت",
+    "Updated at":"وقت التحديث",
+    "Notes":"ملاحظات",
+
+    "Billing Info":"معلومات الفاتورة",
+    "Subtotal":"السعر",
+    "Delivery fees":"سعر التوصيل",
+    "Order Details":"تفاصيل الطلب",
+
+   "Market Admin":"مدير السوق",
+    "Easy control your bussiness":"أدر اعمالك بسهولة",
+    "Remember me":"تذكرني",
+    "Login":"تسجيل الدخول",
+    "Forget password?":"نسيت كلمة السر؟",
+
+    "Reset Password":"اعادة تعيين كلمة المرور",
+    "Enter the Email associated":"ادخل البريد الالكتروني المرتبط بحسابك وسوف نقوم بارسال رساله تحتوي على ارشادات تغيير كلمة المرور",
+
+    "Email":"البريد الالكتروني",
+    "Send mail":"ارسال",
+    "I remember my password return to login":"تذكرت كلمة المرور، العودة إلى صفحة تسجيل الدخول",
+    "Check your mail":"يرجى مراجعة البريد الالكتروني",
+    "We have sent password recover mail":"لقد قمنا بإرسال رابط اعادة ضبط كلمة المرور الى بريدك الالكتروني",
+    "Reset":"ضبط",
+    "Try again, or try another mail address":"حاول مجدداً، او قم بتجربة بريد الكتروني اخر",
+
+    "Password":"كلمة المرور",
+    "Create new password":"تعيين كلمة مرور جديدة",
+    "Your password must be different from previous used password":"كلمة المرور الجديدة يجب ان تختلف عن القديمة",
+
+
+    "Choose Driver": "اختر السائق",
+    "Select which driver":" اختر السائق الذي تريد تعيينه لهذه الطلبية",
+    "Later":"لاحقاً",
+
+
+    "Choose Time":"اختر زمن التوصيل",
+    " Type time in minutes": " اكتب رمن التوصيل بالدقائق",
+    "50:00 Mins":"٥٠:٠٠ دقيقه",
+    "Cancel Order :(":"الغاء الطلبية :(",
+    " Type reason for cancelation": " اكتب سبب الالغاء",
+    "Enter your text here":"اكتب هنا",
+    "Request for refund?":"طلب تعويض؟",
+
+    "View":"عرض",
+    "Accept":"قبول",
+    "Decline":"رفض",
+    "Cancel":"الغاء",
+
+
+    "Not Assigned":"لم يتم التعيين",
+    "Driver not assigned yet? ":"لم بتم تعيين السائق؟ ",
+    "Assign now":"تعيين الآن",
+    "Time counter":"سيجهز الطلب في غضون س دقائق"
+
+  
+
+
 }

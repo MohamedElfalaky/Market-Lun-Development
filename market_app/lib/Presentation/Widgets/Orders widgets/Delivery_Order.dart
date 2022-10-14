@@ -5,6 +5,7 @@ import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Cance
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class DeliveryOrder extends StatelessWidget {
   int? id;
@@ -128,7 +129,7 @@ class DeliveryOrder extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 8),
                           child: Text(
-                            metaDeta[i],
+                            metaDeta[i].tr(context),
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),

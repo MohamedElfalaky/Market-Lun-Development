@@ -7,6 +7,7 @@ import 'package:market_app/Presentation/Widgets/Orders%20widgets/Navigation_Draw
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/business_logic/cubits/Search_cubit/search_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class Search extends StatefulWidget {
   Search({super.key});
@@ -33,7 +34,7 @@ class _SearchState extends State<Search> {
     return Scaffold(
       // drawer: NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text("Search"),
+        title: Text("Search".tr(context)),
         // iconTheme: IconThemeData(color: Colors.red),
 
         // bottom: HorizontalFilterBar(),
@@ -66,7 +67,7 @@ class _SearchState extends State<Search> {
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none),
-                                  hintText: "Search..",
+                                  hintText: "Search..".tr(context),
                                   contentPadding:
                                       EdgeInsets.symmetric(horizontal: 20)),
                               cursorHeight: 30,

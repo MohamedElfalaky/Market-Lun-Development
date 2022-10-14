@@ -1,4 +1,99 @@
 {
-    "All" :"Allll"
+    "Orders" :"Orders",
+    "All" :"All",
+    "New" :"New",
+    "Preparing" :"Preparing",
+    "Delivered" :"Delivered",
+    "Canceled" :"Canceled",
+    "Refunded" :"Refunded",
+    "Delivery":"Delivery",
+    "Pick up":"Pick up",
+    "Today":"Today",
+    "Yesterday":"yesterday",
+    "Lastweek":"Pick up",
+    "Lastmonth":"Last month",
+    "Order status":"  Order status",
+    "Date":"  Date",
+    "Filter":"Filter",
+    "Save":"Save",
+    "Reset all filters":"Reset all filters",
+    "Notifications":"Notifications",
+    "Settings":"Settings",
+    "Logout":"Logout",
+    "Market status":"  Market status",
+    "Recive method":"  Recive method",
+    "Language":"  Language",
+    "Busy":"Busy",
+    "Closed":"Closed",
+    "Search..":"Search..",
+    "Search":"Search",
+    "Order ID" :"Order ID",
+    "Client Name":"Client Name",
+    "Payment Method": "Payment Method",
+    "Driver Name":"Driver Name",
+    "Total":"Total",
+    "Client Info":" Client Info",
+    "Phone":" Phone",
+    "Address":" Address",
 
+
+    "Order Info":" Order Info",
+    "Order Status":"Order Status",
+    "Order Type":"Order Type",
+    "Time":"Time",
+    "Updated at":"Updated at",
+    "Notes":"Notes",
+
+    "Billing Info":"Billing Info",
+    "Subtotal":"Subtotal",
+    "Delivery fees":"Delivery fees",
+    "Order Details":"Order Details",
+
+    "Market Admin":"Market Admin",
+    "Easy control your bussiness":"Easy control your bussiness",
+    "Remember me":"Remember me",
+    "Login":"Login",
+    "Forget password?":"Forget password?",
+
+    "Reset Password":"Reset Password",
+    "Enter the Email associated":"Enter the Email associated with your account and we will send you an email with instructions to reset your password",
+
+    "Email":"Email",
+    "Send mail":"Send mail",
+    "I remember my password return to login":"I remember my password return to login",
+    "Check your mail":"Check your mail",
+    "We have sent password recover mail":"We have sent password recover mail",
+    "Reset":"Reset",
+    "Try again, or try another mail address":"Try again, or try another mail address",
+
+    "Password":"Password",
+    "Create new password":"Create new password",
+    "Your password must be different from previous used password":"Your password must be different from previous used password",
+
+    "Choose Driver": "Choose Driver",
+    "Select which driver":" Select which driver you want to assign to \this order",
+
+    "Later":"Later",
+    "Choose Time":"Choose Time",
+    " Type time in minutes": " Type time in minutes",
+    "50:00 Mins":"50:00 Mins",
+    "Cancel Order :(":"Cancel Order :(",
+    " Type reason for cancelation": " Type reason for cancelation",
+    "Enter your text here":"Enter your text here",
+    "Request for refund?":"Request for refund?",
+
+    "View":"View",
+    "Accept":"Accept",
+    "Decline":"Decline",
+    "Cancel":"Cancel",
+
+    "Not Assigned":"Not Assigned",
+    "Driver not assigned yet? ":"Driver not assigned yet? ",
+    "Assign now":"Assign now",
+    "Time counter":"Order will be ready in x mins"
+
+   
+
+
+    
 }

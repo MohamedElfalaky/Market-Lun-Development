@@ -7,6 +7,7 @@ import 'package:market_app/Presentation/Widgets/Orders%20widgets/Navigation_Draw
 import 'package:market_app/Presentation/Widgets/Search%20widget/Search.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class OrdersPage extends StatefulWidget {
   final int statusToinitiate;
@@ -48,7 +49,7 @@ class _OrdersPageState extends State<OrdersPage> {
     return Scaffold(
       drawer: NavigationDrawerWidget(),
       appBar: AppBar(
-        title: Text("Orders"),
+        title: Text("Orders".tr(context)),
         // iconTheme: IconThemeData(color: Colors.red),
         actions: [
           IconButton(

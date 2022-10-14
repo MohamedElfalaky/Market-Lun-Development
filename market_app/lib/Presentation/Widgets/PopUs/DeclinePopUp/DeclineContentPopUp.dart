@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:duration_picker/duration_picker.dart';
+import '../../../../data/Shared/AppLocalizations.dart';
 
 class DeclineContentPopUp extends StatelessWidget {
   DeclineContentPopUp({super.key});
@@ -16,14 +17,14 @@ class DeclineContentPopUp extends StatelessWidget {
               size: 70,
             ),
             Text(
-              "Cancel Order :(",
+              "Cancel Order :(".tr(context),
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              " Type reason for cancelation",
+              " Type reason for cancelation".tr(context),
               textAlign: TextAlign.center,
             ),
             SizedBox(

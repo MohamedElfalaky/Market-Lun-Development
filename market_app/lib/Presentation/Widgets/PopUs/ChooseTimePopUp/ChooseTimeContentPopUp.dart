@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:duration_picker/duration_picker.dart';
+import '../../../../data/Shared/AppLocalizations.dart';
 
 class ChooseTimePopUpContent extends StatelessWidget {
   ChooseTimePopUpContent({super.key});
@@ -17,14 +18,14 @@ class ChooseTimePopUpContent extends StatelessWidget {
               size: 50,
             ),
             Text(
-              "Choose Time",
+              "Choose Time".tr(context),
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              " Type time in minutes",
+              " Type time in minutes".tr(context),
               textAlign: TextAlign.center,
             ),
             SizedBox(

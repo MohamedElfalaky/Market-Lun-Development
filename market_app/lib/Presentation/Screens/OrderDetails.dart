@@ -8,6 +8,7 @@ import 'package:market_app/Presentation/Widgets/Search%20widget/Search.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class OrderDetails extends StatefulWidget {
   final int? id;
@@ -32,7 +33,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Order Details"),
+          title: Text("Order Details".tr(context)),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: (() {

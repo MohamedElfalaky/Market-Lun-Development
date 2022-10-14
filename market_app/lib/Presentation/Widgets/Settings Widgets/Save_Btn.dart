@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class SaveBtn extends StatelessWidget {
   @override
@@ -28,7 +29,7 @@ class SaveBtn extends StatelessWidget {
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
                           primary: Color.fromARGB(255, 237, 25, 25)),
-                      child: const Text("Save"),
+                      child: Text("Save".tr(context)),
                     ),
                   ),
                 ),

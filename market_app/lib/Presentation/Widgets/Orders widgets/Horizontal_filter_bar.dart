@@ -62,7 +62,8 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                           i++)
                         InkWell(
                           onTap: () {
-                            if (OrdersCubit.selectedValue1 == "All") {
+                            if (OrdersCubit.selectedValue1.tr(context) ==
+                                "All".tr(context)) {
                               if (i == 0) {
                                 OrdersCubit.get(context).getAllOrders(
                                     delivery: 1,
@@ -107,8 +108,8 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                               }
                               NewOrderCounterCubit.get(context).getOrders(
                                   apiToken: CacheHelper.getFromShared("token"));
-                            } else if (OrdersCubit.selectedValue1 ==
-                                "Delivery") {
+                            } else if (OrdersCubit.selectedValue1.tr(context) ==
+                                "Delivery".tr(context)) {
                               if (i == 0) {
                                 OrdersCubit.get(context).getAllOrders(
                                     delivery: 1,
@@ -153,7 +154,9 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                               }
                               NewOrderCounterCubit.get(context).getOrders(
                                   apiToken: CacheHelper.getFromShared("token"));
-                            } else {
+                            } else if ((OrdersCubit.selectedValue1
+                                    .tr(context) ==
+                                "Pick up".tr(context))) {
                               if (i == 0) {
                                 OrdersCubit.get(context).getAllOrders(
                                     delivery: 0,
@@ -226,7 +229,15 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                                 ? Stack(children: [
                                     Center(
                                         child: Text(
-                                      HorizontalFilterBar._barMetaData[i],
+                                      [
+                                        "All",
+                                        "New",
+                                        "Preparing",
+                                        "Delivered", //5
+                                        "Canceled", //6
+                                        "Refunded", //7
+                                      ][i]
+                                          .tr(context),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black),
@@ -250,7 +261,15 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                                   ])
                                 : Center(
                                     child: Text(
-                                    HorizontalFilterBar._barMetaData[i],
+                                    [
+                                      "All",
+                                      "New",
+                                      "Preparing",
+                                      "Delivered", //5
+                                      "Canceled", //6
+                                      "Refunded", //7
+                                    ][i]
+                                        .tr(context),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),

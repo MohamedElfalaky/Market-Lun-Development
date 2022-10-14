@@ -6,7 +6,7 @@ class DioHelper {
 
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: "https://dev.talabatcom.sa/Admin/public",
+      baseUrl: "https://dev.talabatcom.sa/Admin",
       receiveDataWhenStatusError: true,
     ));
   }

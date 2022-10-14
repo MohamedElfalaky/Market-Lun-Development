@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class ClientInfo extends StatelessWidget {
   ClientInfo({super.key});
@@ -45,7 +46,7 @@ class ClientInfo extends StatelessWidget {
                 size: 40,
               ),
               Text(
-                " Client Info.",
+                "Client Info".tr(context),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )
             ],
@@ -55,26 +56,21 @@ class ClientInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 BlocConsumer<TestCubit, TestState>(
-                  listener: (context, state) {
-                    if (state is TestSuccess) {
-                      print(
-                          "slkmlkdnjknlwjndwlsnwljnsjlwnsljwnjlwnkljswnljsnkjbehkbflqndewn");
-                    }
-                  },
+                  listener: (context, state) {},
                   builder: (context, state) {
                     return state is TestSuccess
                         ? Column(
                             children: [
                               myClientInfo(
-                                  "Client Name",
+                                  "Client Name".tr(context),
                                   state.myOrderDetailsModel.data.clientName,
                                   context),
                               myClientInfo(
-                                  "Phone",
+                                  "Phone".tr(context),
                                   state.myOrderDetailsModel.data.clientPhone,
                                   context),
                               myClientInfo(
-                                  "Address",
+                                  "Address".tr(context),
                                   state.myOrderDetailsModel.data.address,
                                   context),
                             ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class OrderInfo extends StatelessWidget {
   String? status;
@@ -37,7 +38,7 @@ class OrderInfo extends StatelessWidget {
             metaa,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          metaa == "Order Status"
+          metaa == "Order Status".tr(context)
               ? Container(
                   height: 30,
                   width: 100,
@@ -90,7 +91,7 @@ class OrderInfo extends StatelessWidget {
                 size: 40,
               ),
               Text(
-                " Order Info.",
+                "Order Info".tr(context),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )
             ],
@@ -101,20 +102,20 @@ class OrderInfo extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    myOrdertInfo("Order Status", status!, statusColor,
+                    myOrdertInfo("Order Status".tr(context), status!,
+                        statusColor, txtStatusColor, context),
+                    myOrdertInfo("Order ID".tr(context), id!, statusColor,
                         txtStatusColor, context),
-                    myOrdertInfo(
-                        "Order ID", id!, statusColor, txtStatusColor, context),
-                    myOrdertInfo("Driver Name", driverName!, statusColor,
+                    myOrdertInfo("Driver Name".tr(context), driverName!,
+                        statusColor, txtStatusColor, context),
+                    myOrdertInfo("Order Type".tr(context), orderType!,
+                        statusColor, txtStatusColor, context),
+                    myOrdertInfo("Time".tr(context), time!, statusColor,
                         txtStatusColor, context),
-                    myOrdertInfo("Order Type", orderType!, statusColor,
+                    myOrdertInfo("Updated at".tr(context), updateAt!,
+                        statusColor, txtStatusColor, context),
+                    myOrdertInfo("Notes".tr(context), hint!, statusColor,
                         txtStatusColor, context),
-                    myOrdertInfo(
-                        "Time", time!, statusColor, txtStatusColor, context),
-                    myOrdertInfo("Updated at", updateAt!, statusColor,
-                        txtStatusColor, context),
-                    myOrdertInfo(
-                        "Notes", hint!, statusColor, txtStatusColor, context),
                   ],
                 )
               ],

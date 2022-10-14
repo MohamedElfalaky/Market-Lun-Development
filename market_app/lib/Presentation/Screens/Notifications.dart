@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/Notifications%20Widgets/One_Notification.dart';
 import 'package:market_app/business_logic/cubits/Notification_cubit/notifications_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -23,7 +24,7 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notifications"),
+        title: Text("Notifications".tr(context)),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class BillingInfo extends StatelessWidget {
   BillingInfo({super.key});
@@ -39,7 +40,7 @@ class BillingInfo extends StatelessWidget {
                 size: 40,
               ),
               Text(
-                " Billing Info.",
+                "Billing Info".tr(context),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )
             ],
@@ -57,19 +58,19 @@ class BillingInfo extends StatelessWidget {
                         ? Column(
                             children: [
                               myBillInfo(
-                                  "Payment Method",
+                                  "Payment Method".tr(context),
                                   state.myOrderDetailsModel.data.payment.method,
                                   context),
                               myBillInfo(
-                                  "Subtotal",
+                                  "Subtotal".tr(context),
                                   "${state.myOrderDetailsModel.data.payment.subtotal} \$",
                                   context),
                               myBillInfo(
-                                  "Delivery fees",
+                                  "Delivery fees".tr(context),
                                   "${state.myOrderDetailsModel.data.payment.deliveryFee} \$",
                                   context),
                               myBillInfo(
-                                  "Total",
+                                  "Total".tr(context),
                                   "${state.myOrderDetailsModel.data.payment.deliveryFee + state.myOrderDetailsModel.data.payment.subtotal} \$",
                                   context),
                             ],

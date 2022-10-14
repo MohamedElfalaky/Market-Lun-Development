@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class AcceptDecline extends StatelessWidget {
   final id;
@@ -34,7 +35,7 @@ class AcceptDecline extends StatelessWidget {
                       child: Image.asset("assets/200w.gif")),
                   Container(
                       margin: EdgeInsets.symmetric(vertical: 15),
-                      child: Text("Order will canceled in x mins")),
+                      child: Text("Time counter".tr(context))),
                 ],
               ),
               SizedBox(
@@ -42,8 +43,9 @@ class AcceptDecline extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 2,
-                      child: Padding(
+                      flex: 4,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 10),
                         padding: const EdgeInsets.only(right: 8.0),
                         child: SizedBox(
                           height: double.infinity,
@@ -53,7 +55,7 @@ class AcceptDecline extends StatelessWidget {
                               onPressed: () {
                                 _showAlertDialog(context, ChoosTimePopUp(id));
                               },
-                              child: Text("Accept"),
+                              child: Text("Accept".tr(context)),
                               style: ElevatedButton.styleFrom(
                                   primary: Color.fromARGB(255, 60, 238, 60)),
                             ),
@@ -62,14 +64,14 @@ class AcceptDecline extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: SizedBox(
                         height: double.infinity,
                         child: OutlinedButton(
                           onPressed: () {
                             _showAlertDialog(context, DeclinePopUp(id));
                           },
-                          child: Text("Decline"),
+                          child: Text("Decline".tr(context)),
                           style: OutlinedButton.styleFrom(
                               backgroundColor:
                                   Color.fromARGB(255, 245, 240, 240),

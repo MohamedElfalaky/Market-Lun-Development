@@ -8,6 +8,7 @@ import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart'
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../../../data/Shared/AppLocalizations.dart';
 
 class DeclinePopUp extends StatefulWidget {
   final id;
@@ -58,7 +59,7 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                           controller: myControlled,
                           maxLines: 8, //or null
                           decoration: InputDecoration.collapsed(
-                              hintText: "Enter your text here"),
+                              hintText: "Enter your text here".tr(context)),
                         ),
                       ))
                 ],
@@ -75,7 +76,7 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                         });
                       },
                     ),
-                    Text("Request for refund?")
+                    Text("Request for refund?".tr(context))
                   ],
                 ),
               ),
@@ -130,7 +131,7 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                               borderRadius: BorderRadius.circular(10),
                               child: ElevatedButton(
                                 child: Text(
-                                  'Save',
+                                  'Save'.tr(context),
                                   style: TextStyle(fontSize: 18),
                                 ),
                                 onPressed: () {

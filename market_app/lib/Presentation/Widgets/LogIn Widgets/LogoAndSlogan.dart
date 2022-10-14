@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class LogoAndSlogan extends StatelessWidget {
   const LogoAndSlogan({super.key});
@@ -17,7 +18,7 @@ class LogoAndSlogan extends StatelessWidget {
                 child: Image.asset('assets/Logo.png')),
           ),
           Text(
-            "Market Admin",
+            "Market Admin".tr(context),
             style: TextStyle(
               color: Color.fromARGB(255, 11, 11, 11),
               fontSize: 40,
@@ -25,7 +26,7 @@ class LogoAndSlogan extends StatelessWidget {
             ),
           ),
           Text(
-            "Easy control your bussiness",
+            "Easy control your bussiness".tr(context),
             style: TextStyle(fontSize: 17),
           )
         ],

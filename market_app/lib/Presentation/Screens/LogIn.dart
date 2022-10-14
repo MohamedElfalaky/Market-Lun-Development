@@ -7,6 +7,7 @@ import 'package:market_app/Presentation/Widgets/LogIn%20Widgets/PassWordTextFiel
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class LogIn extends StatelessWidget {
   LogIn({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class LogIn extends StatelessWidget {
             child: ListView(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 1,
+                  // height: MediaQuery.of(context).size.height * 0.9,
                   color: Color.fromARGB(255, 255, 255, 255),
                   child: Column(
                     // mainAxisSize: MainAxisSize.max,
@@ -91,7 +92,7 @@ class LogIn extends StatelessWidget {
                                             // });
                                           },
                                         ),
-                                        Text("Remember me?")
+                                        Text("Remember me".tr(context))
                                       ],
                                     ),
                                   ),
@@ -127,7 +128,7 @@ class LogIn extends StatelessWidget {
                                                 }
                                               },
                                               child: Text(
-                                                'Login',
+                                                'Login'.tr(context),
                                                 style: TextStyle(
                                                     fontSize: 17,
                                                     fontWeight:
@@ -148,7 +149,7 @@ class LogIn extends StatelessWidget {
                                           context, '/resetpassword');
                                     },
                                     child: Text(
-                                      "Forget password?",
+                                      "Forget password?".tr(context),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 17),

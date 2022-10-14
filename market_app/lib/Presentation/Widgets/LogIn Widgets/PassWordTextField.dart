@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/LogIn%20Widgets/MailTextField.dart';
 import 'package:market_app/business_logic/cubits/Login_cubit/login_cubit.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class PassWordTextField extends StatelessWidget {
   final GlobalKey<FormState> myFormKey;
@@ -36,7 +37,7 @@ class PassWordTextField extends StatelessWidget {
         decoration: InputDecoration(
           fillColor: Color.fromARGB(255, 239, 246, 249),
           filled: true,
-          hintText: "Password",
+          hintText: "Password".tr(context),
           labelStyle: TextStyle(
             color: Color.fromARGB(255, 230, 53, 53),
           ),

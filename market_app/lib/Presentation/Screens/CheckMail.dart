@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Screens/CreateNewPass.dart';
+import '../../data/Shared/AppLocalizations.dart';
 
 class CheckMail extends StatelessWidget {
   const CheckMail({super.key});
@@ -9,7 +10,7 @@ class CheckMail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Reset password",
+          "Reset Password".tr(context),
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -30,13 +31,13 @@ class CheckMail extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                 ),
                 Text(
-                  "Check your mail",
+                  "Check your mail".tr(context),
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.02,
                 ),
-                Text("We have sent password recover mail"),
+                Text("We have sent password recover mail".tr(context)),
                 SizedBox(
                   height: MediaQuery.of(context).size.width * 0.05,
                 ),
@@ -57,22 +58,19 @@ class CheckMail extends StatelessWidget {
 
                         CreateNewPass();
                       },
-                      child: Text('Reset'),
+                      child: Text('Reset'.tr(context)),
                     ),
                   ),
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.25,
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.075,
-                ),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, '/resetpassword');
                   },
                   child: Text(
-                    "Try again, or try another mail address",
+                    "Try again, or try another mail address".tr(context),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 199, 19, 19)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../data/Shared/AppLocalizations.dart';
 
 class MailTextField extends StatelessWidget {
   MailTextField({super.key});
@@ -28,7 +29,7 @@ class MailTextField extends StatelessWidget {
         decoration: InputDecoration(
           fillColor: Color.fromARGB(255, 239, 246, 249),
           filled: true,
-          hintText: "Email",
+          hintText: "Email".tr(context),
           labelStyle: TextStyle(
             color: Color.fromARGB(255, 245, 59, 59),
           ),
