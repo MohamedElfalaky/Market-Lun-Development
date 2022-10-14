@@ -7,6 +7,8 @@ class UpdatePasswordInitial extends UpdatePasswordState {}
 
 class UpdatePasswordLoading extends UpdatePasswordState {}
 
+class ShowPassState extends UpdatePasswordState {}
+
 class UpdatePasswordSuccess extends UpdatePasswordState {
   final UpdatePasswordModel myUpdatePassModel;
   UpdatePasswordSuccess(this.myUpdatePassModel);

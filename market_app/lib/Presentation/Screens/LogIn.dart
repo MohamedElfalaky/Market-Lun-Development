@@ -9,11 +9,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import '../../data/Shared/AppLocalizations.dart';
 
-class LogIn extends StatelessWidget {
+class LogIn extends StatefulWidget {
   LogIn({Key? key}) : super(key: key);
 
+  @override
+  State<LogIn> createState() => _LogInState();
+}
+
+class _LogInState extends State<LogIn> {
   final _formKey = GlobalKey<FormState>();
+
   bool _throwShotAway = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
@@ -87,9 +94,10 @@ class LogIn extends StatelessWidget {
                                         Checkbox(
                                           value: _throwShotAway,
                                           onChanged: (bool? newValue) {
-                                            // setState(() {
-                                            //   _throwShotAway = newValue!;
-                                            // });
+                                            setState(() {
+                                              _throwShotAway = newValue!;
+                                              //run avalue based on (_throwShot value)
+                                            });
                                           },
                                         ),
                                         Text("Remember me".tr(context))

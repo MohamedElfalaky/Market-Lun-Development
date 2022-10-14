@@ -9,8 +9,6 @@ class CreateNewPass extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final pass1 = TextEditingController();
   final pass2 = TextEditingController();
-  bool isHiddenPass = true;
-  bool isHiddenPass2 = true;
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +97,9 @@ class CreateNewPass extends StatelessWidget {
                                         bottom: 10),
                                     child: TextFormField(
                                       controller: pass1,
-                                      obscureText: isHiddenPass,
+                                      obscureText:
+                                          UpdatePasswordCubit.get(context)
+                                              .isHiddenPass,
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
                                       validator: (value) {
@@ -119,17 +119,17 @@ class CreateNewPass extends StatelessWidget {
                                         ),
                                         prefixIcon: Icon(Icons.security),
                                         suffixIcon: InkWell(
-                                          onTap: (() {
-                                            // isHiddenPass
-                                            //     ? isHiddenPass = false
-                                            //     : isHiddenPass = true;
+                                            onTap: (() {
+                                              // isHiddenPass
+                                              //     ? isHiddenPass = false
+                                              //     : isHiddenPass = true;
 
-                                            isHiddenPass = !isHiddenPass;
-                                          }),
-                                          child: Icon(
-                                            Icons.visibility,
-                                          ),
-                                        ),
+                                              UpdatePasswordCubit.get(context)
+                                                  .showPass();
+                                            }),
+                                            child:
+                                                UpdatePasswordCubit.get(context)
+                                                    .stateIcon1),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(width: 1)),
                                         focusedBorder: OutlineInputBorder(
@@ -150,7 +150,9 @@ class CreateNewPass extends StatelessWidget {
                                         bottom: 10),
                                     child: TextFormField(
                                       controller: pass2,
-                                      obscureText: isHiddenPass2,
+                                      obscureText:
+                                          UpdatePasswordCubit.get(context)
+                                              .isHiddenPass2,
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
                                       validator: (value) {
@@ -172,17 +174,17 @@ class CreateNewPass extends StatelessWidget {
                                         ),
                                         prefixIcon: Icon(Icons.security),
                                         suffixIcon: InkWell(
-                                          onTap: (() {
-                                            // isHiddenPass
-                                            //     ? isHiddenPass = false
-                                            //     : isHiddenPass = true;
+                                            onTap: (() {
+                                              // isHiddenPass
+                                              //     ? isHiddenPass = false
+                                              //     : isHiddenPass = true;
 
-                                            isHiddenPass2 = !isHiddenPass2;
-                                          }),
-                                          child: Icon(
-                                            Icons.visibility,
-                                          ),
-                                        ),
+                                              UpdatePasswordCubit.get(context)
+                                                  .showPass2();
+                                            }),
+                                            child:
+                                                UpdatePasswordCubit.get(context)
+                                                    .stateIcon2),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(width: 1)),
                                         focusedBorder: OutlineInputBorder(

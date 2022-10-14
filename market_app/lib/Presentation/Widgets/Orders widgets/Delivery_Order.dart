@@ -142,6 +142,7 @@ class DeliveryOrder extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
+                        margin: EdgeInsets.only(top: 5, bottom: 5),
                         height: 30,
                         width: 100,
                         decoration: BoxDecoration(
