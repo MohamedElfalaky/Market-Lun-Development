@@ -44,7 +44,7 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
     return BlocBuilder<NewOrderCounterCubit, NewOrderCounterState>(
       builder: (context, state) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.08,
+          height: MediaQuery.of(context).size.height * 0.1,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

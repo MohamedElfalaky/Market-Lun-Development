@@ -39,7 +39,11 @@ class CancelButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Driver not assigned yet? ".tr(context)),
+              Text(
+                "Driver not assigned yet? ".tr(context),
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height * 0.022),
+              ),
               InkWell(
                 onTap: () {
                   _showAlertDialog(context,
@@ -48,7 +52,7 @@ class CancelButton extends StatelessWidget {
                 child: Text(
                   "Assign now".tr(context),
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.025,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 247, 6, 6)),
                 ),
@@ -79,7 +83,12 @@ class CancelButton extends StatelessWidget {
                   ),
                   Container(
                       margin: EdgeInsets.only(top: 20, bottom: 10),
-                      child: Text("Time counter".tr(context))),
+                      child: Text(
+                        "Time counter".tr(context),
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.023),
+                      )),
                 ],
               ),
               SizedBox(

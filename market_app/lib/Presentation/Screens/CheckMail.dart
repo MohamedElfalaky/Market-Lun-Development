@@ -18,7 +18,7 @@ class CheckMail extends StatelessWidget {
         children: [
           Center(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.87,
+              height: MediaQuery.of(context).size.height * 1,
               child: Column(mainAxisSize: MainAxisSize.max, children: [
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,

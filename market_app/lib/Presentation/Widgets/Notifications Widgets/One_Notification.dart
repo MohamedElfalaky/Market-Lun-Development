@@ -9,7 +9,7 @@ class OneNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: 40,
+        horizontal: MediaQuery.of(context).size.height * 0.03,
       ),
       padding: EdgeInsets.only(top: 35),
       child: Row(
