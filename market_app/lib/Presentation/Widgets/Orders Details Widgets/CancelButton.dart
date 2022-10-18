@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_countdown_timer/index.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:market_app/Presentation/Screens/Orders.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUpWithTime.dart';
@@ -14,13 +16,18 @@ import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 
 class CancelButton extends StatelessWidget {
   final myCtx;
   final id;
   final driverName;
+  final preparingTime;
+  final timeZone;
   final int _navigateTothisIndex = 3;
-  CancelButton(this.id, this.driverName, this.myCtx);
+  CancelButton(
+      this.id, this.driverName, this.myCtx, this.preparingTime, this.timeZone);
   void _showAlertDialog(context, Widget myWidget) {
     showDialog(
       context: context,
@@ -31,8 +38,45 @@ class CancelButton extends StatelessWidget {
   }
 
   Widget? assignButton = Container();
+
   @override
   Widget build(BuildContext context) {
+    var currentDateTimeSA = tz.TZDateTime.from(DateTime.now(),
+        tz.getLocation(timeZone)); // صيغة وقت بمنطقة زمنية لوقت السعودية الحالي
+    var currentDateTimeEG =
+        tz.TZDateTime.from(DateTime.now(), tz.getLocation("Africa/Cairo"));
+
+    String currenSaTimeString =
+        "${currentDateTimeSA.hour}:${currentDateTimeSA.minute}:${currentDateTimeSA.second}"; // صيغة نص لوقت السعودية
+    var saFormate = DateFormat("HH:mm:ss")
+        .parse(currenSaTimeString); // صيغة وقت السعودية الحالي
+
+    String currenSaTimeDateString =
+        "${currentDateTimeSA.year}-${currentDateTimeSA.month}-${currentDateTimeSA.day} ${currentDateTimeSA.hour}:${currentDateTimeSA.minute}:${currentDateTimeSA.second}";
+    // صيغة نص لوقت السعودية
+    var saTimeDateFormate = DateFormat("yyyy-MM-dd HH:mm:ss")
+        .parse(currenSaTimeDateString); // صيغة وقت السعودية الحالي
+
+    // print(currentDateTimeSA);
+    // print(currentDateTimeEG);
+
+    // print(
+    //   currentDateTimeEG.difference(currentDateTimeSA),
+    // );
+
+    // print(currenSaTimeString);
+    // print(saFormate.difference(DateFormat("HH:mm").parse("12:20:00"))); // الحل
+
+    print(
+      // saFormate.millisecondsSinceEpoch +
+      DateFormat("HH:mm:ss").parse("19:36:21").difference(saFormate).inMinutes,
+    );
+    print(DateTime.now());
+    print(saTimeDateFormate);
+    print(saFormate);
+
+    // print(currenSaTimeString);
+
     if (driverName == "Not Assigned") {
       assignButton = Container(
           margin: EdgeInsets.only(top: 10, bottom: 10),
@@ -83,11 +127,70 @@ class CancelButton extends StatelessWidget {
                   ),
                   Container(
                       margin: EdgeInsets.only(top: 20, bottom: 10),
-                      child: Text(
-                        "Time counter".tr(context),
-                        style: TextStyle(
-                            fontSize:
-                                MediaQuery.of(context).size.height * 0.018),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Time counter preparing".tr(context),
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.018),
+                          ),
+                          CountdownTimer(
+                            endTime: DateTime.now().millisecondsSinceEpoch +
+                                DateFormat("HH:mm:ss")
+                                        .parse(preparingTime)
+                                        .difference(saFormate)
+                                        .inSeconds *
+                                    1000,
+                            onEnd: () {},
+                            widgetBuilder: (context, time) {
+                              var newMins;
+                              var newSec;
+                              if (time == null || time == 0) {
+                                return Text(
+                                  "00:00:00",
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 12, 34, 198),
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }
+                              // if (time.min)
+                              if (time.hours != 0 && time.hours != null) {
+                                newMins = time.hours! * 60 + time.min!;
+                              } else {
+                                newMins = time.min;
+                              }
+                              if (newMins != null) {
+                                if (newMins < 10) {
+                                  newMins = "0${newMins}";
+                                }
+                              }
+                              // else if (time.sec != null) {
+                              //   if (time.sec! < 10) {
+                              //     newSec = "0${time.sec}";
+                              //   } else {
+                              //     newSec = time.sec!;
+                              //   }
+                              // }
+                              return Text(
+                                  '${newMins ?? "00"}:${time.sec ?? "00"}',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 12, 34, 198),
+                                      fontWeight: FontWeight.bold));
+                            },
+                          ),
+                          // Text(
+                          //   "Counter",
+                          //   style: TextStyle(
+                          //       color: Color.fromARGB(255, 61, 33, 243)),
+                          // ),
+                          Text(
+                            "Mins".tr(context),
+                            style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.018),
+                          )
+                        ],
                       )),
                 ],
               ),

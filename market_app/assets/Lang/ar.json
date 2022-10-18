@@ -88,12 +88,14 @@
     "Accept":"قبول",
     "Decline":"رفض",
     "Cancel":"الغاء",
-
+    "Available":"متاح",
 
     "Not Assigned":"لم يتم التعيين",
     "Driver not assigned yet? ":"لم بتم تعيين السائق؟ ",
     "Assign now":"تعيين الآن",
-    "Time counter":"سيجهز الطلب في غضون س دقائق"
+    "Time counter preparing":"سيجهز الطلب في غضون ",
+    "Time counter new":" سيتم الغاء الطلب في غضون ",
+    "Mins":" دقيقه "
 
   
 

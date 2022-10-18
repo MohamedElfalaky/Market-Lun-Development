@@ -90,7 +90,11 @@
     "Not Assigned":"Not Assigned",
     "Driver not assigned yet? ":"Driver not assigned yet? ",
     "Assign now":"Assign now",
-    "Time counter":"Order will be ready in x mins"
+   
+    "Available":"Available",
+    "Time counter preparing":"Order will be ready in ",
+    "Time counter new":"Order will be declined in ",
+    "Mins":" Mins"
 
    
 

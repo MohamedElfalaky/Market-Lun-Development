@@ -122,6 +122,12 @@ class _OrdersPageState extends State<OrdersPage> {
                                               .orderStatus,
                                           receiveMethod: state.myOrdermodel
                                               .data[index].receiveMethod,
+                                          time: state.myOrdermodel.data[index]
+                                              .preparingTime,
+                                          expiration: state.myOrdermodel
+                                              .data[index].expiredAt,
+                                          timeZone: state.myOrdermodel
+                                              .data[index].timezone,
                                         ),
                                       );
                               });

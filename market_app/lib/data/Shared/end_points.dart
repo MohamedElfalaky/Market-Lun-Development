@@ -9,3 +9,4 @@ const UPDATEPASS = "/api/market/changePassword";
 const GETORDERS = "/api/market/orders";
 const NOTIFICATIONS = "/api/market/notifications";
 const DRIVERS = "/api/market/drivers";
+const SETTINGS = "/api/market/settings/1";

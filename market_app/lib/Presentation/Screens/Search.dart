@@ -134,6 +134,12 @@ class _SearchState extends State<Search> {
                                           .myOrderModel.data[index].orderStatus,
                                       receiveMethod: state.myOrderModel
                                           .data[index].receiveMethod,
+                                      time: state.myOrderModel.data[index]
+                                          .preparingTime,
+                                      expiration: state
+                                          .myOrderModel.data[index].expiredAt,
+                                      timeZone: state
+                                          .myOrderModel.data[index].timezone,
                                     ),
                                   );
                           });

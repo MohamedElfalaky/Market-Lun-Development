@@ -11,8 +11,12 @@ class MyBottomNavigationBar extends StatefulWidget {
   final id;
   final driverName;
   String? status;
+  final preparingTime2;
+  final expirationTime;
+  final timeZone;
 
-  MyBottomNavigationBar(this.status, this.id, this.driverName, this.cxt);
+  MyBottomNavigationBar(this.status, this.id, this.driverName, this.cxt,
+      this.preparingTime2, this.expirationTime, this.timeZone);
 
   @override
   State<MyBottomNavigationBar> createState() => _MyBottomNavigationBarState();
@@ -28,9 +32,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         widget.status == "Refunded") {
       statusButton = null;
     } else if (widget.status == "New") {
-      statusButton = AcceptDecline(widget.id);
+      statusButton =
+          AcceptDecline(widget.id, widget.expirationTime, widget.timeZone);
     } else {
-      statusButton = CancelButton(widget.id, widget.driverName, widget.cxt);
+      statusButton = CancelButton(widget.id, widget.driverName, widget.cxt,
+          widget.preparingTime2, widget.timeZone);
     }
     return Container(
       child: ClipRRect(

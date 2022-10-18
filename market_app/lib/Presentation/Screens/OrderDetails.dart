@@ -76,7 +76,10 @@ class _OrderDetailsState extends State<OrderDetails> {
                     state.myOrderDetailsModel.data.status,
                     state.myOrderDetailsModel.data.orderId,
                     state.myOrderDetailsModel.data.driverName,
-                    widget.contextt)
+                    widget.contextt,
+                    state.myOrderDetailsModel.data.preparingTime,
+                    state.myOrderDetailsModel.data.expiredAt,
+                    state.myOrderDetailsModel.data.timezone)
                 : Center(
                     child: CircularProgressIndicator(),
                   );

@@ -26,13 +26,18 @@ import 'package:market_app/business_logic/cubits/Search_cubit/search_cubit.dart'
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
+import 'package:market_app/business_logic/cubits/settings_cubit/settings_cubit.dart';
 import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
 import 'package:market_app/data/Shared/UniLinks.dart';
 import './data/Shared/UniLinks.dart';
+import 'package:timezone/timezone.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
+  tz.initializeTimeZones();
+
   WidgetsFlutterBinding.ensureInitialized();
   //WidgetsFlutterBinding.ensureInitialized used to ensure that every functions main will run completely then run app
 
@@ -87,6 +92,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UpdateOrderCubit()),
         BlocProvider(create: (context) => TestCubit()),
         BlocProvider(create: (context) => AssignCubit()),
+        BlocProvider(create: (context) => SettingsCubit()),
         BlocProvider(
             create: (context) => LocalCubit()
               ..getSavedLanguage()), //بدون نقاط: برجع انستانس من الكيوبت، بنقطه واحده: برجه انستانس من الفانكشن، نقطتين: برجع انستانت من الكيوبت وبرن الفنكشن

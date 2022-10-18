@@ -19,18 +19,20 @@ class DeliveryOrder extends StatelessWidget {
   Color? txtStatusColor;
   Widget? statusButton;
   Icon? methodIcon;
-  final time;
-
-  DeliveryOrder({
-    this.id,
-    this.name,
-    this.paymentMethod,
-    this.driverName,
-    this.total,
-    this.status,
-    this.receiveMethod,
-    this.time,
-  });
+  String? time;
+  final expiration;
+  final timeZone;
+  DeliveryOrder(
+      {this.id,
+      this.name,
+      this.paymentMethod,
+      this.driverName,
+      this.total,
+      this.status,
+      this.receiveMethod,
+      required this.time,
+      required this.expiration,
+      required this.timeZone});
 
   List<String> metaDeta = [
     "Order ID",
@@ -79,9 +81,9 @@ class DeliveryOrder extends StatelessWidget {
         status == "Refunded") {
       statusButton = ViewButton();
     } else if (status == "New") {
-      statusButton = AcceptDecline(id);
+      statusButton = AcceptDecline(id, expiration, timeZone);
     } else {
-      statusButton = CancelButton(id, driverName, context);
+      statusButton = CancelButton(id, driverName, context, time, timeZone);
     }
 
     if (receiveMethod == "Delivery") {

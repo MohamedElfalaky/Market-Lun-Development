@@ -85,7 +85,7 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
     });
   }
 
-  void declineOrder({required orderId, cancelReason}) {
+  declineOrder({required orderId, cancelReason}) {
     emit(UpdateOrderLoading());
     DioHelper.postData(url: "$GETORDERS/$orderId", data: {
       "api_token": CacheHelper.getFromShared("token"),
@@ -132,5 +132,27 @@ class UpdateOrderCubit extends Cubit<UpdateOrderState> {
 
   pleaseRender() {
     emit(PleaseRender());
+  }
+
+  declineOrderImmediately({required orderId, cancelReason}) {
+    emit(UpdateOrderLoading());
+    DioHelper.postData(url: "$GETORDERS/$orderId", data: {
+      "api_token": CacheHelper.getFromShared("token"),
+      "cancel_reason": cancelReason,
+      "order_status_id": 6,
+    }).then((value) {
+      var myUpdateOrderModel = UpdateOrderModel.fromJson(value.data);
+      Fluttertoast.showToast(
+          msg: myUpdateOrderModel.message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color.fromARGB(255, 223, 47, 34),
+          textColor: Colors.white,
+          fontSize: 16.0);
+      emit(declineOrderSuccess(myUpdateOrderModel));
+    }).catchError((error) {
+      emit(UpdateOrderError(error.toString()));
+    });
   }
 }
