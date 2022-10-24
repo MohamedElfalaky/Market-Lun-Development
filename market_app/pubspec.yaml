@@ -44,8 +44,11 @@ dependencies:
   uni_links: ^0.5.1
   intl: ^0.17.0
   timezone: ^0.9.0
+  firebase_messaging: ^14.0.2
+  flutter_local_notifications: ^12.0.2
   flutter_localizations:
     sdk: flutter
+  firebase_core: ^2.1.0
 
 dev_dependencies:
   flutter_test:

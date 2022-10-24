@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,6 +29,7 @@ import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/business_logic/cubits/settings_cubit/settings_cubit.dart';
+import 'package:market_app/data/Services/local_notification_service.dart';
 import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
@@ -35,11 +38,26 @@ import './data/Shared/UniLinks.dart';
 import 'package:timezone/timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
-void main() async {
-  tz.initializeTimeZones();
+// Receive message when app is on background
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print(message.data.toString());
+  print(message.notification?.title);
+  LocalNotificationService.display(message); // show notification head
+}
 
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //WidgetsFlutterBinding.ensureInitialized used to ensure that every functions main will run completely then run app
+
+  LocalNotificationService
+      .initialize(); // to create channel, display notification head
+
+  await Firebase.initializeApp();
+
+  //send message onbackground or terminated
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+
+  tz.initializeTimeZones();
 
   DioHelper.init();
 
