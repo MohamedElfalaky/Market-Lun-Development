@@ -24,7 +24,7 @@ class LocalNotificationService {
               playSound: true,
               sound: RawResourceAndroidNotificationSound("notificationsound")));
       await _notificationsPlugin.show(id, message.notification?.title,
-          message.notification?.title, notificationDetails);
+          message.notification?.body, notificationDetails);
     } on Exception catch (e) {
       print(e);
     }
