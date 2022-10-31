@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Local/local_cubit.dart';
@@ -35,8 +36,8 @@ class _insideSettingsState extends State<insideSettings> {
                 : BlocProvider.of<SettingsCubit>(context)
                     .selectedValue2, //احتياطية
 
-            title: Text(listItem,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            title: AutoSizeText(listItem,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             onChanged: ((value) {
               setState(() {
                 // listItem = value!;
@@ -55,11 +56,11 @@ class _insideSettingsState extends State<insideSettings> {
           );
         }).toList()
 
-        // Text(
+        // AutoSizeText(
         //   metaa,
         //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         // ),
-        // Text(
+        // AutoSizeText(
         //   dataa,
         //   style: TextStyle(fontSize: 15),
         // )
@@ -79,6 +80,7 @@ class _insideSettingsState extends State<insideSettings> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 15),
       child: Column(
         children: [
@@ -118,7 +120,7 @@ class _insideSettingsState extends State<insideSettings> {
                           SizedBox(
                               height: 30,
                               child: Image.asset("assets/market.png")),
-                          Text(
+                          AutoSizeText(
                             "Market status".tr(context),
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
@@ -139,7 +141,7 @@ class _insideSettingsState extends State<insideSettings> {
                         children: [
                           SizedBox(
                               height: 30, child: Image.asset("assets/qq.png")),
-                          Text(
+                          AutoSizeText(
                             "Recive method".tr(context),
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
@@ -155,7 +157,10 @@ class _insideSettingsState extends State<insideSettings> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ListTile(
-                                  title: Text("Delivery".tr(context)),
+                                  title: AutoSizeText(
+                                    "Delivery".tr(context),
+                                    style: TextStyle(fontSize: 14),
+                                  ),
                                   leading: Checkbox(
                                       value: BlocProvider.of<SettingsCubit>(
                                               context)
@@ -168,7 +173,10 @@ class _insideSettingsState extends State<insideSettings> {
                                         });
                                       })),
                               ListTile(
-                                  title: Text("Pick up".tr(context)),
+                                  title: AutoSizeText(
+                                    "Pick up".tr(context),
+                                    style: TextStyle(fontSize: 14),
+                                  ),
                                   leading: Checkbox(
                                       value: BlocProvider.of<SettingsCubit>(
                                               context)
@@ -203,7 +211,7 @@ class _insideSettingsState extends State<insideSettings> {
                 title: Row(
                   children: [
                     SizedBox(height: 30, child: Icon(Icons.language)),
-                    Text(
+                    AutoSizeText(
                       "Language".tr(context),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -226,10 +234,10 @@ class _insideSettingsState extends State<insideSettings> {
                                   return RadioListTile<String>(
                                     value: listItem, //
                                     groupValue: selectedValue3,
-                                    title: Text(listItem,
+                                    title: AutoSizeText(listItem,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 15)),
+                                            fontSize: 14)),
 
                                     onChanged: ((value) {
                                       selectedValue3 = value!;

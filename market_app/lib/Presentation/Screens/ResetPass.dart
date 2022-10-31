@@ -1,9 +1,12 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/business_logic/cubits/Mail_sent_cubit/mail_sent_cubit.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class ResetPass extends StatelessWidget {
   ResetPass();
@@ -13,45 +16,46 @@ class ResetPass extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        centerTitle: true,
+        elevation: 0,
+        toolbarHeight: Simplify.hightClc(context, 96),
+        title: AutoSizeText(
           "Reset Password".tr(context),
-          style: TextStyle(
-            color: Colors.black,
-          ),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
       ),
       body: ListView(children: [
         Center(
           child: Container(
+              color: Color(0xFFFFFFFF),
               height: MediaQuery.of(context).size.height * 0.83,
-              margin: EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: Simplify.hightClc(context, 48)),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
+                  AutoSizeText(
                     'Reset Password'.tr(context),
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: Simplify.hightClc(context, 16),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 40),
-                    child: Text(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: Simplify.widthClc(context, 28)),
+                    child: AutoSizeText(
                       'Enter the Email associated'.tr(context),
                       textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: Simplify.hightClc(context, 58),
                   ),
                   Form(
                     key: _formKey,
                     child: Column(children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.9,
+                        width: MediaQuery.of(context).size.width * 344 / 375,
                         child: TextFormField(
                           controller: _mailText,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -66,18 +70,14 @@ class ResetPass extends StatelessWidget {
                             return null;
                           },
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 245, 242, 237),
+                            fillColor: Color(0xFFF2F5F7),
                             filled: true,
                             hintText: "Email".tr(context),
                             labelStyle: TextStyle(
                               color: Color.fromARGB(255, 245, 59, 59),
                             ),
                             prefixIcon: Icon(Icons.email),
-                            // suffixIcon: Icon(
-                            //   Icons.check_circle,
-                            // ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 1)),
+                            enabledBorder: InputBorder.none,
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15.0),
                               borderSide: BorderSide(
@@ -124,15 +124,14 @@ class ResetPass extends StatelessWidget {
                                       style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
-                                                  Color.fromARGB(
-                                                      255, 248, 85, 85))),
+                                                  Color(0xFFF5504C))),
                                       onPressed: () {
                                         if (_formKey.currentState!.validate()) {
                                           MailSentCubit.get(context)
                                               .sendMail(email: _mailText.text);
                                         }
                                       },
-                                      child: Text(
+                                      child: AutoSizeText(
                                         'Send mail'.tr(context),
                                         style: TextStyle(
                                             fontSize: 15,
@@ -153,14 +152,14 @@ class ResetPass extends StatelessWidget {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           '/login', (Route<dynamic> route) => false);
                     },
-                    child: Text(
+                    child: AutoSizeText(
                       'I remember my password return to login'.tr(context),
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: Simplify.hightClc(context, 30),
                   )
                 ],
               )),

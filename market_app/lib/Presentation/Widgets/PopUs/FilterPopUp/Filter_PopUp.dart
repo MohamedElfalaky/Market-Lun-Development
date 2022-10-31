@@ -1,8 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/FilterPopUp/PopUpContent.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Shared/AppLocalizations.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
+import 'package:sizer/sizer.dart';
 
 class FilterPopUp extends StatelessWidget {
   const FilterPopUp({super.key});
@@ -18,24 +21,26 @@ class FilterPopUp extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Color.fromARGB(255, 243, 244, 240),
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20))),
+                      topLeft: Radius.circular(20.sp),
+                      topRight: Radius.circular(20.sp))),
               height: MediaQuery.of(context).size.height * 0.06,
               child: Center(
-                  child: Text(
+                  child: AutoSizeText(
                 'Filter'.tr(context),
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ))),
-          Padding(
-              padding: const EdgeInsets.all(8.0), child: FilterPopUpContent()),
+          Padding(padding: EdgeInsets.all(8.0.sp), child: FilterPopUpContent()),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            margin: EdgeInsets.symmetric(horizontal: 20.sp),
             width: MediaQuery.of(context).size.width * .6,
-            height: MediaQuery.of(context).size.height * .06,
+            height: MediaQuery.of(context).size.height * .05,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(15.sp),
               child: ElevatedButton(
-                child: Text('Save'.tr(context)),
+                child: AutoSizeText(
+                  'Save'.tr(context),
+                  style: TextStyle(fontSize: 14),
+                ),
                 onPressed: () {
                   // if()
 
@@ -65,7 +70,10 @@ class FilterPopUp extends StatelessWidget {
             ),
           ),
           TextButton(
-            child: Text('Reset all filters'.tr(context)),
+            child: AutoSizeText(
+              'Reset all filters'.tr(context),
+              style: TextStyle(fontSize: 14),
+            ),
             onPressed: () {
               OrdersCubit.get(context).getAllOrders(
                   delivery: 1,
@@ -77,9 +85,6 @@ class FilterPopUp extends StatelessWidget {
               Navigator.of(context).pop();
             },
           ),
-          SizedBox(
-            height: 15,
-          )
         ],
       ),
     );

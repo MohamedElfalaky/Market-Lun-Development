@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:market_app/business_logic/cubits/Logout%20Cubit/logout_cubit.dart';
 import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
+import 'package:sizer/sizer.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   const NavigationDrawerWidget({super.key});
@@ -15,11 +18,11 @@ class NavigationDrawerWidget extends StatelessWidget {
       leading: Icon(
         myIcon,
         color: Colors.black,
-        size: 30,
+        size: 30.sp,
       ),
-      title: Text(
+      title: AutoSizeText(
         theTitle,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       onTap: () {
         if (routeNAme == '/login') {
@@ -51,16 +54,16 @@ class NavigationDrawerWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                  height: 90,
+                  height: Simplify.hightClc(context, 96),
                   child: FadeInImage.assetNetwork(
                       placeholder: "assets/attachment_120367649.png",
                       image: CacheHelper.getFromShared('image'))),
               SizedBox(
-                height: 7,
+                height: Simplify.hightClc(context, 8),
               ),
-              Text(
+              AutoSizeText(
                 CacheHelper.getFromShared(('name')),
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           )),
@@ -96,14 +99,14 @@ class NavigationDrawerWidget extends StatelessWidget {
                     timeInSecForIosWeb: 1,
                     backgroundColor: Color.fromARGB(255, 223, 47, 34),
                     textColor: Colors.white,
-                    fontSize: 16.0);
+                    fontSize: 12.sp);
               }
             }
           },
           builder: (context, state) {
             return Padding(
-              padding: const EdgeInsets.only(
-                bottom: 25,
+              padding: EdgeInsets.only(
+                bottom: Simplify.hightClc(context, 20),
               ),
               child: ConditionalBuilder(
                 condition: state is! LogoutLoading,

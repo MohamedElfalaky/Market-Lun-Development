@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_countdown_timer/index.dart';
@@ -15,7 +16,9 @@ import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart'
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -83,20 +86,19 @@ class CancelButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              AutoSizeText(
                 "Driver not assigned yet? ".tr(context),
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * 0.018),
+                style: TextStyle(fontSize: 13),
               ),
               InkWell(
                 onTap: () {
                   _showAlertDialog(context,
                       ChooseDriverPopUpWithTime(id)); // حاطط التايم بصفر
                 },
-                child: Text(
+                child: AutoSizeText(
                   "Assign now".tr(context),
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * 0.02,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 247, 6, 6)),
                 ),
@@ -119,8 +121,8 @@ class CancelButton extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                      height: 25,
-                      width: 25,
+                      height: Simplify.hightClc(context, 25),
+                      width: Simplify.widthClc(context, 25),
                       child: Image.asset("assets/cooking.gif")),
                   SizedBox(
                     width: 8,
@@ -129,11 +131,9 @@ class CancelButton extends StatelessWidget {
                       margin: EdgeInsets.only(top: 20, bottom: 10),
                       child: Row(
                         children: [
-                          Text(
+                          AutoSizeText(
                             "Time counter preparing".tr(context),
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.018),
+                            style: TextStyle(fontSize: 14),
                           ),
                           CountdownTimer(
                             endTime: DateTime.now().millisecondsSinceEpoch +
@@ -147,9 +147,10 @@ class CancelButton extends StatelessWidget {
                               var newMins;
                               var newSec;
                               if (time == null || time == 0) {
-                                return Text(
+                                return AutoSizeText(
                                   "00:00:00",
                                   style: TextStyle(
+                                      fontSize: 14,
                                       color: Color.fromARGB(255, 12, 34, 198),
                                       fontWeight: FontWeight.bold),
                                 );
@@ -172,34 +173,33 @@ class CancelButton extends StatelessWidget {
                               //     newSec = time.sec!;
                               //   }
                               // }
-                              return Text(
+                              return AutoSizeText(
                                   '${newMins ?? "00"}:${time.sec ?? "00"}',
                                   style: TextStyle(
+                                      fontSize: 14,
                                       color: Color.fromARGB(255, 12, 34, 198),
                                       fontWeight: FontWeight.bold));
                             },
                           ),
-                          // Text(
+                          // AutoSizeText(
                           //   "Counter",
                           //   style: TextStyle(
                           //       color: Color.fromARGB(255, 61, 33, 243)),
                           // ),
-                          Text(
+                          AutoSizeText(
                             "Mins".tr(context),
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height * 0.018),
+                            style: TextStyle(fontSize: 12),
                           )
                         ],
                       )),
                 ],
               ),
               SizedBox(
-                height: 50,
+                height: Simplify.hightClc(context, 48),
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
@@ -241,16 +241,20 @@ class CancelButton extends StatelessWidget {
                           builder: (context, state) {
                             return state is! UpdateOrderLoading
                                 ? SizedBox(
-                                    height: double.infinity,
+                                    height: Simplify.hightClc(context, 48),
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius:
+                                          BorderRadius.circular(10.sp),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           UpdateOrderCubit.get(context)
                                               .updatePreparingToDelivered(
                                                   orderId: id);
                                         },
-                                        child: Text("Delivered".tr(context)),
+                                        child: AutoSizeText(
+                                          "Delivered".tr(context),
+                                          style: TextStyle(fontSize: 12),
+                                        ),
                                         style: ElevatedButton.styleFrom(
                                             primary: Color.fromARGB(
                                                 255, 60, 238, 60)),
@@ -261,14 +265,16 @@ class CancelButton extends StatelessWidget {
                                     // من الكيوبت عشان اعرف امسكها بعد ما تاخد قيمتها
                                     ? Center(child: CircularProgressIndicator())
                                     : SizedBox(
-                                        height: double.infinity,
+                                        height: Simplify.hightClc(context, 48),
                                         child: ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(15),
+                                              BorderRadius.circular(10.sp),
                                           child: ElevatedButton(
                                             onPressed: () {},
-                                            child:
-                                                Text("Delivered".tr(context)),
+                                            child: AutoSizeText(
+                                              "Delivered".tr(context),
+                                              style: TextStyle(fontSize: 12),
+                                            ),
                                             style: ElevatedButton.styleFrom(
                                                 primary: Color.fromARGB(
                                                     255, 60, 238, 60)),
@@ -284,18 +290,21 @@ class CancelButton extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: SizedBox(
-                          height: double.infinity,
+                          height: Simplify.hightClc(context, 48),
                           child: OutlinedButton(
                             onPressed: () {
                               _showAlertDialog(context, DeclinePopUp(id));
                             },
-                            child: Text("Cancel".tr(context)),
+                            child: AutoSizeText(
+                              "Cancel".tr(context),
+                              style: TextStyle(fontSize: 12),
+                            ),
                             style: OutlinedButton.styleFrom(
                                 backgroundColor:
                                     Color.fromARGB(255, 245, 243, 243),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.sp))),
                                 side: BorderSide(color: Colors.red),
                                 primary: Color.fromARGB(255, 246, 19, 19)),
                           ),
@@ -315,7 +324,10 @@ class CancelButton extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Driver not assigned yet? ".tr(context)),
+                              AutoSizeText(
+                                "Driver not assigned yet? ".tr(context),
+                                style: TextStyle(fontSize: 12),
+                              ),
                               InkWell(
                                 onTap: () {
                                   _showAlertDialog(
@@ -323,10 +335,10 @@ class CancelButton extends StatelessWidget {
                                       ChooseDriverPopUpWithTime(
                                           id)); // حاطط التايم بصفر
                                 },
-                                child: Text(
+                                child: AutoSizeText(
                                   "Assign now".tr(context),
                                   style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                       color: Color.fromARGB(255, 247, 6, 6)),
                                 ),

@@ -1,4 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
+import 'package:sizer/sizer.dart';
 
 class ReturnToLogin extends StatelessWidget {
   const ReturnToLogin({Key? key}) : super(key: key);
@@ -7,76 +10,77 @@ class ReturnToLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        centerTitle: true,
+        elevation: 0,
+        title: AutoSizeText(
           "Reset Successfully",
           style: TextStyle(
+            fontSize: 20,
             color: Colors.black,
           ),
         ),
       ),
-      // appBar: AppBar(title: Text("LOGIN")),
+      // appBar: AppBar(title: AutoSizeText("LOGIN")),
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.85,
-        color: Color.fromARGB(255, 251, 248, 248),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.4,
-          child: Column(
-            // mainAxisSiz MainAxisSize.min,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 50, bottom: 50),
-                width: double.infinity,
-                // ignore: sort_child_properties_last
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        Text(
-                          "Successfully Reseted",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.03,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          child: Text(
-                            "You Password was Reseted Successfully, tap below to return to login page",
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    )),
-                // color: Color.fromARGB(255, 18, 107, 98),
+        height: Simplify.hightClc(context, 720),
+        color: Colors.white,
+        child: Column(
+          // mainAxisSiz MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.only(
+                  top: Simplify.hightClc(context, 48),
+                  bottom: Simplify.hightClc(context, 48)),
+              width: double.infinity,
+              // ignore: sort_child_properties_last
+              child: Column(
+                children: [
+                  AutoSizeText(
+                    "Successfully Reset",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: Simplify.hightClc(context, 16),
+                  ),
+                  SizedBox(
+                    width: Simplify.widthClc(context, 295),
+                    child: AutoSizeText(
+                      "You Password was Reseted Successfully, tap below to return to login page",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  )
+                ],
               ),
-              Container(
+              // color: Color.fromARGB(255, 18, 107, 98),
+            ),
+            Container(
+              // width: double.infinity,
+              // ignore: sort_child_properties_last
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: Simplify.widthClc(context, 16)),
                 width: double.infinity,
-                // ignore: sort_child_properties_last
-                child: Align(
-                  alignment: Alignment(0.0, -0.3),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    width: double.infinity,
-                    height: 50,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(18),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromARGB(255, 248, 85, 85))),
-                        onPressed: () {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/login', (Route<dynamic> route) => false);
-                        },
-                        child: Text('Return to login page'),
-                      ),
+                height: Simplify.hightClc(context, 48),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.sp),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor)),
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/login', (Route<dynamic> route) => false);
+                    },
+                    child: AutoSizeText(
+                      'Return to login page',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

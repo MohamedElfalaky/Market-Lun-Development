@@ -1,8 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseDriverPopUp/ChooseDriverPopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimeContentPopUp.dart';
 import 'package:duration_picker/duration_picker.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class ChoosTimePopUp extends StatefulWidget {
   final id;
@@ -57,10 +60,10 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32.0))),
+          borderRadius: BorderRadius.all(Radius.circular(32.0.sp))),
       scrollable: true,
       content: Padding(
-          padding: const EdgeInsets.all(8.0), child: ChooseTimePopUpContent()),
+          padding: EdgeInsets.all(8.0.sp), child: ChooseTimePopUpContent()),
       actions: <Widget>[
         Center(
             child: Container(
@@ -69,13 +72,13 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
                 child: TextField(
                   controller: _myController,
                   keyboardType: TextInputType.number,
-                  cursorHeight: 40,
+                  cursorHeight: 40.sp,
                   // showCursor: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration.collapsed(
                       hintText: "50:00 Mins".tr(context),
-                      hintStyle:
-                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+                      hintStyle: TextStyle(
+                          fontSize: 40.sp, fontWeight: FontWeight.bold)),
                 ))
 
             //  Builder(
@@ -102,9 +105,12 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
             width: MediaQuery.of(context).size.width * 0.6,
             height: MediaQuery.of(context).size.height * 0.05,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.sp),
               child: ElevatedButton(
-                child: Text('Save'.tr(context)),
+                child: AutoSizeText(
+                  'Save'.tr(context),
+                  style: TextStyle(fontSize: 14),
+                ),
                 onPressed: () {
                   _showAlertDialog(context, int.parse(_myController.text));
                 },
@@ -113,7 +119,7 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
           ),
         ),
         SizedBox(
-          height: 20,
+          height: Simplify.hightClc(context, 20),
         )
       ],
     );

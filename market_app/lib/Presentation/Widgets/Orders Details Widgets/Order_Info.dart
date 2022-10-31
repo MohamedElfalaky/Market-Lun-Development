@@ -1,8 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class OrderInfo extends StatelessWidget {
   String? status;
@@ -28,32 +31,33 @@ class OrderInfo extends StatelessWidget {
   Container myOrdertInfo(
       String metaa, String dataa, Color? stsClr, Color? txtClr, context) {
     return Container(
-      padding: EdgeInsets.only(left: 20),
-      margin: EdgeInsets.only(bottom: 10, top: 10),
+      padding: EdgeInsets.only(left: Simplify.widthClc(context, 10)),
+      margin: EdgeInsets.symmetric(vertical: Simplify.hightClc(context, 8)),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          AutoSizeText(
             metaa,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
           ),
           metaa == "Order Status".tr(context)
               ? Container(
-                  height: 30,
-                  width: 100,
+                  height: Simplify.hightClc(context, 30),
+                  width: Simplify.widthClc(context, 100),
                   decoration: BoxDecoration(
-                      color: stsClr, borderRadius: BorderRadius.circular(15)),
+                      color: stsClr,
+                      borderRadius: BorderRadius.circular(15.sp)),
                   child: Center(
-                    child: Text(
+                    child: AutoSizeText(
                       dataa,
-                      style: TextStyle(color: txtClr),
+                      style: TextStyle(color: txtClr, fontSize: 14),
                     ),
                   ),
                 )
-              : Text(
+              : AutoSizeText(
                   dataa,
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 14, color: Color(0xFF999999)),
                 )
         ],
       ),
@@ -82,7 +86,8 @@ class OrderInfo extends StatelessWidget {
       txtStatusColor = Color.fromARGB(255, 235, 19, 152);
     }
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 15),
+      color: Colors.white,
+      // margin: EdgeInsets.symmetric(vertical: 15),
       child: ExpansionTile(
           title: Row(
             children: [
@@ -90,7 +95,7 @@ class OrderInfo extends StatelessWidget {
                 Icons.shopping_bag,
                 size: 40,
               ),
-              Text(
+              AutoSizeText(
                 "Order Info".tr(context),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )

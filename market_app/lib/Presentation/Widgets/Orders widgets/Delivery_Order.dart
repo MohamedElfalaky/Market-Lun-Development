@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
@@ -5,14 +6,16 @@ import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Cance
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class DeliveryOrder extends StatelessWidget {
   int? id;
   String? name;
   String? paymentMethod;
   String? driverName;
-  int? total;
+  num? total;
   String? status;
   String? receiveMethod;
   Color? statusColor;
@@ -53,7 +56,7 @@ class DeliveryOrder extends StatelessWidget {
       name.toString(),
       paymentMethod.toString(),
       driverName.toString(),
-      total.toString(),
+      "${total.toString()} \u0024",
     ];
     if (status == "Cancelled") {
       statusColor = Color.fromRGBO(255, 1, 1, 0.2);
@@ -99,11 +102,16 @@ class DeliveryOrder extends StatelessWidget {
     }
 
     return Container(
-      margin: EdgeInsets.only(right: 20, left: 20, bottom: 10),
+      margin: EdgeInsets.only(
+          right: Simplify.widthClc(context, 16),
+          left: Simplify.widthClc(context, 16),
+          bottom: Simplify.hightClc(context, 16)),
       child: Card(
-        elevation: 10,
+        elevation: 3,
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.symmetric(
+              vertical: Simplify.hightClc(context, 12),
+              horizontal: Simplify.widthClc(context, 16)),
           child: Column(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -117,51 +125,58 @@ class DeliveryOrder extends StatelessWidget {
                         children: [
                           methodIcon!,
                           SizedBox(
-                            width: 10,
+                            width: Simplify.widthClc(context, 8),
                           ),
                           Container(
                               margin: EdgeInsets.symmetric(vertical: 5),
-                              child: Text(
+                              child: AutoSizeText(
                                 receiveMethod!,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 14),
                               )),
                         ],
                       ),
                       for (var i = 0; i < metaDeta.length; i++)
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 8),
-                          child: Text(
+                          margin: EdgeInsets.symmetric(
+                              vertical: Simplify.hightClc(context, 6)),
+                          child: AutoSizeText(
                             metaDeta[i].tr(context),
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14),
                           ),
                         ),
-                      // Text("Payment Method"),
-                      // Text("Driver Name"),
-                      // Text("Total"),
+                      // AutoSizeText("Payment Method"),
+                      // AutoSizeText("Driver Name"),
+                      // AutoSizeText("Total"),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 5, bottom: 5),
-                        height: 30,
-                        width: 100,
+                        margin: EdgeInsets.symmetric(
+                            vertical: Simplify.hightClc(context, 5)),
+                        height: Simplify.hightClc(context, 30),
+                        width: Simplify.widthClc(context, 100),
                         decoration: BoxDecoration(
                             color: statusColor,
-                            borderRadius: BorderRadius.circular(15)),
+                            borderRadius: BorderRadius.circular(20.sp)),
                         child: Center(
-                          child: Text(
+                          child: AutoSizeText(
                             status!,
-                            style: TextStyle(color: txtStatusColor),
+                            style:
+                                TextStyle(color: txtStatusColor, fontSize: 14),
                           ),
                         ),
                       ),
                       for (var i = 0; i < dummyData.length; i++)
                         Container(
-                          margin: EdgeInsets.symmetric(vertical: 8),
-                          child: Text(dummyData[i],
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          margin: EdgeInsets.symmetric(
+                              vertical: Simplify.hightClc(context, 8)),
+                          child: AutoSizeText(dummyData[i],
+                              style: TextStyle(
+                                  fontSize: 14, color: Color(0xFF999999))),
                         ),
                     ],
                   )

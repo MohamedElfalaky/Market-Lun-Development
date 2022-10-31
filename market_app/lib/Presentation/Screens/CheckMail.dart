@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Screens/CreateNewPass.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../data/Shared/AppLocalizations.dart';
 
 class CheckMail extends StatelessWidget {
@@ -9,43 +11,49 @@ class CheckMail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        centerTitle: true,
+        elevation: 0,
+        title: AutoSizeText(
           "Reset Password".tr(context),
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
       ),
       body: ListView(
         children: [
           Center(
             child: Container(
-              height: MediaQuery.of(context).size.height * 1,
+              color: Colors.white,
+              // height: MediaQuery.of(context).size.height * 1,
               child: Column(mainAxisSize: MainAxisSize.max, children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: Simplify.hightClc(context, 72),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Simplify.hightClc(context, 96),
                   child: Image.asset('assets/Mail.png'),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: Simplify.hightClc(context, 72),
                 ),
-                Text(
+                AutoSizeText(
                   "Check your mail".tr(context),
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.02,
+                  height: Simplify.hightClc(context, 16),
                 ),
-                Text("We have sent password recover mail".tr(context)),
+                AutoSizeText(
+                  "We have sent password recover mail".tr(context),
+                  style: TextStyle(fontSize: 16),
+                ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.05,
+                  height: Simplify.hightClc(context, 48),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * 0.1),
+                      horizontal: Simplify.widthClc(context, 16)),
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.05,
+                  height: Simplify.hightClc(context, 48),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: ElevatedButton(
@@ -58,24 +66,30 @@ class CheckMail extends StatelessWidget {
 
                         CreateNewPass();
                       },
-                      child: Text('Reset'.tr(context)),
+                      child: AutoSizeText(
+                        'Reset'.tr(context),
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.25,
+                  height: Simplify.hightClc(context, 240),
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, '/resetpassword');
                   },
-                  child: Text(
+                  child: AutoSizeText(
                     "Try again, or try another mail address".tr(context),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 199, 19, 19)),
                   ),
                 ),
+                SizedBox(
+                  height: Simplify.hightClc(context, 70),
+                )
               ]),
             ),
           ),

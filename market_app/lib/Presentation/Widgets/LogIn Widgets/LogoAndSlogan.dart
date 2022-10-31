@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import '../../../data/Shared/AppLocalizations.dart';
 
@@ -11,23 +12,24 @@ class LogoAndSlogan extends StatelessWidget {
         children: [
           Center(
             child: Container(
-                margin: EdgeInsets.only(top: 15),
-                padding: EdgeInsets.all(25),
-                height: MediaQuery.of(context).size.height * 0.2,
-                // width: MediaQuery.of(context).size.height * 0.4,
+                height: MediaQuery.of(context).size.height * (110 / 812),
                 child: Image.asset('assets/Logo.png')),
           ),
-          Text(
+          SizedBox(height: MediaQuery.of(context).size.height * (34 / 812)),
+          AutoSizeText(
             "Market Admin".tr(context),
             style: TextStyle(
               color: Color.fromARGB(255, 11, 11, 11),
-              fontSize: 40,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
+          SizedBox(
+            height: MediaQuery.of(context).size.height * (8 / 812),
+          ),
+          AutoSizeText(
             "Easy control your bussiness".tr(context),
-            style: TextStyle(fontSize: 17),
+            style: TextStyle(fontSize: 14),
           )
         ],
       ),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/Notifications%20Widgets/One_Notification.dart';
@@ -24,7 +25,7 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notifications".tr(context)),
+        title: AutoSizeText("Notifications".tr(context)),
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -34,25 +35,40 @@ class _NotificationsState extends State<Notifications> {
       body: BlocConsumer<NotificationsCubit, NotificationsState>(
         listener: (context, state) {},
         builder: (context, state) {
-          return ListView.builder(
-              itemExtent: 100,
-              itemCount: state is! NotificationsSuccess
-                  ? 1
-                  : state.myNotificationsModel.data.length,
-              itemBuilder: (context, index) {
-                return state is! NotificationsSuccess
-                    ? Center(
-                        child: Container(
-                            margin: EdgeInsets.only(top: 300),
-                            child: CircularProgressIndicator()),
-                      )
-                    : OneNotification(
-                        body: state.myNotificationsModel.data[index].body,
-                        date: state.myNotificationsModel.data[index].date,
-                      );
-              });
+          return state is! NotificationsLoading
+              ? RefreshIndicator(
+                  onRefresh: refresh,
+                  child: ListView.builder(
+                      itemExtent: 100,
+                      itemCount: state is! NotificationsSuccess
+                          ? 1
+                          : state.myNotificationsModel.data.length,
+                      itemBuilder: (context, index) {
+                        return state is! NotificationsSuccess
+                            ? Center(
+                                child: Container(
+                                    margin: EdgeInsets.only(top: 300),
+                                    child: CircularProgressIndicator()),
+                              )
+                            : OneNotification(
+                                body:
+                                    state.myNotificationsModel.data[index].body,
+                                date:
+                                    state.myNotificationsModel.data[index].date,
+                              );
+                      }),
+                )
+              : Center(
+                  child: CircularProgressIndicator(),
+                );
         },
       ),
     );
+  }
+
+  Future refresh() async {
+    NotificationsCubit.get(context)
+        .getNotifications(apiToken: CacheHelper.getFromShared("token"));
+    super.initState();
   }
 }

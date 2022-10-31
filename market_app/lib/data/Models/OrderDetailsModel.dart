@@ -79,7 +79,7 @@ class Payment {
     required this.deliveryFee,
     required this.subtotal,
   });
-  late final int price;
+  late final num price;
   late final String method;
   late final int deliveryFee;
   late final num subtotal;

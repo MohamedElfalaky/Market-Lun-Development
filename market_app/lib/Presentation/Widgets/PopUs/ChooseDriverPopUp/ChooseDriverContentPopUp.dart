@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:duration_picker/duration_picker.dart';
 import '../../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class ChooseDriverPopUpContent extends StatelessWidget {
   ChooseDriverPopUpContent({super.key});
@@ -14,7 +15,7 @@ class ChooseDriverPopUpContent extends StatelessWidget {
             Icon(
               Icons.delivery_dining,
               color: Colors.orange,
-              size: 70,
+              size: 70.sp,
             ),
             Text(
               "Choose Driver".tr(context),

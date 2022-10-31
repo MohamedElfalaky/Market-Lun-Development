@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,7 +9,9 @@ import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart'
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class DeclinePopUp extends StatefulWidget {
   final id;
@@ -28,11 +31,11 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32.0))),
+          borderRadius: BorderRadius.all(Radius.circular(32.0.sp))),
       scrollable: true,
-      // title: Text('Filter'),
+      // title: AutoSizeText('Filter'),
       content: Padding(
-          padding: const EdgeInsets.all(8.0), child: DeclineContentPopUp()),
+          padding: EdgeInsets.all(8.0.sp), child: DeclineContentPopUp()),
 
       actions: <Widget>[
         Form(
@@ -42,13 +45,15 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
               Column(
                 children: <Widget>[
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: Simplify.widthClc(context, 20)),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(15.sp),
                         color: Color.fromARGB(124, 222, 218, 216),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(top: 12.0, left: 18, right: 8),
+                        padding: EdgeInsets.only(
+                            top: 12.0.sp, left: 18.sp, right: 8.sp),
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
@@ -65,7 +70,7 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                 ],
               ),
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(left: Simplify.widthClc(context, 10)),
                 child: Row(
                   children: [
                     Checkbox(
@@ -76,12 +81,15 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                         });
                       },
                     ),
-                    Text("Request for refund?".tr(context))
+                    AutoSizeText(
+                      "Request for refund?".tr(context),
+                      style: TextStyle(fontSize: 14),
+                    )
                   ],
                 ),
               ),
               SizedBox(
-                width: 15,
+                width: Simplify.widthClc(context, 15),
               ),
               Center(
                 child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
@@ -124,15 +132,15 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                   builder: (context, state) {
                     return state is! UpdateOrderLoading
                         ? Container(
-                            margin: EdgeInsets.only(bottom: 15),
+                            margin: EdgeInsets.only(bottom: 15.sp),
                             width: MediaQuery.of(context).size.width * 0.55,
                             height: MediaQuery.of(context).size.height * 0.055,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: ElevatedButton(
-                                child: Text(
+                                child: AutoSizeText(
                                   'Save'.tr(context),
-                                  style: TextStyle(fontSize: 18),
+                                  style: TextStyle(fontSize: 14),
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {

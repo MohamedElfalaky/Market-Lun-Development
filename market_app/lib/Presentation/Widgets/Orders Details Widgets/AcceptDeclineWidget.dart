@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_countdown_timer/index.dart';
@@ -9,6 +10,7 @@ import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart'
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -93,7 +95,10 @@ class AcceptDecline extends StatelessWidget {
                       children: [
                         Container(
                             margin: EdgeInsets.symmetric(vertical: 15),
-                            child: Text("Time counter new".tr(context))),
+                            child: AutoSizeText(
+                              "Time counter new".tr(context),
+                              style: TextStyle(fontSize: 14),
+                            )),
 
                         CountdownTimer(
                           endTime: DateTime.now().millisecondsSinceEpoch +
@@ -115,11 +120,12 @@ class AcceptDecline extends StatelessWidget {
                             var newSec;
 
                             if (time == null || time == 0) {
-                              return Text(
+                              return AutoSizeText(
                                 "00:00:00",
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 12, 34, 198),
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
                               );
                             }
                             // if (time.min)
@@ -140,30 +146,29 @@ class AcceptDecline extends StatelessWidget {
                             //     newSec = time.sec!;
                             //   }
                             // }
-                            return Text(
+                            return AutoSizeText(
                                 '${newMins ?? "00"}:${time.sec ?? "00"}',
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 12, 34, 198),
-                                    fontWeight: FontWeight.bold));
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14));
                           },
                         ),
-                        // Text(
+                        // AutoSizeText(
                         //   "Counter",
                         //   style: TextStyle(
                         //       color: Color.fromARGB(255, 61, 33, 243)),
                         // ),
-                        Text(
+                        AutoSizeText(
                           "Mins".tr(context),
-                          style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.018),
+                          style: TextStyle(fontSize: 14),
                         )
                       ],
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 50,
+                  height: Simplify.hightClc(context, 48),
                   child: Row(
                     children: [
                       Expanded(
@@ -179,7 +184,7 @@ class AcceptDecline extends StatelessWidget {
                                 onPressed: () {
                                   _showAlertDialog(context, ChoosTimePopUp(id));
                                 },
-                                child: Text("Accept".tr(context)),
+                                child: AutoSizeText("Accept".tr(context)),
                                 style: ElevatedButton.styleFrom(
                                     primary: Color.fromARGB(255, 60, 238, 60)),
                               ),
@@ -195,7 +200,7 @@ class AcceptDecline extends StatelessWidget {
                             onPressed: () {
                               _showAlertDialog(context, DeclinePopUp(id));
                             },
-                            child: Text("Decline".tr(context)),
+                            child: AutoSizeText("Decline".tr(context)),
                             style: OutlinedButton.styleFrom(
                                 backgroundColor:
                                     Color.fromARGB(255, 245, 240, 240),

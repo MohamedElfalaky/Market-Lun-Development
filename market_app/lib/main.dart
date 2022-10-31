@@ -34,6 +34,7 @@ import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Remote/dio_helper.dart';
 import 'package:market_app/data/Shared/UniLinks.dart';
+import 'package:sizer/sizer.dart';
 import './data/Shared/UniLinks.dart';
 import 'package:timezone/timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -117,69 +118,79 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<LocalCubit, LocalState>(
         builder: (context, state) {
-          return MaterialApp(
-              locale:
-                  state is ChangeLocaleState ? state.local : const Locale('en'),
-              //  const Locale('ar'),
-              supportedLocales: const [
-                Locale('en'),
-                Locale('ar')
-              ], //Localization
-              localizationsDelegates: const [
-                AppLocalizations
-                    .delegate, // Localization basedon mobile defaulte language
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate
-              ],
+          return Sizer(builder: (context, orientation, deviceType) {
+            return MaterialApp(
+                locale: state is ChangeLocaleState
+                    ? state.local
+                    : const Locale('en'),
+                //  const Locale('ar'),
+                supportedLocales: const [
+                  Locale('en'),
+                  Locale('ar')
+                ], //Localization
+                localizationsDelegates: const [
+                  AppLocalizations
+                      .delegate, // Localization basedon mobile defaulte language
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
+                ],
 
-              // لو لغة الهاتف مدعومه ف الاب بتاعي حطها لو لا حط اول لغه
-              // localeResolutionCallback: ((deviceLocale, supportedLocales) {
-              //   for (var local in supportedLocales) {
-              //     if (deviceLocale != null &&
-              //         deviceLocale.languageCode == local.languageCode) {
-              //       return deviceLocale;
-              //     }
-              //     return supportedLocales.first;
-              //   }
-              // }),
-              useInheritedMediaQuery: true,
-              builder: DevicePreview.appBuilder,
-              debugShowCheckedModeBanner: false,
-              routes: {
-                // '/': (context) => const LogIn(),
-                '/login': (context) => LogIn(),
-                '/resetpassword': (context) => ResetPass(),
-                '/checkmail': (context) => const CheckMail(),
-                '/createnewpass': (context) => CreateNewPass(),
-                '/returntologin': (context) => const ReturnToLogin(),
-                '/orderspage': (context) => OrdersPage(
-                      statusToinitiate: 0,
-                    ),
-                '/ordersdetails': (context) => OrderDetails(),
-                '/notifications': (context) => const Notifications(),
-                '/settings': (context) => const Settings(),
-                '/search': (context) => Search(),
-              },
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                appBarTheme: const AppBarTheme(
-                    color: Colors.white,
-                    actionsIconTheme:
-                        IconThemeData(color: Colors.black, size: 37),
-                    iconTheme: IconThemeData(
-                      color: Colors.black,
-                      size: 37,
-                    ),
-                    titleTextStyle: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold)),
-                primarySwatch: Colors.red,
+                // لو لغة الهاتف مدعومه ف الاب بتاعي حطها لو لا حط اول لغه
+                // localeResolutionCallback: ((deviceLocale, supportedLocales) {
+                //   for (var local in supportedLocales) {
+                //     if (deviceLocale != null &&
+                //         deviceLocale.languageCode == local.languageCode) {
+                //       return deviceLocale;
+                //     }
+                //     return supportedLocales.first;
+                //   }
+                // }),
+                useInheritedMediaQuery: true,
+                builder: DevicePreview.appBuilder,
+                debugShowCheckedModeBanner: false,
+                routes: {
+                  // '/': (context) => const LogIn(),
+                  '/login': (context) => LogIn(),
+                  '/resetpassword': (context) => ResetPass(),
+                  '/checkmail': (context) => const CheckMail(),
+                  '/createnewpass': (context) => CreateNewPass(),
+                  '/returntologin': (context) => const ReturnToLogin(),
+                  '/orderspage': (context) => OrdersPage(
+                        statusToinitiate: 0,
+                      ),
+                  '/ordersdetails': (context) => OrderDetails(),
+                  '/notifications': (context) => const Notifications(),
+                  '/settings': (context) => const Settings(),
+                  '/search': (context) => Search(),
+                },
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                    appBarTheme: const AppBarTheme(
+                        centerTitle: true,
+                        elevation: 0,
+                        color: Colors.white,
+                        actionsIconTheme:
+                            IconThemeData(color: Colors.black, size: 37),
+                        iconTheme: IconThemeData(
+                          color: Colors.black,
+                          size: 37,
+                        ),
+                        titleTextStyle: TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold)),
+                    primarySwatch: Colors.red,
+                    primaryColor: Color.fromARGB(255, 245, 80, 76),
+                    colorScheme: ThemeData().colorScheme.copyWith(
+                          secondary: Color(0xFFF2F5F7),
+                          primary: Color.fromARGB(255, 245, 80, 76),
+                        )
 
-                // iconTheme: IconThemeData(color: Colors.red)
-              ),
-              home: startWidget);
+                    // iconTheme: IconThemeData(color: Colors.red)
+                    ),
+                home: startWidget);
+          });
         },
       ),
     );

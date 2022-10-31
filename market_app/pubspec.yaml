@@ -49,6 +49,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   firebase_core: ^2.1.0
+  auto_size_text: ^3.0.0
+  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
+import 'package:sizer/sizer.dart';
 
 class OneNotification extends StatelessWidget {
   String? body;
@@ -8,10 +11,12 @@ class OneNotification extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.height * 0.03,
+      color: Colors.white,
+      padding: EdgeInsets.only(
+        top: Simplify.hightClc(context, 1),
+        left: MediaQuery.of(context).size.height * 0.03,
+        right: MediaQuery.of(context).size.height * 0.03,
       ),
-      padding: EdgeInsets.only(top: 35),
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -19,10 +24,10 @@ class OneNotification extends StatelessWidget {
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Color.fromARGB(255, 244, 206, 203),
-                borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(10.sp)),
             child: Icon(
               Icons.notifications,
-              size: 40,
+              size: 20.sp,
               color: Colors.red,
             ),
           ),
@@ -34,14 +39,14 @@ class OneNotification extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                child: Text(
+                child: AutoSizeText(
                   body!,
                   // softWrap: true,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 14),
                 ),
               ),
               Container(
-                child: Text(
+                child: AutoSizeText(
                   "${date!}s ago",
                   // softWrap: true,
                   style: TextStyle(fontSize: 12, color: Colors.grey),

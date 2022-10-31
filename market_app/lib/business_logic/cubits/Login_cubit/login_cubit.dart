@@ -11,7 +11,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
   bool isHiddenPass = true;
-  Icon? securityIcon = Icon(Icons.visibility_off);
+  Icon? securityIcon = Icon(
+    Icons.visibility_off,
+  );
 
   void userLogin({required email, required password}) {
     emit(LoginLoading());

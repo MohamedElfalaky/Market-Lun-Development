@@ -1,14 +1,17 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class FilterPopUpContent extends StatelessWidget {
   FilterPopUpContent({super.key});
 
   Widget myFilterPopUp(List myList, int index, context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(5.sp),
       width: MediaQuery.of(context).size.width * 1,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -18,8 +21,8 @@ class FilterPopUpContent extends StatelessWidget {
             groupValue: index == 0
                 ? OrdersCubit.selectedValue1
                 : OrdersCubit.selectedValue2,
-            title: Text(listItem.toString().tr(context),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            title: AutoSizeText(listItem.toString().tr(context),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
             onChanged: ((value) {
               // listItem = value!;
               if (index == 0) {
@@ -52,8 +55,10 @@ class FilterPopUpContent extends StatelessWidget {
               Column(children: [
                 Row(
                   children: [
-                    SizedBox(height: 30, child: Icon(Icons.shopping_bag)),
-                    Text(
+                    SizedBox(
+                        height: Simplify.hightClc(context, 30),
+                        child: Icon(Icons.shopping_bag)),
+                    AutoSizeText(
                       "Order status".tr(context),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -67,8 +72,10 @@ class FilterPopUpContent extends StatelessWidget {
               Column(children: [
                 Row(
                   children: [
-                    SizedBox(height: 30, child: Icon(Icons.date_range)),
-                    Text(
+                    SizedBox(
+                        height: Simplify.hightClc(context, 30),
+                        child: Icon(Icons.date_range)),
+                    AutoSizeText(
                       "Date".tr(context),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

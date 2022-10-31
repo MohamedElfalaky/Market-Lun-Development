@@ -1,8 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/settings_cubit/settings_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class SaveBtn extends StatelessWidget {
   @override
@@ -11,29 +14,31 @@ class SaveBtn extends StatelessWidget {
       builder: (context, state) {
         return state is! SettingsLoading
             ? Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(30),
-                      topLeft: Radius.circular(30)),
+                      topRight: Radius.circular(30.sp),
+                      topLeft: Radius.circular(30.sp)),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black38, spreadRadius: 0, blurRadius: 20),
                   ],
                 ),
                 child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        topLeft: Radius.circular(30)),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10.sp),
+                        topLeft: Radius.circular(10.sp)),
                     child: BottomAppBar(
                       child: SizedBox(
-                        height: 70,
+                        height: Simplify.hightClc(context, 70),
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10.0, right: 10, bottom: 10, top: 10),
+                          padding: EdgeInsets.symmetric(
+                            vertical: Simplify.hightClc(context, 10),
+                            horizontal: Simplify.widthClc(context, 10),
+                          ),
                           child: SizedBox(
                             height: double.infinity,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(10.sp),
                               child: ElevatedButton(
                                 onPressed: () {
                                   BlocProvider.of<SettingsCubit>(context)
@@ -67,7 +72,10 @@ class SaveBtn extends StatelessWidget {
                                 },
                                 style: ElevatedButton.styleFrom(
                                     primary: Color.fromARGB(255, 237, 25, 25)),
-                                child: Text("Save".tr(context)),
+                                child: AutoSizeText(
+                                  "Save".tr(context),
+                                  style: TextStyle(fontSize: 14),
+                                ),
                               ),
                             ),
                           ),

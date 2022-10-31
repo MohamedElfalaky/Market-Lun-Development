@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/FilterPopUp/Filter_PopUp.dart';
@@ -6,6 +7,8 @@ import 'package:market_app/business_logic/cubits/Orders_cubit/orders_cubit.dart'
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
+import 'package:sizer/sizer.dart';
 
 class HorizontalFilterBar extends StatefulWidget {
   HorizontalFilterBar({super.key});
@@ -44,15 +47,18 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
     return BlocBuilder<NewOrderCounterCubit, NewOrderCounterState>(
       builder: (context, state) {
         return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.1,
+          // height: MediaQuery.of(context).size.height * 0.1,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                margin: const EdgeInsets.only(
-                    right: 12, left: 20, top: 15, bottom: 10),
-                // height: MediaQuery.of(context).size.height * 0.05,
-                width: MediaQuery.of(context).size.width * 0.75,
+                margin: EdgeInsets.only(
+                    right: 1,
+                    left: Simplify.hightClc(context, 16),
+                    top: Simplify.hightClc(context, 20),
+                    bottom: Simplify.hightClc(context, 15)),
+                height: Simplify.hightClc(context, 50),
+                width: Simplify.widthClc(context, 300),
                 child: ListView(
                     // This next line does the trick.
                     scrollDirection: Axis.horizontal,
@@ -205,30 +211,33 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                             OrdersCubit.get(context).selectedIndex = i;
                           },
                           child: Container(
-                            width: 110.0,
+                            // height: Simplify.hightClc(context, 40),
+                            width: Simplify.widthClc(context, 93),
                             decoration: BoxDecoration(
                                 color: i == 1
-                                    ? const Color.fromARGB(255, 250, 107, 97)
-                                    : const Color.fromARGB(255, 242, 238, 238),
+                                    ? Theme.of(context).primaryColor
+                                    : Theme.of(context).colorScheme.secondary,
                                 //to give "New" button its own style.
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
+                                    BorderRadius.all(Radius.circular(10.sp)),
                                 boxShadow: [
                                   OrdersCubit.get(context).selectedIndex == i
                                       //to give special effect to the selected button.
 
                                       ? BoxShadow(
                                           color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 5,
-                                          blurRadius: 5,
+                                          spreadRadius: 3.sp,
+                                          blurRadius: 6.sp,
                                         )
-                                      : const BoxShadow()
+                                      : BoxShadow()
                                 ]),
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: Simplify.widthClc(context, 8),
+                                vertical: Simplify.hightClc(context, 5)),
                             child: i == 1
                                 ? Stack(children: [
                                     Center(
-                                        child: Text(
+                                        child: AutoSizeText(
                                       [
                                         "All",
                                         "New",
@@ -239,28 +248,32 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                                       ][i]
                                           .tr(context),
                                       style: const TextStyle(
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black),
                                     )),
                                     Align(
                                       alignment: const Alignment(0.79, 0),
                                       child: Container(
-                                        height: 20,
-                                        width: 20,
+                                        height: Simplify.hightClc(context, 20),
+                                        width: Simplify.widthClc(context, 20),
                                         decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 195, 185, 184),
+                                            color: Color.fromARGB(
+                                                227, 251, 244, 242),
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                                BorderRadius.circular(10.sp)),
                                         child: Center(
-                                            child: Text(NewOrderCounterCubit
-                                                .myCounter
-                                                .toString())),
+                                          child: AutoSizeText(
+                                            NewOrderCounterCubit.myCounter
+                                                .toString(),
+                                            style: TextStyle(fontSize: 14),
+                                          ),
+                                        ),
                                       ),
                                     )
                                   ])
                                 : Center(
-                                    child: Text(
+                                    child: AutoSizeText(
                                     [
                                       "All",
                                       "New",
@@ -271,6 +284,7 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                                     ][i]
                                         .tr(context),
                                     style: const TextStyle(
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   )),
@@ -283,12 +297,22 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                   _showModalSheet(context);
                 },
                 child: Container(
-                  // height: MediaQuery.of(context).size.height * 0.05,
-                  width: MediaQuery.of(context).size.width * 0.1,
+                  margin: EdgeInsets.only(
+                      bottom: Simplify.hightClc(context, 15),
+                      right: Simplify.widthClc(context, 15)),
+                  height: Simplify.hightClc(context, 40),
+                  width: Simplify.widthClc(context, 40),
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color.fromARGB(255, 231, 229, 228)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1.sp,
+                          blurRadius: 2.sp,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10.sp),
+                      color: Colors.white),
                   child: Image.asset("assets/filter.png"),
                 ),
               )

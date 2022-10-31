@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:market_app/Presentation/Widgets/Settings%20Widgets/Inside_Settings.dart';
@@ -11,7 +12,7 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Settings".tr(context)),
+          title: AutoSizeText("Settings".tr(context)),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: (() {
@@ -19,9 +20,12 @@ class Settings extends StatelessWidget {
             }),
           ),
         ),
-        body: ListView(children: [
-          insideSettings(),
-        ]),
+        body: Container(
+          color: Colors.white,
+          child: ListView(children: [
+            insideSettings(),
+          ]),
+        ),
         bottomNavigationBar: SaveBtn());
   }
 }

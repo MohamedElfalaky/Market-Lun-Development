@@ -1,6 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:duration_picker/duration_picker.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class DeclineContentPopUp extends StatelessWidget {
   DeclineContentPopUp({super.key});
@@ -16,19 +19,19 @@ class DeclineContentPopUp extends StatelessWidget {
               color: Colors.orange,
               size: 70,
             ),
-            Text(
+            AutoSizeText(
               "Cancel Order :(".tr(context),
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: 10,
+              height: Simplify.hightClc(context, 10),
             ),
-            Text(
+            AutoSizeText(
               " Type reason for cancelation".tr(context),
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 20,
+              height: Simplify.hightClc(context, 20),
             ),
           ],
         ));

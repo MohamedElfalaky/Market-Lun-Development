@@ -12,7 +12,9 @@ import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order
 import 'package:market_app/data/Models/DriversModel.dart';
 import 'package:market_app/data/Models/NotificationsModel.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class ChooseDriverPopUp extends StatefulWidget {
   final id;
@@ -44,7 +46,7 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
               .toString(); // تخزين قيمه الاختيار الاول
           return AlertDialog(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                borderRadius: BorderRadius.all(Radius.circular(32.0.sp))),
             scrollable: true,
             // title: Text('Filter'),
             content: Padding(
@@ -53,15 +55,15 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
 
             actions: <Widget>[
               Container(
-                margin: EdgeInsets.all(15),
-                padding: EdgeInsets.only(left: 20, right: 15),
+                margin: EdgeInsets.all(15.sp),
+                padding: EdgeInsets.only(left: 20.sp, right: 15.sp),
                 decoration: BoxDecoration(
                     color: Color.fromARGB(126, 217, 205, 204),
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(10.sp)),
                 width: MediaQuery.of(context).size.width * .8,
                 child: DropdownButton<String>(
                   isExpanded: true,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.sp),
                   value: dropdownValue,
                   icon: const Icon(
                     Icons.arrow_drop_down,
@@ -114,7 +116,7 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                     width: MediaQuery.of(context).size.width * 0.45,
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.sp),
                       child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
                         listener: (context, state) {
                           if (state is NewToPreparingWithDriverSuccess) {
@@ -201,7 +203,7 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: Simplify.hightClc(context, 20),
               )
             ],
           );

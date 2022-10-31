@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTimePopUp.dart';
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
 
 class ViewButton extends StatelessWidget {
@@ -23,10 +25,10 @@ class ViewButton extends StatelessWidget {
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 10,
+            height: Simplify.hightClc(context, 10),
           ),
           SizedBox(
-            height: 50,
+            height: Simplify.hightClc(context, 48),
             child: Row(
               children: [
                 Expanded(
@@ -48,9 +50,10 @@ class ViewButton extends StatelessWidget {
                               SizedBox(
                                 width: 10,
                               ),
-                              Text(
+                              AutoSizeText(
                                 "View".tr(context),
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
                               ),
                             ],
                           ),

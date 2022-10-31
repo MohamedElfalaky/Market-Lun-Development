@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
 
 class ClientInfo extends StatelessWidget {
@@ -9,24 +11,24 @@ class ClientInfo extends StatelessWidget {
 
   Container myClientInfo(String metaa, String dataa, context) {
     return Container(
-      padding: EdgeInsets.only(left: 25),
-      margin: EdgeInsets.only(bottom: 10, top: 5),
+      padding: EdgeInsets.only(left: Simplify.widthClc(context, 10)),
+      margin: EdgeInsets.symmetric(vertical: Simplify.hightClc(context, 8)),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             flex: 4,
-            child: Text(
+            child: AutoSizeText(
               metaa,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
           ),
           Expanded(
-            flex: 3,
-            child: Text(
+            flex: 2,
+            child: AutoSizeText(
               dataa,
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 14, color: Color(0xFF999999)),
             ),
           )
         ],
@@ -37,7 +39,8 @@ class ClientInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 15),
+      color: Colors.white,
+      // margin: EdgeInsets.symmetric(vertical: Simplify.hightClc(context, 10)),
       child: ExpansionTile(
           title: Row(
             children: [
@@ -45,7 +48,7 @@ class ClientInfo extends StatelessWidget {
                 Icons.person,
                 size: 40,
               ),
-              Text(
+              AutoSizeText(
                 "Client Info".tr(context),
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               )

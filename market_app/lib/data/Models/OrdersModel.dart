@@ -33,7 +33,7 @@ class Data {
   late final String clientName;
   late final String driverName;
   late final String receiveMethod;
-  late final int total;
+  late final num total;
   late final String paymentMethod;
   late final String orderStatus;
   late final String? preparingTime;

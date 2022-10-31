@@ -1,10 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Billing_Info.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Bottom_Navigation_Bar.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Client_info.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Order_Info.dart';
-import 'package:market_app/Presentation/Widgets/Search%20widget/Search.dart';
 import 'package:market_app/business_logic/cubits/Order_details_Cubit/order_details_cubit.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
@@ -33,7 +33,7 @@ class _OrderDetailsState extends State<OrderDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Order Details".tr(context)),
+          title: AutoSizeText("Order Details".tr(context)),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: (() {
@@ -48,27 +48,30 @@ class _OrderDetailsState extends State<OrderDetails> {
                 icon: Icon(Icons.search))
           ],
         ),
-        body: ListView(children: [
-          ClientInfo(),
-          BlocBuilder<TestCubit, TestState>(
-            builder: (context, state) {
-              return state is TestSuccess
-                  ? OrderInfo(
-                      status: state.myOrderDetailsModel.data.status,
-                      id: state.myOrderDetailsModel.data.orderId.toString(),
-                      driverName: state.myOrderDetailsModel.data.driverName,
-                      orderType: state.myOrderDetailsModel.data.orderType,
-                      time: state.myOrderDetailsModel.data.time.toString(),
-                      updateAt: state.myOrderDetailsModel.data.updatedAt,
-                      hint: state.myOrderDetailsModel.data.hint,
-                    )
-                  : Center(
-                      child: CircularProgressIndicator(),
-                    );
-            },
-          ),
-          BillingInfo(),
-        ]),
+        body: Container(
+          color: Colors.white,
+          child: ListView(children: [
+            ClientInfo(),
+            BlocBuilder<TestCubit, TestState>(
+              builder: (context, state) {
+                return state is TestSuccess
+                    ? OrderInfo(
+                        status: state.myOrderDetailsModel.data.status,
+                        id: state.myOrderDetailsModel.data.orderId.toString(),
+                        driverName: state.myOrderDetailsModel.data.driverName,
+                        orderType: state.myOrderDetailsModel.data.orderType,
+                        time: state.myOrderDetailsModel.data.time.toString(),
+                        updateAt: state.myOrderDetailsModel.data.updatedAt,
+                        hint: state.myOrderDetailsModel.data.hint,
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      );
+              },
+            ),
+            BillingInfo(),
+          ]),
+        ),
         bottomNavigationBar: BlocBuilder<TestCubit, TestState>(
           builder: (context, state) {
             return state is TestSuccess

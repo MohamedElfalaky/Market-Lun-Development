@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class MailTextField extends StatelessWidget {
   MailTextField({super.key});
@@ -7,16 +8,16 @@ class MailTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5.0, right: 15, left: 15),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 65 / 812,
+      width: MediaQuery.of(context).size.width * 344 / 375,
       child: TextFormField(
+        textAlignVertical: TextAlignVertical.bottom,
         keyboardType: TextInputType.emailAddress,
         controller: mailText,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
-          if (value!.isNotEmpty && value.length <= 9) {
-            return "Mail must be more than 9 characters!";
-          } else if (value.isEmpty) {
+          if (value!.isEmpty) {
             return "please enter you mail";
           } else if (value.isNotEmpty &&
               !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -25,26 +26,16 @@ class MailTextField extends StatelessWidget {
           }
           return null;
         },
-        // maxLength: 20,
         decoration: InputDecoration(
-          fillColor: Color.fromARGB(255, 239, 246, 249),
+          border: InputBorder.none,
+          fillColor: Color(0XFFF2F5F7),
           filled: true,
           hintText: "Email".tr(context),
-          labelStyle: TextStyle(
-            color: Color.fromARGB(255, 245, 59, 59),
-          ),
-          prefixIcon: Icon(Icons.email),
-          suffixIcon: Icon(
-            Icons.check_circle,
-          ),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                  width: 1, color: Color.fromARGB(255, 239, 246, 249))),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25.0),
-            borderSide: BorderSide(
-              color: Color.fromARGB(255, 239, 246, 249),
-            ),
+          hintStyle: TextStyle(fontSize: 12.sp),
+          labelStyle: TextStyle(),
+          prefixIcon: Icon(
+            Icons.email,
+            size: 14.sp,
           ),
         ),
       ),
