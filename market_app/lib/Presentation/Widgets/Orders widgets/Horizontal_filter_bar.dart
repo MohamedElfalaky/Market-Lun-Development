@@ -297,11 +297,10 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                   _showModalSheet(context);
                 },
                 child: Container(
-                  margin: EdgeInsets.only(
-                      bottom: Simplify.hightClc(context, 15),
-                      right: Simplify.widthClc(context, 15)),
-                  height: Simplify.hightClc(context, 40),
-                  width: Simplify.widthClc(context, 40),
+                  margin:
+                      EdgeInsets.only(right: Simplify.widthClc(context, 15)),
+                  height: Simplify.hightClc(context, 37),
+                  width: Simplify.widthClc(context, 37),
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       boxShadow: [

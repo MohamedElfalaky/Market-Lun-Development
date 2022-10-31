@@ -4,6 +4,7 @@ import 'package:market_app/Presentation/Widgets/PopUs/ChooseTimePopUp/ChooseTime
 import 'package:market_app/Presentation/Widgets/PopUs/DeclinePopUp/DeclinePopUp.dart';
 import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 
 class ViewButton extends StatelessWidget {
   ViewButton({super.key});
@@ -33,32 +34,29 @@ class ViewButton extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: SizedBox(
-                      height: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.visibility,
-                                color: Colors.white,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              AutoSizeText(
-                                "View".tr(context),
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
-                            ],
-                          ),
-                          decoration: BoxDecoration(color: Colors.red),
+                  child: SizedBox(
+                    height: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.sp),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.visibility,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            AutoSizeText(
+                              "View".tr(context),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                          ],
                         ),
+                        decoration: BoxDecoration(color: Colors.red),
                       ),
                     ),
                   ),

@@ -15,7 +15,7 @@ class LocalNotificationService {
   static void display(RemoteMessage message) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-      final NotificationDetails notificationDetails = NotificationDetails(
+      final NotificationDetails notificationDetails = const NotificationDetails(
           android: AndroidNotificationDetails(
               "market_app", "market_app_channel",
               importance: Importance.max,

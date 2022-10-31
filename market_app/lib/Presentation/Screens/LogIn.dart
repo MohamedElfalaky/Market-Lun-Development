@@ -51,7 +51,7 @@ class _LogInState extends State<LogIn> {
                 toastLength: Toast.LENGTH_SHORT,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
-                backgroundColor: Color.fromARGB(255, 223, 47, 34),
+                backgroundColor: const Color.fromARGB(255, 223, 47, 34),
                 textColor: Colors.white,
                 fontSize: 16.0);
             print(state.myLoginModel.message);

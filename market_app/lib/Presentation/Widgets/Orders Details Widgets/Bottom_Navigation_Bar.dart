@@ -5,6 +5,7 @@ import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/Cance
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
 import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
+import 'package:market_app/data/Shared/Simplify.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   final cxt;
@@ -32,24 +33,31 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         widget.status == "Refunded") {
       statusButton = null;
     } else if (widget.status == "New") {
-      statusButton =
-          AcceptDecline(widget.id, widget.expirationTime, widget.timeZone);
+      statusButton = Container(
+          padding:
+              EdgeInsets.symmetric(horizontal: Simplify.widthClc(context, 15)),
+          child:
+              AcceptDecline(widget.id, widget.expirationTime, widget.timeZone));
     } else {
-      statusButton = CancelButton(widget.id, widget.driverName, widget.cxt,
-          widget.preparingTime2, widget.timeZone);
+      statusButton = Container(
+        padding:
+            EdgeInsets.symmetric(horizontal: Simplify.widthClc(context, 15)),
+        child: CancelButton(widget.id, widget.driverName, widget.cxt,
+            widget.preparingTime2, widget.timeZone),
+      );
     }
     return Container(
-      child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-          child: BottomAppBar(child: statusButton)),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         boxShadow: [
           BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 20),
         ],
       ),
+      child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+          child: BottomAppBar(child: statusButton)),
     );
   }
 }

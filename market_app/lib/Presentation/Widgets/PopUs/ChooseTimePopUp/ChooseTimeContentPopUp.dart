@@ -20,16 +20,17 @@ class ChooseTimePopUpContent extends StatelessWidget {
               color: Colors.orange,
               size: 50.sp,
             ),
-            AutoSizeText(
+            Text(
               "Choose Time".tr(context),
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: Simplify.hightClc(context, 10),
             ),
-            AutoSizeText(
+            Text(
               " Type time in minutes".tr(context),
               textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12.sp),
             ),
             SizedBox(
               height: Simplify.hightClc(context, 10),

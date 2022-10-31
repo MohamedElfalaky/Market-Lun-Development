@@ -33,7 +33,7 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(32.0.sp))),
       scrollable: true,
-      // title: AutoSizeText('Filter'),
+      // title: Text('Filter'),
       content: Padding(
           padding: EdgeInsets.all(8.0.sp), child: DeclineContentPopUp()),
 
@@ -42,33 +42,30 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
           key: _formKey,
           child: Column(
             children: [
-              Column(
-                children: <Widget>[
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: Simplify.widthClc(context, 20)),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.sp),
-                        color: Color.fromARGB(124, 222, 218, 216),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: 12.0.sp, left: 18.sp, right: 8.sp),
-                        child: TextFormField(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please enter the reason";
-                            }
-                          },
-                          controller: myControlled,
-                          maxLines: 8, //or null
-                          decoration: InputDecoration.collapsed(
-                              hintText: "Enter your text here".tr(context)),
-                        ),
-                      ))
-                ],
-              ),
+              Container(
+                  margin: EdgeInsets.symmetric(
+                      horizontal: Simplify.widthClc(context, 20)),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.sp),
+                    color: Color.fromARGB(124, 222, 218, 216),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(top: 12.0.sp, left: 18.sp, right: 8.sp),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter the reason";
+                        }
+                      },
+                      controller: myControlled,
+                      maxLines: 8, //or null
+                      decoration: InputDecoration.collapsed(
+                          hintText: "Enter your text here".tr(context)),
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
+                  )),
               Container(
                 margin: EdgeInsets.only(left: Simplify.widthClc(context, 10)),
                 child: Row(
@@ -81,9 +78,9 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                         });
                       },
                     ),
-                    AutoSizeText(
+                    Text(
                       "Request for refund?".tr(context),
-                      style: TextStyle(fontSize: 14),
+                      style: TextStyle(fontSize: 12.sp),
                     )
                   ],
                 ),
@@ -138,9 +135,9 @@ class _DeclinePopUpState extends State<DeclinePopUp> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: ElevatedButton(
-                                child: AutoSizeText(
+                                child: Text(
                                   'Save'.tr(context),
-                                  style: TextStyle(fontSize: 14),
+                                  style: TextStyle(fontSize: 12.sp),
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {

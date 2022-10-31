@@ -110,10 +110,10 @@ class _ChooseDriverPopUpState extends State<ChooseDriverPopUp> {
                     },
                   ),
                   SizedBox(
-                    width: 15,
+                    width: Simplify.widthClc(context, 15),
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
+                    width: MediaQuery.of(context).size.width * 0.35,
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.sp),

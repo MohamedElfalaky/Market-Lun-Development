@@ -72,13 +72,13 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
                 child: TextField(
                   controller: _myController,
                   keyboardType: TextInputType.number,
-                  cursorHeight: 40.sp,
+                  cursorHeight: 20.sp,
                   // showCursor: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration.collapsed(
                       hintText: "50:00 Mins".tr(context),
                       hintStyle: TextStyle(
-                          fontSize: 40.sp, fontWeight: FontWeight.bold)),
+                          fontSize: 20.sp, fontWeight: FontWeight.bold)),
                 ))
 
             //  Builder(
@@ -107,9 +107,9 @@ class _ChoosTimePopUpState extends State<ChoosTimePopUp> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.sp),
               child: ElevatedButton(
-                child: AutoSizeText(
+                child: Text(
                   'Save'.tr(context),
-                  style: TextStyle(fontSize: 14),
+                  style: TextStyle(fontSize: 12.sp),
                 ),
                 onPressed: () {
                   _showAlertDialog(context, int.parse(_myController.text));

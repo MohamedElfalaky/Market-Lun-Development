@@ -12,6 +12,7 @@ import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order
 import 'package:market_app/data/Shared/CacheHelper.dart';
 import 'package:market_app/data/Shared/Simplify.dart';
 import '../../../data/Shared/AppLocalizations.dart';
+import 'package:sizer/sizer.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -77,7 +78,8 @@ class AcceptDecline extends StatelessWidget {
             : null;
       },
       child: Container(
-        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+        width: double.infinity,
+        padding: EdgeInsets.only(bottom: 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           // crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +99,7 @@ class AcceptDecline extends StatelessWidget {
                             margin: EdgeInsets.symmetric(vertical: 15),
                             child: AutoSizeText(
                               "Time counter new".tr(context),
-                              style: TextStyle(fontSize: 14),
+                              style: TextStyle(fontSize: 12),
                             )),
 
                         CountdownTimer(
@@ -125,7 +127,7 @@ class AcceptDecline extends StatelessWidget {
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 12, 34, 198),
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 14),
+                                    fontSize: 12),
                               );
                             }
                             // if (time.min)
@@ -151,7 +153,7 @@ class AcceptDecline extends StatelessWidget {
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 12, 34, 198),
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 14));
+                                    fontSize: 12));
                           },
                         ),
                         // AutoSizeText(
@@ -174,17 +176,20 @@ class AcceptDecline extends StatelessWidget {
                       Expanded(
                         flex: 4,
                         child: Container(
-                          margin: EdgeInsets.only(left: 10),
+                          // margin: EdgeInsets.only(left: 10),
                           padding: const EdgeInsets.only(right: 8.0),
                           child: SizedBox(
                             height: double.infinity,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(10.sp),
                               child: ElevatedButton(
                                 onPressed: () {
                                   _showAlertDialog(context, ChoosTimePopUp(id));
                                 },
-                                child: AutoSizeText("Accept".tr(context)),
+                                child: AutoSizeText(
+                                  "Accept".tr(context),
+                                  style: TextStyle(fontSize: 14),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                     primary: Color.fromARGB(255, 60, 238, 60)),
                               ),
@@ -200,14 +205,15 @@ class AcceptDecline extends StatelessWidget {
                             onPressed: () {
                               _showAlertDialog(context, DeclinePopUp(id));
                             },
-                            child: AutoSizeText("Decline".tr(context)),
+                            child: AutoSizeText("Decline".tr(context),
+                                style: TextStyle(fontSize: 14)),
                             style: OutlinedButton.styleFrom(
                                 backgroundColor:
                                     Color.fromARGB(255, 245, 240, 240),
                                 side: BorderSide(color: Colors.red, width: 1),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)))),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.sp)))),
                           ),
                         ),
                       )

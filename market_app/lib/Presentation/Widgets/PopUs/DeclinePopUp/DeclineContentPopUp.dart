@@ -17,18 +17,19 @@ class DeclineContentPopUp extends StatelessWidget {
             Icon(
               Icons.dangerous_rounded,
               color: Colors.orange,
-              size: 70,
+              size: 50.sp,
             ),
-            AutoSizeText(
+            Text(
               "Cancel Order :(".tr(context),
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: Simplify.hightClc(context, 10),
             ),
-            AutoSizeText(
+            Text(
               " Type reason for cancelation".tr(context),
               textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12.sp),
             ),
             SizedBox(
               height: Simplify.hightClc(context, 20),

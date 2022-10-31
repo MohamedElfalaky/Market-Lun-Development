@@ -54,7 +54,7 @@ class _SearchState extends State<Search> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(width: 1),
-                        color: Color.fromARGB(207, 244, 236, 236)),
+                        color: const Color.fromARGB(207, 244, 236, 236)),
                     margin: EdgeInsets.symmetric(vertical: 20),
                     child: Row(
                       // crossAxisAlignment: CrossAxisAlignment.,
@@ -67,11 +67,11 @@ class _SearchState extends State<Search> {
                           child: TextField(
                             controller: myController,
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                     borderSide: BorderSide.none),
                                 hintText: "Search..".tr(context),
                                 contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 20)),
+                                    const EdgeInsets.symmetric(horizontal: 20)),
                             cursorHeight: 30,
                             // autofocus: true,
                           ),

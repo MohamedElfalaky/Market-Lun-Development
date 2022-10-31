@@ -106,262 +106,262 @@ class CancelButton extends StatelessWidget {
             ],
           ));
     } else {
-      assignButton = Container();
+      assignButton = Container(
+        height: Simplify.hightClc(context, 20),
+      );
     }
-    return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      height: Simplify.hightClc(context, 25),
-                      width: Simplify.widthClc(context, 25),
-                      child: Image.asset("assets/cooking.gif")),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(top: 20, bottom: 10),
-                      child: Row(
-                        children: [
-                          AutoSizeText(
-                            "Time counter preparing".tr(context),
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          CountdownTimer(
-                            endTime: DateTime.now().millisecondsSinceEpoch +
-                                DateFormat("HH:mm:ss")
-                                        .parse(preparingTime)
-                                        .difference(saFormate)
-                                        .inSeconds *
-                                    1000,
-                            onEnd: () {},
-                            widgetBuilder: (context, time) {
-                              var newMins;
-                              var newSec;
-                              if (time == null || time == 0) {
-                                return AutoSizeText(
-                                  "00:00:00",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Color.fromARGB(255, 12, 34, 198),
-                                      fontWeight: FontWeight.bold),
-                                );
-                              }
-                              // if (time.min)
-                              if (time.hours != 0 && time.hours != null) {
-                                newMins = time.hours! * 60 + time.min!;
-                              } else {
-                                newMins = time.min;
-                              }
-                              if (newMins != null) {
-                                if (newMins < 10) {
-                                  newMins = "0${newMins}";
-                                }
-                              }
-                              // else if (time.sec != null) {
-                              //   if (time.sec! < 10) {
-                              //     newSec = "0${time.sec}";
-                              //   } else {
-                              //     newSec = time.sec!;
-                              //   }
-                              // }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      // crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    height: Simplify.hightClc(context, 25),
+                    width: Simplify.widthClc(context, 25),
+                    child: Image.asset("assets/cooking.gif")),
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    margin: EdgeInsets.only(top: 20, bottom: 10),
+                    child: Row(
+                      children: [
+                        AutoSizeText(
+                          "Time counter preparing".tr(context),
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        CountdownTimer(
+                          endTime: DateTime.now().millisecondsSinceEpoch +
+                              DateFormat("HH:mm:ss")
+                                      .parse(preparingTime)
+                                      .difference(saFormate)
+                                      .inSeconds *
+                                  1000,
+                          onEnd: () {},
+                          widgetBuilder: (context, time) {
+                            var newMins;
+                            var newSec;
+                            if (time == null || time == 0) {
                               return AutoSizeText(
-                                  '${newMins ?? "00"}:${time.sec ?? "00"}',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Color.fromARGB(255, 12, 34, 198),
-                                      fontWeight: FontWeight.bold));
-                            },
-                          ),
-                          // AutoSizeText(
-                          //   "Counter",
-                          //   style: TextStyle(
-                          //       color: Color.fromARGB(255, 61, 33, 243)),
-                          // ),
-                          AutoSizeText(
-                            "Mins".tr(context),
+                                "00:00:00",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: Color.fromARGB(255, 12, 34, 198),
+                                    fontWeight: FontWeight.bold),
+                              );
+                            }
+                            // if (time.min)
+                            if (time.hours != 0 && time.hours != null) {
+                              newMins = time.hours! * 60 + time.min!;
+                            } else {
+                              newMins = time.min;
+                            }
+                            if (newMins != null) {
+                              if (newMins < 10) {
+                                newMins = "0${newMins}";
+                              }
+                            }
+                            // else if (time.sec != null) {
+                            //   if (time.sec! < 10) {
+                            //     newSec = "0${time.sec}";
+                            //   } else {
+                            //     newSec = time.sec!;
+                            //   }
+                            // }
+                            return AutoSizeText(
+                                '${newMins ?? "00"}:${time.sec ?? "00"}',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: Color.fromARGB(255, 12, 34, 198),
+                                    fontWeight: FontWeight.bold));
+                          },
+                        ),
+                        // AutoSizeText(
+                        //   "Counter",
+                        //   style: TextStyle(
+                        //       color: Color.fromARGB(255, 61, 33, 243)),
+                        // ),
+                        AutoSizeText(
+                          "Mins".tr(context),
+                          style: TextStyle(fontSize: 12),
+                        )
+                      ],
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: Simplify.hightClc(context, 48),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
+                        listener: (context, state) {
+                          state is PreparingToDeliveredSuccess
+                              ? () {
+                                  OrdersCubit.get(context)
+                                          .selectedIndex = //حط شادو علي التاب اللي اتعدل لها الستيت
+                                      _navigateTothisIndex;
+
+                                  OrdersCubit.get(context).getOrders(
+                                      //
+                                      // رندر الاوردر ليست
+                                      delivery: 1,
+                                      pickup: 1,
+                                      status: 5,
+                                      apiToken:
+                                          CacheHelper.getFromShared("token"));
+
+                                  // to update "New" Counter and tab bar (change the selected index)
+                                  NewOrderCounterCubit.get(context).getOrders(
+                                      apiToken:
+                                          CacheHelper.getFromShared("token"));
+
+                                  //render order details..
+                                  TestCubit.get(context).getOrdersDetails(
+                                      apiToken:
+                                          CacheHelper.getFromShared("token"),
+                                      orderId: id.toString());
+
+                                  // BlocProvider.of<TestCubit>(context)
+                                  //     .getOrdersDetails(
+                                  //         apiToken: CacheHelper.getFromShared(
+                                  //             "token"),
+                                  //         orderId: id.toString());
+                                }()
+                              : null;
+                        },
+                        builder: (context, state) {
+                          return state is! UpdateOrderLoading
+                              ? SizedBox(
+                                  height: Simplify.hightClc(context, 48),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.sp),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        UpdateOrderCubit.get(context)
+                                            .updatePreparingToDelivered(
+                                                orderId: id);
+                                      },
+                                      child: AutoSizeText(
+                                        "Delivered".tr(context),
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                          primary:
+                                              Color.fromARGB(255, 60, 238, 60)),
+                                    ),
+                                  ),
+                                )
+                              : id == UpdateOrderCubit.get(context).currentId
+                                  // من الكيوبت عشان اعرف امسكها بعد ما تاخد قيمتها
+                                  ? Center(child: CircularProgressIndicator())
+                                  : SizedBox(
+                                      height: Simplify.hightClc(context, 48),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.sp),
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          child: AutoSizeText(
+                                            "Delivered".tr(context),
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Color.fromARGB(
+                                                  255, 60, 238, 60)),
+                                        ),
+                                      ),
+                                    );
+                        },
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: SizedBox(
+                        height: Simplify.hightClc(context, 48),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            _showAlertDialog(context, DeclinePopUp(id));
+                          },
+                          child: AutoSizeText(
+                            "Cancel".tr(context),
                             style: TextStyle(fontSize: 12),
-                          )
-                        ],
-                      )),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor:
+                                  Color.fromARGB(255, 245, 243, 243),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.sp))),
+                              side: BorderSide(color: Colors.red),
+                              primary: Color.fromARGB(255, 246, 19, 19)),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(
-                height: Simplify.hightClc(context, 48),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: BlocConsumer<UpdateOrderCubit, UpdateOrderState>(
-                          listener: (context, state) {
-                            state is PreparingToDeliveredSuccess
-                                ? () {
-                                    OrdersCubit.get(context)
-                                            .selectedIndex = //حط شادو علي التاب اللي اتعدل لها الستيت
-                                        _navigateTothisIndex;
-
-                                    OrdersCubit.get(context).getOrders(
-                                        //
-                                        // رندر الاوردر ليست
-                                        delivery: 1,
-                                        pickup: 1,
-                                        status: 5,
-                                        apiToken:
-                                            CacheHelper.getFromShared("token"));
-
-                                    // to update "New" Counter and tab bar (change the selected index)
-                                    NewOrderCounterCubit.get(context).getOrders(
-                                        apiToken:
-                                            CacheHelper.getFromShared("token"));
-
-                                    //render order details..
-                                    TestCubit.get(context).getOrdersDetails(
-                                        apiToken:
-                                            CacheHelper.getFromShared("token"),
-                                        orderId: id.toString());
-
-                                    // BlocProvider.of<TestCubit>(context)
-                                    //     .getOrdersDetails(
-                                    //         apiToken: CacheHelper.getFromShared(
-                                    //             "token"),
-                                    //         orderId: id.toString());
-                                  }()
-                                : null;
-                          },
-                          builder: (context, state) {
-                            return state is! UpdateOrderLoading
-                                ? SizedBox(
-                                    height: Simplify.hightClc(context, 48),
-                                    child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.circular(10.sp),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          UpdateOrderCubit.get(context)
-                                              .updatePreparingToDelivered(
-                                                  orderId: id);
-                                        },
-                                        child: AutoSizeText(
-                                          "Delivered".tr(context),
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                            primary: Color.fromARGB(
-                                                255, 60, 238, 60)),
-                                      ),
-                                    ),
-                                  )
-                                : id == UpdateOrderCubit.get(context).currentId
-                                    // من الكيوبت عشان اعرف امسكها بعد ما تاخد قيمتها
-                                    ? Center(child: CircularProgressIndicator())
-                                    : SizedBox(
-                                        height: Simplify.hightClc(context, 48),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.sp),
-                                          child: ElevatedButton(
-                                            onPressed: () {},
-                                            child: AutoSizeText(
-                                              "Delivered".tr(context),
-                                              style: TextStyle(fontSize: 12),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: Color.fromARGB(
-                                                    255, 60, 238, 60)),
-                                          ),
-                                        ),
-                                      );
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: SizedBox(
-                          height: Simplify.hightClc(context, 48),
-                          child: OutlinedButton(
-                            onPressed: () {
-                              _showAlertDialog(context, DeclinePopUp(id));
-                            },
-                            child: AutoSizeText(
-                              "Cancel".tr(context),
+            ),
+            BlocConsumer<AssignCubit, AssignState>(
+              listener: (context, state) {
+                if (state is AssignSuccess) {
+                  if (state.myOrderDetailsModel.data.driverName ==
+                      "Not Assigned") {
+                    assignButton = Container(
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AutoSizeText(
+                              "Driver not assigned yet? ".tr(context),
                               style: TextStyle(fontSize: 12),
                             ),
-                            style: OutlinedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 245, 243, 243),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.sp))),
-                                side: BorderSide(color: Colors.red),
-                                primary: Color.fromARGB(255, 246, 19, 19)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              BlocConsumer<AssignCubit, AssignState>(
-                listener: (context, state) {
-                  if (state is AssignSuccess) {
-                    if (state.myOrderDetailsModel.data.driverName ==
-                        "Not Assigned") {
-                      assignButton = Container(
-                          margin: EdgeInsets.only(top: 10, bottom: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AutoSizeText(
-                                "Driver not assigned yet? ".tr(context),
-                                style: TextStyle(fontSize: 12),
+                            InkWell(
+                              onTap: () {
+                                _showAlertDialog(
+                                    context,
+                                    ChooseDriverPopUpWithTime(
+                                        id)); // حاطط التايم بصفر
+                              },
+                              child: AutoSizeText(
+                                "Assign now".tr(context),
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 247, 6, 6)),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  _showAlertDialog(
-                                      context,
-                                      ChooseDriverPopUpWithTime(
-                                          id)); // حاطط التايم بصفر
-                                },
-                                child: AutoSizeText(
-                                  "Assign now".tr(context),
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 247, 6, 6)),
-                                ),
-                              ),
-                            ],
-                          ));
-                    } else {
-                      assignButton = Container();
-                    }
+                            ),
+                          ],
+                        ));
+                  } else {
+                    assignButton = Container(
+                      height: Simplify.hightClc(context, 15),
+                    );
                   }
-                },
-                builder: (context, state) {
-                  return state is! AssignLoading
-                      ? assignButton!
-                      : Center(
-                          child: CircularProgressIndicator(),
-                        );
-                },
-              )
-            ],
-          )
-        ],
-      ),
+                }
+              },
+              builder: (context, state) {
+                return state is! AssignLoading
+                    ? assignButton!
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      );
+              },
+            )
+          ],
+        )
+      ],
     );
   }
 }
