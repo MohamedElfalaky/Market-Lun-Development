@@ -94,119 +94,109 @@ class _LogInState extends State<LogIn> {
                           ),
                           width: double.infinity,
                           // ignore: sort_child_properties_last
-                          child: Align(
-                              alignment: Alignment(0.0, -0.3),
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    MailTextField(),
-                                    PassWordTextField(_formKey),
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              12 /
-                                              375,
-                                          bottom: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                MailTextField(),
+                                PassWordTextField(_formKey),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width *
+                                          12 /
+                                          375,
+                                      bottom:
+                                          MediaQuery.of(context).size.height *
                                               24 /
                                               812),
-                                      child: Row(
-                                        children: [
-                                          Checkbox(
-                                            value: _throwShotAway,
-                                            onChanged: (bool? newValue) {
-                                              setState(() {
-                                                _throwShotAway = newValue!;
-                                                //run avalue based on (_throwShot value)
-                                              });
-                                            },
-                                          ),
-                                          AutoSizeText(
-                                            "Remember me".tr(context),
-                                            style: TextStyle(fontSize: 16),
-                                          )
-                                        ],
+                                  child: Row(
+                                    children: [
+                                      Checkbox(
+                                        value: _throwShotAway,
+                                        onChanged: (bool? newValue) {
+                                          setState(() {
+                                            _throwShotAway = newValue!;
+                                            //run avalue based on (_throwShot value)
+                                          });
+                                        },
                                       ),
-                                    ),
-                                    ConditionalBuilder(
-                                      condition: state is! LoginLoading,
-                                      builder: ((context) => Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                      AutoSizeText(
+                                        "Remember me".tr(context),
+                                        style: TextStyle(fontSize: 16),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                ConditionalBuilder(
+                                  condition: state is! LoginLoading,
+                                  builder: ((context) => Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
                                                 344 /
                                                 375,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                48 /
-                                                812,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              child: ElevatedButton(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all(Theme.of(
-                                                                    context)
-                                                                .primaryColor)),
-                                                onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    LoginCubit.get(context)
-                                                        .userLogin(
-                                                            email: MailTextField
-                                                                .mailText.text,
-                                                            password:
-                                                                PassWordTextField
-                                                                    .passWordText
-                                                                    .text);
-                                                  }
-                                                },
-                                                child: AutoSizeText(
-                                                  'Login'.tr(context),
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ),
-                                          )),
-                                      fallback: (context) =>
-                                          CircularProgressIndicator(),
-                                    ),
-                                    SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                24 /
-                                                812),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, '/resetpassword');
-                                      },
-                                      child: AutoSizeText(
-                                        "Forget password?".tr(context),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
-                                      ),
-                                    ),
-                                    // SizedBox(
-                                    //     height:
-                                    //         MediaQuery.of(context).size.height *
-                                    //             100 /
-                                    //             812),
-                                  ],
+                                                48 /
+                                                812,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Theme.of(context)
+                                                            .primaryColor)),
+                                            onPressed: () {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                LoginCubit.get(context)
+                                                    .userLogin(
+                                                        email: MailTextField
+                                                            .mailText.text,
+                                                        password:
+                                                            PassWordTextField
+                                                                .passWordText
+                                                                .text);
+                                              }
+                                            },
+                                            child: AutoSizeText(
+                                              'Login'.tr(context),
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                      )),
+                                  fallback: (context) =>
+                                      CircularProgressIndicator(),
                                 ),
-                              )),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        24 /
+                                        812),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/resetpassword');
+                                  },
+                                  child: AutoSizeText(
+                                    "Forget password?".tr(context),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                                // SizedBox(
+                                //     height:
+                                //         MediaQuery.of(context).size.height *
+                                //             100 /
+                                //             812),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),

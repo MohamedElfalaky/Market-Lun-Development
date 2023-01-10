@@ -54,7 +54,7 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     clientName = json['client_name'];
     clientPhone = json['client_phone'];
-    hint = json['hint'];
+    hint = json['hint'] ?? "s";
     address = json['address'];
     orderType = json['order_type'];
     status = json['status'];
@@ -87,7 +87,7 @@ class Payment {
   Payment.fromJson(Map<String, dynamic> json) {
     price = json['price'];
     method = json['method'];
-    deliveryFee = json['delivery_fee'];
+    deliveryFee = json['delivery_fee'] ?? 0;
     subtotal = json['subtotal'];
   }
 }

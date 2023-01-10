@@ -225,9 +225,10 @@ class _HorizontalFilterBarState extends State<HorizontalFilterBar> {
                                       //to give special effect to the selected button.
 
                                       ? BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 3.sp,
-                                          blurRadius: 6.sp,
+                                          offset: Offset(2, 4),
+                                          color: Colors.black.withOpacity(0.12),
+                                          spreadRadius: 1.sp,
+                                          blurRadius: 3.sp,
                                         )
                                       : BoxShadow()
                                 ]),

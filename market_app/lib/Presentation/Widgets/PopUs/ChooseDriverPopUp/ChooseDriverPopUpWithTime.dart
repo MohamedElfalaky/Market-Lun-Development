@@ -100,7 +100,7 @@ class _ChooseDriverPopUpWithTimeState extends State<ChooseDriverPopUpWithTime> {
                     ),
                   ),
                   SizedBox(
-                    width: Simplify.widthClc(context, 10),
+                    width: Simplify.widthClc(context, 15),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.35,

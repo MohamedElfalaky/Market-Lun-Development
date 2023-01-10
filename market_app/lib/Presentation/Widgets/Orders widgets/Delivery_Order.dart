@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/AcceptDeclineWidget.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/CancelButton.dart';
 import 'package:market_app/Presentation/Widgets/Orders%20Details%20Widgets/ViewButton.dart';
@@ -21,7 +22,7 @@ class DeliveryOrder extends StatelessWidget {
   Color? statusColor;
   Color? txtStatusColor;
   Widget? statusButton;
-  Icon? methodIcon;
+  var methodIcon;
   String? time;
   final expiration;
   final timeZone;
@@ -90,15 +91,10 @@ class DeliveryOrder extends StatelessWidget {
     }
 
     if (receiveMethod == "Delivery") {
-      methodIcon = Icon(
-        Icons.delivery_dining,
-        size: 40,
-      );
+      // methodIcon = Image.asset("assets/Flat.png");
+      methodIcon = SvgPicture.asset("assets/Flat.svg");
     } else {
-      methodIcon = Icon(
-        Icons.assured_workload,
-        size: 40,
-      );
+      methodIcon = Image.asset("assets/restaurant 1.png");
     }
 
     return Container(

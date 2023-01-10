@@ -20,9 +20,9 @@ class MailTextField extends StatelessWidget {
           if (value!.isEmpty) {
             return "please enter you mail";
           } else if (value.isNotEmpty &&
-              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+              !RegExp(r'^(?:\+?88|0088)?01[13-9]\d{8}$')
                   .hasMatch(mailText.text)) {
-            return "please use mail formoula ***@***.com ";
+            return "Invalide Mobile number";
           }
           return null;
         },
@@ -35,7 +35,7 @@ class MailTextField extends StatelessWidget {
           labelStyle: TextStyle(),
           prefixIcon: Icon(
             Icons.email,
-            size: 14.sp,
+            size: 16.sp,
           ),
         ),
       ),

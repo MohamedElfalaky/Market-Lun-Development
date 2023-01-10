@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../data/Shared/AppLocalizations.dart';
 
 class LogoAndSlogan extends StatelessWidget {
@@ -12,8 +13,8 @@ class LogoAndSlogan extends StatelessWidget {
         children: [
           Center(
             child: Container(
-                height: MediaQuery.of(context).size.height * (110 / 812),
-                child: Image.asset('assets/Logo.png')),
+                // height: MediaQuery.of(context).size.height * (110 / 812),
+                child: Image.asset("assets/image 3.png")),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * (34 / 812)),
           AutoSizeText(

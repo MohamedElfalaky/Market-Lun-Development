@@ -51,7 +51,7 @@ class PassWordTextField extends StatelessWidget {
               labelStyle: TextStyle(),
               prefixIcon: Icon(
                 Icons.security,
-                size: 14.sp,
+                size: 16.sp,
               ),
               suffixIcon: InkWell(
                 child: LoginCubit.get(context).securityIcon,

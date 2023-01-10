@@ -22,8 +22,6 @@ class TestCubit extends Cubit<TestState> {
       var myOdrerDetailModel = OrderDetailsModel.fromJson(value.data);
 
       emit(TestSuccess(myOdrerDetailModel));
-    }).catchError((error) {
-      emit(TestError(error.toString()));
     });
   }
 

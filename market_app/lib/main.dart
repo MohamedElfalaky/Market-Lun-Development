@@ -29,6 +29,7 @@ import 'package:market_app/business_logic/cubits/TestCubit/Test_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_Password_cubit/cubit/update_password_cubit.dart';
 import 'package:market_app/business_logic/cubits/Update_order_cubit/update_order_cubit.dart';
 import 'package:market_app/business_logic/cubits/settings_cubit/settings_cubit.dart';
+import 'package:market_app/business_logic/debug/app_bloc_observer.dart';
 import 'package:market_app/data/Services/local_notification_service.dart';
 import 'package:market_app/data/Shared/AppLocalizations.dart';
 import 'package:market_app/data/Shared/CacheHelper.dart';
@@ -48,6 +49,8 @@ Future<void> backgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+
   //WidgetsFlutterBinding.ensureInitialized used to ensure that every functions main will run completely then run app
 
   LocalNotificationService
